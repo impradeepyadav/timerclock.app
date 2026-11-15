@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Online Stopwatch – Free Stopwatch with Laps | Timer Clock</title>
-    <meta name="description" content="Free online stopwatch with lap timing and millisecond precision. Perfect for workouts, cooking, coding, and timing any activity. Works on any device, no signup.">
+    <title>Online Stopwatch – Timer Clock</title>
+    <meta name="description" content="Looking for a free online stopwatch? Start, stop, and reset the timer to measure elapsed time and track every second.">
     <link rel="canonical" href="https://timerclock.app/stopwatch">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#22c55e">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Online Stopwatch – Free Stopwatch with Laps">
-    <meta property="og:description" content="Free online stopwatch with lap timing. Measure elapsed time with millisecond precision — no signup required.">
+    <meta property="og:title" content="Online Stopwatch – Timer Clock">
+    <meta property="og:description" content="Looking for a free online stopwatch? Start, stop, and reset the timer to measure elapsed time and track every second.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://timerclock.app/stopwatch">
     <meta property="og:image" content="https://timerclock.app/og-image.png">
@@ -20,8 +20,8 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Online Stopwatch – Free Stopwatch with Laps">
-    <meta name="twitter:description" content="Free online stopwatch with lap timing and millisecond precision — no signup required.">
+    <meta name="twitter:title" content="Online Stopwatch – Timer Clock">
+    <meta name="twitter:description" content="Looking for a free online stopwatch? Start, stop, and reset the timer to measure elapsed time and track every second.">
     <meta name="twitter:image" content="https://timerclock.app/og-image.png">
 
     <!-- Hreflang -->
@@ -56,9 +56,9 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Timer Clock Stopwatch",
+      "name": "Timer Clock",
       "url": "https://timerclock.app/stopwatch",
-      "description": "Free online stopwatch with lap timing and millisecond precision. Measure elapsed time for workouts, cooking, coding, and more.",
+      "description": "Looking for a free online stopwatch? Start, stop, and reset the timer to measure elapsed time and track every second.",
       "applicationCategory": "UtilityApplication",
       "operatingSystem": "All",
       "browserRequirements": "Requires JavaScript",
@@ -436,7 +436,6 @@
             stroke-width: 12;
             stroke-linecap: round;
             stroke-dashoffset: 0;
-            filter: drop-shadow(0 0 6px rgba(34, 197, 94, 0.35));
         }
 
         .time-text {
@@ -1132,8 +1131,7 @@
                         <span class="brand-text">timerclock.app</span>
                     </a>
                     <p class="footer-tagline">
-                        Free online countdown timer, stopwatch, and alarm clock.
-                        No signup, works on any device.
+                        Timer Clock offers free online countdown timers and a stopwatch to help you track time and stay productive throughout the day.
                     </p>
                 </div>
 
@@ -1159,9 +1157,10 @@
                     </ul>
                 </nav>
 
-                <nav class="footer-col" aria-labelledby="footerLegal">
-                    <h3 id="footerLegal">Legal</h3>
+                <nav class="footer-col" aria-labelledby="footerCompany">
+                    <h3 id="footerCompany">Company</h3>
                     <ul>
+                        <li><a href="/about">About</a></li>
                         <li><a href="/privacy">Privacy Policy</a></li>
                         <li><a href="/terms">Terms of Use</a></li>
                         <li><a href="/contact">Contact</a></li>
@@ -1291,7 +1290,7 @@
 
         /* ========== WAKE LOCK ========== */
         async function requestWakeLock() {
-            if (!('wakeLock' in navigator)) return;
+            if (!('wakeLock' in navigator) || wakeLock) return;
             try {
                 wakeLock = await navigator.wakeLock.request('screen');
                 wakeLock.addEventListener('release', () => { wakeLock = null; });
@@ -1300,9 +1299,6 @@
         function releaseWakeLock() {
             if (wakeLock) { wakeLock.release().catch(() => {}); wakeLock = null; }
         }
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible' && isRunning) requestWakeLock();
-        });
 
         /* ========== TIME FORMATTING ========== */
         function formatStopwatchTime(ms) {
@@ -1479,6 +1475,22 @@
             lapsSection.innerHTML = html;
             lapsSection.scrollTop = 0;
         }
+
+        /* ========== VISIBILITY / LIFECYCLE ========== */
+        // Fix: when tab becomes visible again, RAF has stopped. Restart the
+        // loop so the display catches up to the correct elapsed time.
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible' && isRunning) {
+                requestWakeLock();
+                cancelAnimationFrame(rafId);
+                rafId = requestAnimationFrame(tick);
+            }
+        });
+
+        window.addEventListener('pagehide', () => {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+        });
 
         /* ========== KEYBOARD ========== */
         document.addEventListener('keydown', (e) => {

@@ -40,6 +40,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
 
+    <!-- ============ GOOGLE TAG MANAGER ============ -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-K4L3JFT4"></script>
+    <!-- ============ END GOOGLE TAG MANAGER ============ -->
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -68,6 +78,7 @@
             --border-color: #e5e7eb;
             --danger: #ef4444;
             --shadow-color: rgba(0,0,0,0.1);
+            --page-max: 760px;
         }
 
         *, *::before, *::after {
@@ -109,13 +120,15 @@
             gap: clamp(10px, 2vh, 20px);
         }
 
+        /* === HEADER — same width as content, SAME layout on all devices === */
         .site-header {
             width: 100%;
+            max-width: var(--page-max);
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: clamp(10px, 2vw, 22px);
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: clamp(6px, 1.5vw, 22px);
             flex-shrink: 0;
             min-width: 0;
         }
@@ -123,58 +136,54 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: clamp(10px, 2vw, 16px);
+            gap: clamp(6px, 1.5vw, 16px);
             flex: 1 1 auto;
             min-width: 0;
         }
 
         .header-logo {
-            width: clamp(32px, 6vw, 48px);
-            height: clamp(32px, 6vw, 48px);
+            width: clamp(28px, 6vw, 48px);
+            height: clamp(28px, 6vw, 48px);
             object-fit: contain;
             flex-shrink: 0;
             border-radius: 8px;
         }
 
-        .header-text { min-width: 0; }
+        .header-text {
+            min-width: 0;
+            overflow: hidden;
+        }
 
         .site-header h1 {
             font-family: 'Outfit', 'Inter', sans-serif;
-            font-size: clamp(22px, min(4vh, 6.4vw), 38px);
+            font-size: clamp(18px, min(4vh, 5.5vw), 38px);
             font-weight: 800;
             letter-spacing: -0.5px;
             line-height: 1.15;
             color: var(--text-main);
-            margin-bottom: 0.4vh;
-            overflow-wrap: break-word;
-        }
-
-        .site-header p {
-            font-size: clamp(13px, min(1.9vh, 3.6vw), 17px);
-            color: var(--text-muted);
-            line-height: 1.45;
-            max-width: 62ch;
-            overflow-wrap: break-word;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .top-controls {
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            flex-wrap: wrap;
-            gap: 6px;
+            flex-wrap: nowrap;
+            gap: 2px;
             flex: 0 0 auto;
             min-width: 0;
-            padding-top: clamp(4px, 0.8vh, 8px);
         }
 
+        /* === MAIN CONTENT — same width as header === */
         .main-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             width: 100%;
-            max-width: 1000px;
+            max-width: var(--page-max);
             flex-grow: 1;
             flex-shrink: 0;
             gap: clamp(10px, 2vh, 20px);
@@ -185,7 +194,7 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: clamp(6px, 1.2vw, 14px);
+            gap: clamp(6px, 1vw, 10px);
             width: 100%;
             min-width: 0;
         }
@@ -194,9 +203,9 @@
             background-color: var(--gray-light);
             color: var(--text-muted);
             border: none;
-            padding: 0.7vh clamp(12px, 2.2vw, 20px);
+            padding: 0.7vh clamp(10px, 2.2vw, 20px);
             border-radius: 20px;
-            font-size: clamp(13px, min(2vh, 3.6vw), 17px);
+            font-size: clamp(12px, min(2vh, 3.4vw), 17px);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -266,6 +275,7 @@
         .main-content:fullscreen,
         .main-content:-webkit-full-screen {
             width: 100vw;
+            max-width: none;
             height: 100vh;
             padding: clamp(14px, 2.5vh, 32px) clamp(12px, 3vw, 40px);
             background: var(--card-bg);
@@ -516,39 +526,45 @@
             outline-offset: 2px;
         }
 
+        /* === Touch-friendly header controls (same on all devices) === */
         .privacy-link {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: clamp(12px, min(1.7vh, 3vw), 14px);
+            font-size: clamp(11px, min(1.7vh, 2.8vw), 14px);
             font-weight: 300;
             transition: color 0.2s;
-            display: inline-block;
-            padding: 4px 2px;
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 6px;
+            min-height: 40px;
             white-space: nowrap;
             line-height: 1.2;
+            border-radius: 8px;
         }
 
-        .privacy-link:hover { color: var(--text-main); }
+        .privacy-link:hover { color: var(--text-main); background-color: var(--gray-light); }
 
-        .lang-dropdown, .tools-dropdown { position: relative; }
+        .tools-dropdown { position: relative; }
 
-        .lang-btn, .tools-btn {
+        .tools-btn {
             background: transparent;
             color: var(--text-muted);
             border: none;
-            font-size: clamp(12px, min(1.7vh, 3vw), 14px);
+            font-size: clamp(11px, min(1.7vh, 2.8vw), 14px);
             font-weight: 300;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 4px;
-            transition: color 0.2s;
-            padding: 4px 2px;
+            transition: color 0.2s, background-color 0.2s;
+            padding: 10px 6px;
+            min-height: 40px;
             font-family: inherit;
             line-height: 1.2;
+            border-radius: 8px;
         }
 
-        .lang-btn:hover, .tools-btn:hover { color: var(--text-main); }
+        .tools-btn:hover { color: var(--text-main); background-color: var(--gray-light); }
 
         .caret { font-size: 8px; margin-top: 2px; }
 
@@ -620,41 +636,45 @@
             justify-content: flex-end;
             flex-wrap: wrap;
         }
-        .modal-buttons .btn { padding: 10px 22px; font-size: 15px; }
+        .modal-buttons .btn { padding: 12px 24px; font-size: 15px; }
 
-        @media (max-width: 768px) {
-            .site-header { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
-            .brand { flex-direction: column; align-items: center; text-align: center; max-width: 100%; }
-            .top-controls { justify-content: center; padding-top: 0; }
-            .dropdown-content { right: auto; left: 50%; transform: translateX(-50%); }
-        }
-
+        /* === Small-screen sizing only (NO layout changes — desktop look preserved) === */
         @media (max-width: 480px) {
-            .container { padding: 14px 12px 12px; }
+            .container { padding: 12px 10px 10px; }
             .controls-wrapper { gap: 1.2vh; }
-            .preset-btn { padding: 7px 12px; }
-            .btn { gap: 7px; }
+            .preset-btn { padding: 7px 10px; }
+            .btn { gap: 7px; padding: 10px 18px; font-size: 14px; }
             .colon { margin-bottom: 1.6vh; }
             .fs-exit-btn { width: 38px; height: 38px; top: 12px; right: 12px; }
             .fs-exit-btn svg { width: 24px; height: 24px; }
+            .site-header { gap: 4px; }
+            .brand { gap: 6px; }
+            .header-logo { width: 26px; height: 26px; }
+            .site-header h1 { font-size: 17px; }
+            .privacy-link, .tools-btn { padding: 10px 4px; font-size: 11px; }
         }
 
         @media (max-width: 380px) {
-            .preset-btn { padding: 6px 10px; font-size: 12px; }
-            .btn { padding: 10px 15px; font-size: 14px; }
-            .btn-icon { width: 44px; height: 44px; }
+            .preset-btn { padding: 6px 8px; font-size: 11px; }
+            .btn { padding: 10px 14px; font-size: 13px; }
+            .btn-icon { width: 42px; height: 42px; }
             .controls { gap: 8px; }
-            .input-group { gap: 6px; }
-            .top-controls { gap: 4px; }
+            .input-group { gap: 5px; }
+            .site-header h1 { font-size: 16px; }
+            .header-logo { width: 24px; height: 24px; }
+            .privacy-link, .tools-btn { padding: 10px 3px; font-size: 10.5px; }
+            .top-controls { gap: 0; }
         }
 
         @media (max-width: 330px) {
-            .preset-btn { padding: 6px 8px; }
-            .btn { padding: 10px 12px; }
+            .preset-btn { padding: 6px 7px; font-size: 10.5px; }
+            .btn { padding: 10px 12px; font-size: 12px; }
+            .site-header h1 { font-size: 14px; }
+            .header-logo { width: 22px; height: 22px; }
+            .privacy-link, .tools-btn { padding: 10px 2px; font-size: 10px; }
         }
 
         @media (max-height: 520px) {
-            .site-header p { display: none; }
             .container { gap: 8px; padding-top: 10px; }
             .main-content:not(:fullscreen):not(:-webkit-full-screen) .timer-display {
                 width: clamp(150px, min(48vh, 56vw), 240px);
@@ -667,14 +687,17 @@
 </head>
 <body>
 
+    <!-- GTM noscript fallback -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4L3JFT4"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
     <div class="container">
 
         <header class="site-header">
             <div class="brand">
                 <img src="/apple-touch-icon.png" alt="TimerClock logo" class="header-logo" width="48" height="48" loading="eager">
                 <div class="header-text">
-                    <h1>Set a Free Online Countdown Timer</h1>
-                    <p>Online Countdown Timer for Work, Study, Exercise and Daily Tasks</p>
+                    <h1>Timer Clock</h1>
                 </div>
             </div>
 
@@ -683,21 +706,7 @@
                     <button type="button" class="tools-btn" id="toolsBtn" onclick="toggleToolsDropdown()" aria-label="Tools" aria-expanded="false" aria-controls="toolsDropdown">
                         <span>Tools</span> <span class="caret" aria-hidden="true">▼</span>
                     </button>
-                    <!-- Populated automatically by tools.js -->
                     <div class="dropdown-content tools-content" id="toolsDropdown"></div>
-                </div>
-
-                <div class="lang-dropdown">
-                    <button type="button" class="lang-btn" id="langBtn" onclick="toggleLangDropdown()" aria-label="Select language" aria-expanded="false" aria-controls="langDropdown">
-                        <span>English (US)</span> <span class="caret" aria-hidden="true">▼</span>
-                    </button>
-                    <div class="dropdown-content" id="langDropdown">
-                        <a href="/" hreflang="en">English (US)</a>
-                        <a href="/hi/" hreflang="hi">हिंदी</a>
-                        <a href="/es/" hreflang="es">Español</a>
-                        <a href="/fr/" hreflang="fr">Français</a>
-                        <a href="/de/" hreflang="de">Deutsch</a>
-                    </div>
                 </div>
 
                 <a href="/privacy" class="privacy-link">Privacy</a>
@@ -757,8 +766,8 @@
                     </button>
 
                     <button type="button" class="btn btn-reset" id="resetBtn" onclick="handleReset()" aria-label="Reset timer">
-                        <svg class="icon" id="resetIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
-                        <span id="resetText">Reset</span>
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                        <span>Reset</span>
                     </button>
 
                     <button type="button" class="btn-icon" id="muteBtn" onclick="toggleMute()" title="Mute / unmute sound" aria-label="Mute">
@@ -780,7 +789,7 @@
     </div>
 
     <div class="modal-overlay hidden" id="modalOverlay">
-        <div class="modal" role="dialog" aria-modal="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalMessage">
             <p id="modalMessage"></p>
             <div class="modal-buttons">
                 <button type="button" class="btn btn-reset" id="modalCancel">Cancel</button>
@@ -789,22 +798,15 @@
         </div>
     </div>
 
-    <!-- ============ TOOLS (EXTERNAL FILE) ============ -->
-    <!-- ⭐ Naya URL add karne ke liye sirf tools.js edit karo -->
     <script src="tools.js"></script>
 
-    <!-- ============ MAIN TIMER LOGIC (INLINE) ============ -->
     <script>
         const mainTime       = document.getElementById('mainTime');
-        const timeDisplayEl  = document.getElementById('timeDisplay');
         const statusText     = document.getElementById('statusText');
         const startBtnText   = document.getElementById('startBtnText');
         const startBtn       = document.getElementById('startBtn');
         const playIcon       = document.getElementById('playIcon');
         const pauseIcon      = document.getElementById('pauseIcon');
-        const resetBtn       = document.getElementById('resetBtn');
-        const resetText      = document.getElementById('resetText');
-        const resetIcon      = document.getElementById('resetIcon');
 
         const progressRing   = document.getElementById('progressRing');
         const inputHours     = document.getElementById('inputHours');
@@ -817,9 +819,6 @@
 
         const toolsBtn       = document.getElementById('toolsBtn');
         const toolsDropdown  = document.getElementById('toolsDropdown');
-
-        const langBtn        = document.getElementById('langBtn');
-        const langDropdown   = document.getElementById('langDropdown');
 
         const mainContent    = document.getElementById('mainContent');
         const fsBtn          = document.getElementById('fsBtn');
@@ -843,24 +842,43 @@
         const circumference = 2 * Math.PI * 130;
         let audioCtx;
 
-        const MAX_SECONDS = 99 * 3600 + 59 * 60 + 59;
-
         progressRing.style.strokeDasharray = circumference;
 
         let modalResolve = null;
 
+        /* ===== Modal ===== */
+        function trapFocus(e) {
+            if (e.key !== 'Tab') return;
+            const first = modalCancel;
+            const last  = modalOk;
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
+
         function showConfirm(message) {
-            if (modalResolve) return Promise.resolve(false);
+            if (modalResolve) {
+                const old = modalResolve;
+                modalResolve = null;
+                old(false);
+            }
             return new Promise((resolve) => {
                 modalMessage.textContent = message;
                 modalOverlay.classList.remove('hidden');
                 modalResolve = resolve;
+                modalOverlay.removeEventListener('keydown', trapFocus);
+                modalOverlay.addEventListener('keydown', trapFocus);
                 setTimeout(() => modalOk.focus(), 0);
             });
         }
 
         function closeModal(result) {
             modalOverlay.classList.add('hidden');
+            modalOverlay.removeEventListener('keydown', trapFocus);
             const r = modalResolve;
             modalResolve = null;
             if (r) r(result);
@@ -872,6 +890,7 @@
             if (e.target === modalOverlay) closeModal(false);
         });
 
+        /* ===== Fullscreen ===== */
         function getFullscreenElement() {
             return document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || null;
         }
@@ -907,32 +926,24 @@
         document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
         document.addEventListener('MSFullscreenChange', handleFullscreenChange);
 
+        /* ===== Tools dropdown ===== */
         function toggleToolsDropdown() {
             const isOpen = toolsDropdown.classList.toggle('show');
             toolsBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            if (isOpen) {
-                langDropdown.classList.remove('show');
-                langBtn.setAttribute('aria-expanded', 'false');
-            }
         }
 
-        function toggleLangDropdown() {
-            const isOpen = langDropdown.classList.toggle('show');
-            langBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            if (isOpen) {
+        function closeToolsDropdown() {
+            if (toolsDropdown.classList.contains('show')) {
                 toolsDropdown.classList.remove('show');
                 toolsBtn.setAttribute('aria-expanded', 'false');
+                return true;
             }
+            return false;
         }
 
         document.addEventListener('click', (e) => {
             if (!toolsBtn.contains(e.target) && !toolsDropdown.contains(e.target)) {
-                toolsDropdown.classList.remove('show');
-                toolsBtn.setAttribute('aria-expanded', 'false');
-            }
-            if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
-                langDropdown.classList.remove('show');
-                langBtn.setAttribute('aria-expanded', 'false');
+                closeToolsDropdown();
             }
         });
 
@@ -943,6 +954,7 @@
             }
         });
 
+        /* ===== Start button state ===== */
         function setStartButton(state) {
             const text = state === 'running' ? 'Pause' : (state === 'paused' ? 'Resume' : 'Start');
             startBtnText.textContent = text;
@@ -959,6 +971,7 @@
             });
         }
 
+        /* ===== Audio ===== */
         function initAudio() {
             if (!audioCtx) {
                 try {
@@ -998,6 +1011,7 @@
             }
         }
 
+        /* ===== Display update ===== */
         function updateCountdownText() {
             const h = Math.floor(totalSeconds / 3600);
             const m = Math.floor((totalSeconds % 3600) / 60);
@@ -1017,6 +1031,7 @@
             }
         }
 
+        /* ===== Inputs ===== */
         function setupInput(input, max) {
             input.addEventListener('keydown', (e) => {
                 if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -1076,6 +1091,7 @@
             updateDisplay();
         }
 
+        /* ===== Timer control ===== */
         function toggleTimer() {
             if (isRunning) pauseTimer();
             else startTimer();
@@ -1272,6 +1288,7 @@
             }
         }
 
+        /* ===== Keyboard ===== */
         document.addEventListener('keydown', (e) => {
             if (modalResolve) {
                 if (e.key === 'Escape') {
@@ -1279,6 +1296,10 @@
                     e.stopPropagation();
                     closeModal(false);
                 }
+                return;
+            }
+
+            if (e.key === 'Escape' && closeToolsDropdown()) {
                 return;
             }
 

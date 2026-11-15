@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minuteur de compte à rebours et chronomètre en ligne - timerclock.app</title>
+    <title>Minuteur de compte à rebours et chronomètre en ligne - Timer Clock</title>
     <meta name="description" content="Vous cherchez un minuteur ou un chronomètre en ligne ? Réglez un minuteur de compte à rebours gratuit, suivez le temps écoulé et mesurez secondes, minutes et heures.">
     <link rel="canonical" href="https://timerclock.app/fr/">
 
@@ -22,7 +22,7 @@
     <meta name="theme-color" content="#4caf50">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="TimerClock.app : Minuteur de compte à rebours et chronomètre en ligne">
+    <meta property="og:title" content="Timer Clock: Minuteur de compte à rebours et chronomètre en ligne">
     <meta property="og:description" content="Vous cherchez un minuteur en ligne gratuit ? Utilisez notre minuteur de compte à rebours et notre chronomètre pour décompter le temps, mesurer le temps écoulé et suivre chaque seconde.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://timerclock.app/fr/">
@@ -38,7 +38,7 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="TimerClock.app : Minuteur de compte à rebours et chronomètre en ligne">
+    <meta name="twitter:title" content="Timer Clock: Minuteur de compte à rebours et chronomètre en ligne">
     <meta name="twitter:description" content="Vous cherchez un minuteur en ligne gratuit ? Utilisez notre minuteur de compte à rebours et notre chronomètre pour décompter le temps, mesurer le temps écoulé et suivre chaque seconde.">
     <meta name="twitter:image" content="https://timerclock.app/og-image.png">
 
@@ -288,6 +288,9 @@
             color: #fff;
         }
 
+        /* ================= TIMER DISPLAY =================
+           Square container; container-type lets the text
+           size itself relative to the ring so it never overflows. */
         .timer-display {
             position: relative;
             width: clamp(180px, min(36vh, 74vw), 350px);
@@ -299,6 +302,7 @@
             align-items: center;
             margin: 1vh 0;
             flex-shrink: 0;
+            container-type: inline-size;
         }
 
         .ring-svg {
@@ -308,6 +312,7 @@
             width: 100%;
             height: 100%;
             transform: rotate(-90deg);
+            overflow: visible;
         }
 
         .ring-bg { fill: none; stroke: var(--gray-light); stroke-width: 12; }
@@ -317,13 +322,16 @@
             stroke: var(--green-primary);
             stroke-width: 12;
             stroke-linecap: round;
-            stroke-dasharray: 816.81;
+            stroke-dasharray: 816.814;
             stroke-dashoffset: 0;
             transition: stroke 0.3s;
         }
 
         .time-text {
+            /* Fallback for browsers without container queries */
             font-size: clamp(2rem, min(6.5vh, 10.5vw), 3.9rem);
+            /* Container-relative sizing (ring width) – preferred */
+            font-size: clamp(1.5rem, 18cqw, 3.9rem);
             font-weight: 900;
             color: var(--text-main);
             font-variant-numeric: tabular-nums;
@@ -332,19 +340,24 @@
             margin-bottom: 0.4vh;
             letter-spacing: -1px;
             white-space: nowrap;
+            max-width: 100%;
+            text-align: center;
         }
 
         .time-text .ms-text {
             font-size: clamp(1.1rem, min(3.2vh, 5.5vw), 2.1rem);
+            font-size: clamp(0.85rem, 10cqw, 2.1rem);
             color: var(--text-muted);
             margin-left: 2px;
         }
 
         .time-text.long-time {
             font-size: clamp(1.3rem, min(4.4vh, 7vw), 2.6rem);
+            font-size: clamp(1rem, 13cqw, 2.6rem);
         }
         .time-text.long-time .ms-text {
             font-size: clamp(0.8rem, min(2.2vh, 3.8vw), 1.4rem);
+            font-size: clamp(0.7rem, 7cqw, 1.4rem);
         }
 
         .status-text {
@@ -390,20 +403,24 @@
         .main-content:fullscreen .time-text,
         .main-content:-webkit-full-screen .time-text {
             font-size: clamp(2.2rem, min(10vh, 12vw), 5.4rem);
+            font-size: clamp(2rem, 18cqw, 5.4rem);
         }
 
         .main-content:fullscreen .time-text .ms-text,
         .main-content:-webkit-full-screen .time-text .ms-text {
             font-size: clamp(1.2rem, min(5vh, 6vw), 2.8rem);
+            font-size: clamp(1rem, 10cqw, 2.8rem);
         }
 
         .main-content:fullscreen .time-text.long-time,
         .main-content:-webkit-full-screen .time-text.long-time {
             font-size: clamp(1.6rem, min(7vh, 9vw), 3.6rem);
+            font-size: clamp(1.3rem, 13cqw, 3.6rem);
         }
         .main-content:fullscreen .time-text.long-time .ms-text,
         .main-content:-webkit-full-screen .time-text.long-time .ms-text {
             font-size: clamp(0.9rem, min(3.5vh, 4.5vw), 2rem);
+            font-size: clamp(0.8rem, 7cqw, 2rem);
         }
 
         .main-content:fullscreen .status-text,
@@ -687,6 +704,17 @@
 
         .hidden { display: none !important; opacity: 0; pointer-events: none; }
 
+        /* Screen-reader-only helper for the lap live region */
+        .sr-only {
+            position: absolute !important;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         button:focus-visible,
         a:focus-visible {
             outline: 2px solid var(--blue-primary);
@@ -913,7 +941,7 @@
                     <circle class="ring-bg" cx="140" cy="140" r="130"></circle>
                     <circle class="ring-progress" id="progressRing" cx="140" cy="140" r="130"></circle>
                 </svg>
-                <div class="time-text" id="timeDisplay" role="timer" aria-live="off">
+                <div class="time-text" id="timeDisplay" role="timer" aria-live="off" aria-label="Affichage du minuteur">
                     <span id="mainTime">00:01:00</span><span class="ms-text" id="msTime"></span>
                 </div>
                 <div class="status-text" id="statusText" aria-live="polite">Prêt</div>
@@ -940,7 +968,10 @@
                 </div>
             </div>
 
-            <div class="laps-container hidden" id="lapsSection" role="list" aria-live="polite" aria-label="Temps de tour"></div>
+            <!-- Visual lap list (not a live region itself) -->
+            <div class="laps-container hidden" id="lapsSection" role="list" aria-label="Temps de tour"></div>
+            <!-- Separate live region: announces only the newest lap -->
+            <div class="sr-only" id="lapsLiveRegion" aria-live="polite" aria-atomic="true"></div>
 
             <div class="controls-wrapper">
                 <div class="controls">
@@ -989,7 +1020,7 @@
         </div>
     </div>
 
-    <!-- Confirm Modal -->
+    <!-- Non-blocking confirm modal -->
     <div class="modal-overlay hidden" id="modalOverlay">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalMessage">
             <p id="modalMessage"></p>
@@ -1001,6 +1032,9 @@
     </div>
 
     <script>
+        'use strict';
+
+        /* ---------- Element refs ---------- */
         const mainTime       = document.getElementById('mainTime');
         const msTime         = document.getElementById('msTime');
         const timeDisplayEl  = document.getElementById('timeDisplay');
@@ -1025,6 +1059,7 @@
         const presetsSection = document.getElementById('presetsSection');
         const inputsSection  = document.getElementById('inputsSection');
         const lapsSection    = document.getElementById('lapsSection');
+        const lapsLiveRegion = document.getElementById('lapsLiveRegion');
 
         const btnModeCountdown = document.getElementById('btnModeCountdown');
         const btnModeStopwatch = document.getElementById('btnModeStopwatch');
@@ -1040,6 +1075,9 @@
         const modalOk        = document.getElementById('modalOk');
         const modalCancel    = document.getElementById('modalCancel');
 
+        const containerEl    = document.querySelector('.container');
+
+        /* ---------- State ---------- */
         let currentMode = 'countdown';
         let rafId = null;
         let backstopId = null;
@@ -1058,35 +1096,46 @@
         let lastLapMs = 0;
 
         let isMuted = false;
-        const circumference = 2 * Math.PI * 130;
+        const circumference = 2 * Math.PI * 130;   // 816.814…
         let audioCtx;
 
         const MAX_SECONDS = 99 * 3600 + 59 * 60 + 59;
         const MAX_LAPS = 100;
 
-        progressRing.style.strokeDasharray = circumference;
+        progressRing.style.strokeDasharray = String(circumference);
 
         const ICON_RESET = '<path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>';
         const ICON_LAP   = '<path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>';
 
-        /* ---------- Confirm Modal ---------- */
+        /* ============================================================
+           Confirm modal (non-blocking, focus-trapped, focus-restored)
+           ============================================================ */
         let modalResolve = null;
+        let modalPrevFocus = null;
 
         function showConfirm(message) {
             if (modalResolve) return Promise.resolve(false);
             return new Promise((resolve) => {
                 modalMessage.textContent = message;
+                modalPrevFocus = document.activeElement;
                 modalOverlay.classList.remove('hidden');
+                if (containerEl) containerEl.setAttribute('inert', '');
                 modalResolve = resolve;
                 setTimeout(() => modalOk.focus(), 0);
             });
         }
 
         function closeModal(result) {
-            modalOverlay.classList.add('hidden');
-            const r = modalResolve;
+            if (!modalResolve) return;
+            const resolve = modalResolve;
             modalResolve = null;
-            if (r) r(result);
+            modalOverlay.classList.add('hidden');
+            if (containerEl) containerEl.removeAttribute('inert');
+            if (modalPrevFocus && typeof modalPrevFocus.focus === 'function') {
+                try { modalPrevFocus.focus(); } catch (_) {}
+            }
+            modalPrevFocus = null;
+            resolve(result);
         }
 
         modalOk.addEventListener('click', () => closeModal(true));
@@ -1094,10 +1143,29 @@
         modalOverlay.addEventListener('click', (e) => {
             if (e.target === modalOverlay) closeModal(false);
         });
+        modalOverlay.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return;
+            const focusable = modalOverlay.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            if (!focusable.length) return;
+            const first = focusable[0];
+            const last  = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        });
 
-        /* ---------- Fullscreen ---------- */
+        /* ============================================================
+           Fullscreen
+           ============================================================ */
         function getFullscreenElement() {
-            return document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || null;
+            return document.fullscreenElement || document.webkitFullscreenElement ||
+                   document.msFullscreenElement || null;
         }
 
         function enterFullscreen() {
@@ -1110,7 +1178,7 @@
             try {
                 const p = req.call(el);
                 if (p && p.catch) p.catch(() => {});
-            } catch (err) { }
+            } catch (_) {}
         }
 
         function exitFullscreen() {
@@ -1119,7 +1187,7 @@
             try {
                 const p = exit.call(document);
                 if (p && p.catch) p.catch(() => {});
-            } catch (err) { }
+            } catch (_) {}
         }
 
         function handleFullscreenChange() {
@@ -1143,11 +1211,11 @@
             document.documentElement.webkitRequestFullscreen ||
             document.documentElement.msRequestFullscreen
         );
-        if (!fsSupported) {
-            fsBtn.style.display = 'none';
-        }
+        if (!fsSupported) fsBtn.style.display = 'none';
 
-        /* ---------- Language dropdown ---------- */
+        /* ============================================================
+           Language dropdown
+           ============================================================ */
         function toggleLangDropdown() {
             const isOpen = langDropdown.classList.toggle('show');
             langBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
@@ -1172,23 +1240,26 @@
             }
         });
 
-        /* ---------- Button state helpers ---------- */
+        /* ============================================================
+           Button state helpers
+           ============================================================ */
         function setStartButton(state) {
             let text;
-            if (state === 'running') text = 'Pause';
+            if (state === 'running') text = 'Mettre en pause';
             else if (state === 'paused') text = 'Reprendre';
             else text = 'Démarrer';
+            const noun = currentMode === 'stopwatch' ? 'le chronomètre' : 'le minuteur';
             startBtnText.textContent = text;
-            startBtn.setAttribute('aria-label', `${text} le minuteur`);
+            startBtn.setAttribute('aria-label', text + ' ' + noun);
             startBtn.classList.toggle('paused', state === 'paused');
             playIcon.style.display  = state === 'running' ? 'none' : 'block';
             pauseIcon.style.display = state === 'running' ? 'block' : 'none';
         }
 
         function setLapButton(lapMode) {
-            const text = lapMode ? 'Tour' : 'Réinitialiser';
-            resetLapText.textContent = text;
-            resetLapBtn.setAttribute('aria-label', lapMode ? 'Enregistrer un tour' : 'Réinitialiser le minuteur');
+            const noun = currentMode === 'stopwatch' ? 'le chronomètre' : 'le minuteur';
+            resetLapText.textContent = lapMode ? 'Tour' : 'Réinitialiser';
+            resetLapBtn.setAttribute('aria-label', lapMode ? 'Enregistrer un tour' : 'Réinitialiser ' + noun);
             resetIcon.innerHTML = lapMode ? ICON_LAP : ICON_RESET;
         }
 
@@ -1199,12 +1270,14 @@
             });
         }
 
-        /* ---------- Audio ---------- */
+        /* ============================================================
+           Audio
+           ============================================================ */
         function initAudio() {
             if (!audioCtx) {
                 try {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                } catch (err) { return; }
+                } catch (_) { return; }
             }
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume().catch(() => {});
@@ -1231,7 +1304,7 @@
                     };
                     beep(0);
                     beep(0.3);
-                } catch (err) { }
+                } catch (_) {}
             };
 
             if (audioCtx.state === 'suspended') {
@@ -1241,15 +1314,19 @@
             }
         }
 
-        /* ---------- Mode switching ---------- */
+        /* ============================================================
+           Mode switching
+           ============================================================ */
         async function switchMode(mode) {
             if (mode === currentMode) return;
+            if (modalResolve) return;   // a confirm is already open
 
             const hasProgress = isRunning || remainingMs > 0 || stopwatchElapsed > 0;
             if (hasProgress) {
                 const ok = await showConfirm('Le minuteur a progressé. Changer de mode le réinitialisera. Continuer ?');
                 if (!ok) return;
             }
+            if (mode === currentMode) return;   // re-check after await
 
             currentMode = mode;
             resetTimer();
@@ -1271,6 +1348,7 @@
 
                 progressRing.style.stroke = 'var(--green-primary)';
                 startBtn.classList.remove('sw-mode');
+                timeDisplayEl.setAttribute('aria-label', 'Minuteur de compte à rebours');
             } else {
                 btnModeStopwatch.classList.add('active');
                 btnModeStopwatch.setAttribute('aria-pressed', 'true');
@@ -1284,10 +1362,15 @@
 
                 progressRing.style.stroke = 'var(--blue-primary)';
                 startBtn.classList.add('sw-mode');
+                timeDisplayEl.setAttribute('aria-label', 'Chronomètre');
             }
+            setStartButton('ready');
+            setLapButton(false);
         }
 
-        /* ---------- Formatting ---------- */
+        /* ============================================================
+           Formatting
+           ============================================================ */
         function formatStopwatchTime(ms) {
             const totalSecs = Math.floor(ms / 1000);
             const h = Math.floor(totalSecs / 3600);
@@ -1295,12 +1378,12 @@
             const s = totalSecs % 60;
             const centiseconds = Math.floor((ms % 1000) / 10);
 
-            const hStr = h > 0 ? `${String(h).padStart(2, '0')}:` : '';
+            const hStr = h > 0 ? String(h).padStart(2, '0') + ':' : '';
             const mStr = String(m).padStart(2, '0');
             const sStr = String(s).padStart(2, '0');
             const cStr = String(centiseconds).padStart(2, '0');
 
-            return { main: `${hStr}${mStr}:${sStr}`, ms: `.${cStr}` };
+            return { main: hStr + mStr + ':' + sStr, ms: '.' + cStr };
         }
 
         function updateCountdownText() {
@@ -1308,9 +1391,13 @@
             const m = Math.floor((totalSeconds % 3600) / 60);
             const s = totalSeconds % 60;
             mainTime.textContent =
-                `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                String(h).padStart(2, '0') + ':' +
+                String(m).padStart(2, '0') + ':' +
+                String(s).padStart(2, '0');
             msTime.textContent = '';
-            timeDisplayEl.classList.remove('long-time');
+            // Countdown always renders HH:MM:SS (8 chars) — always use the
+            // long-time font so the text fits inside the ring on all screens.
+            timeDisplayEl.classList.add('long-time');
         }
 
         function updateStopwatchDisplay() {
@@ -1339,7 +1426,9 @@
             }
         }
 
-        /* ---------- Input handling ---------- */
+        /* ============================================================
+           Input handling
+           ============================================================ */
         function setupInput(input, max) {
             input.addEventListener('keydown', (e) => {
                 if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -1374,6 +1463,10 @@
                         updateTimeFromInputs();
                     }
                 }
+                // Sync metadata even when value didn't change locally
+                if (!isRunning && currentMode === 'countdown') {
+                    syncMetaFromInputs();
+                }
             });
         }
 
@@ -1385,22 +1478,123 @@
             const h = parseInt(inputHours.value, 10) || 0;
             const m = parseInt(inputMinutes.value, 10) || 0;
             const s = parseInt(inputSeconds.value, 10) || 0;
+            const newTotal = Math.min(h * 3600 + m * 60 + s, MAX_SECONDS);
 
-            totalSeconds = (h * 3600) + (m * 60) + s;
-            initialTotalSeconds = totalSeconds;
-            remainingMs = 0;
+            const changed = newTotal !== totalSeconds;
+            if (changed) {
+                totalSeconds = newTotal;
+                initialTotalSeconds = newTotal;
+                remainingMs = 0;
+            }
 
             if (!isRunning && currentMode === 'countdown') {
                 progressRing.style.stroke = 'var(--green-primary)';
-                statusText.textContent = 'Prêt';
+                const paused = remainingMs > 0;
+                statusText.textContent = paused ? 'En pause' : 'Prêt';
                 statusText.style.color = 'var(--text-muted)';
-                setStartButton('ready');
+                setStartButton(paused ? 'paused' : 'ready');
             }
 
             updateDisplay();
         }
 
-        /* ---------- Timer control ---------- */
+        /* ============================================================
+           Meta / SEO sync
+           ============================================================ */
+        function getCurrentBase() {
+            const localePrefixes = { hi: '/hi/', es: '/es/', fr: '/fr/', de: '/de/' };
+            const path = window.location.pathname;
+            for (const prefix of Object.values(localePrefixes)) {
+                const noSlash = prefix.replace(/\/$/, '');
+                if (path === noSlash || path.startsWith(prefix)) return prefix;
+            }
+            return '/';
+        }
+
+        function syncMeta(h, m, s) {
+            if (currentMode !== 'countdown') return;
+            const totalSecs = h * 3600 + m * 60 + s;
+            if (totalSecs <= 0) return;
+
+            const shortParts = [];
+            if (h > 0) shortParts.push(pluralizeTime(h, 'heure', 'heures'));
+            if (m > 0) shortParts.push(pluralizeTime(m, 'minute', 'minutes'));
+            if (s > 0) shortParts.push(pluralizeTime(s, 'seconde', 'secondes'));
+            const shortLabel = shortParts.join(' ');
+
+            const newTitle = 'Minuteur de ' + shortLabel + ' - Compte à rebours en ligne gratuit';
+            const newDesc  = 'Minuteur de compte à rebours de ' + shortLabel + ' en ligne et gratuit avec anneau visuel. Sans inscription.';
+            const newH1    = 'Minuteur de ' + shortLabel;
+
+            const canonParams = new URLSearchParams();
+            const totalMin = h * 60 + m;
+            if (totalMin > 0) canonParams.set('minutes', totalMin);
+            if (s > 0)        canonParams.set('seconds', s);
+            const qs = canonParams.toString();
+            const querySuffix = qs ? '?' + qs : '';
+
+            const currentBase = getCurrentBase();
+            const localeLangs = { '/': 'en', '/hi/': 'hi', '/es/': 'es', '/fr/': 'fr', '/de/': 'de' };
+            const newUrl  = 'https://timerclock.app' + currentBase + querySuffix;
+            const rootUrl = 'https://timerclock.app/' + querySuffix;
+
+            document.title = newTitle;
+
+            const setMeta = (selector, attr, value) => {
+                const el = document.querySelector(selector);
+                if (el) el.setAttribute(attr, value);
+            };
+            setMeta('meta[name="description"]', 'content', newDesc);
+            setMeta('link[rel="canonical"]', 'href', newUrl);
+            setMeta('meta[property="og:title"]', 'content', newTitle);
+            setMeta('meta[property="og:description"]', 'content', newDesc);
+            setMeta('meta[property="og:url"]', 'content', newUrl);
+            setMeta('meta[name="twitter:title"]', 'content', newTitle);
+            setMeta('meta[name="twitter:description"]', 'content', newDesc);
+
+            const h1 = document.querySelector('.site-header h1');
+            if (h1) h1.textContent = newH1;
+
+            const ldJsonEl = document.querySelector('script[type="application/ld+json"]');
+            if (ldJsonEl) {
+                try {
+                    const data = JSON.parse(ldJsonEl.textContent);
+                    data.name        = 'Timer Clock';
+                    data.description = newDesc;
+                    data.url         = newUrl;
+                    data.inLanguage  = localeLangs[currentBase] || 'fr';
+                    ldJsonEl.textContent = JSON.stringify(data);
+                } catch (_) {}
+            }
+
+            const langPaths = { en: '/', hi: '/hi/', es: '/es/', fr: '/fr/', de: '/de/' };
+            document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(link => {
+                const lang = link.getAttribute('hreflang');
+                if (lang === 'x-default') {
+                    link.setAttribute('href', rootUrl);
+                } else if (langPaths[lang]) {
+                    link.setAttribute('href', 'https://timerclock.app' + langPaths[lang] + querySuffix);
+                }
+            });
+
+            document.documentElement.lang = localeLangs[currentBase] || 'fr';
+        }
+
+        function syncMetaFromInputs() {
+            const h = parseInt(inputHours.value, 10) || 0;
+            const m = parseInt(inputMinutes.value, 10) || 0;
+            const s = parseInt(inputSeconds.value, 10) || 0;
+            syncMeta(h, m, s);
+        }
+
+        /* French singular/plural helper */
+        function pluralizeTime(count, singular, plural) {
+            return count + ' ' + (count === 1 ? singular : plural);
+        }
+
+        /* ============================================================
+           Timer control
+           ============================================================ */
         function toggleTimer() {
             if (isRunning) pauseTimer();
             else startTimer();
@@ -1493,7 +1687,7 @@
             totalSeconds = 0;
             updateCountdownText();
 
-            statusText.textContent = "Temps écoulé !";
+            statusText.textContent = 'Temps écoulé !';
             statusText.style.color = 'var(--danger)';
             progressRing.style.stroke = 'var(--danger)';
             progressRing.style.strokeDashoffset = String(circumference);
@@ -1521,6 +1715,14 @@
                 isRunning = false;
                 totalSeconds = Math.ceil(remainingMs / 1000);
                 updateCountdownText();
+
+                // Sync inputs to the *remaining* time so editing them
+                // (or accidentally re-typing the same value) doesn't
+                // silently discard the paused progress.
+                inputHours.value   = String(Math.floor(totalSeconds / 3600));
+                inputMinutes.value = String(Math.floor((totalSeconds % 3600) / 60));
+                inputSeconds.value = String(totalSeconds % 60);
+
                 const initMs = initialTotalSeconds * 1000;
                 if (initMs > 0) {
                     progressRing.style.strokeDashoffset =
@@ -1560,6 +1762,7 @@
             lapCount = 0;
             lastLapMs = 0;
             lapsSection.innerHTML = '';
+            lapsLiveRegion.textContent = '';
 
             if (currentMode === 'countdown') {
                 updateTimeFromInputs();
@@ -1574,6 +1777,7 @@
             statusText.style.color = 'var(--text-muted)';
             setStartButton('ready');
             setLapButton(false);
+            clearPresetActive();
         }
 
         async function handleResetLap() {
@@ -1605,14 +1809,16 @@
             lapDiv.className = 'lap-item';
             lapDiv.setAttribute('role', 'listitem');
             const label = document.createElement('span');
-            label.textContent = `Tour ${lapCount}`;
+            label.textContent = 'Tour ' + lapCount;
             const value = document.createElement('span');
-            value.textContent = `+${lapObj.main}${lapObj.ms}`;
+            value.textContent = '+' + lapObj.main + lapObj.ms;
             lapDiv.appendChild(label);
             lapDiv.appendChild(value);
             lapsSection.prepend(lapDiv);
-
             lapsSection.scrollTop = 0;
+
+            // Announce only the new lap
+            lapsLiveRegion.textContent = 'Tour ' + lapCount + ' ' + lapObj.main + lapObj.ms;
 
             while (lapsSection.children.length > MAX_LAPS) {
                 lapsSection.removeChild(lapsSection.lastElementChild);
@@ -1635,11 +1841,13 @@
             isRunning = false;
             remainingMs = 0;
 
-            inputHours.value   = Math.min(99, Math.floor(minutes / 60));
-            inputMinutes.value = Math.min(59, minutes % 60);
-            inputSeconds.value = 0;
+            inputHours.value   = String(Math.min(99, Math.floor(minutes / 60)));
+            inputMinutes.value = String(Math.min(59, minutes % 60));
+            inputSeconds.value = '0';
 
-            updateTimeFromInputs();
+            totalSeconds = minutes * 60;
+            initialTotalSeconds = totalSeconds;
+
             statusText.textContent = 'Prêt';
             statusText.style.color = 'var(--text-muted)';
             progressRing.style.stroke = 'var(--green-primary)';
@@ -1648,12 +1856,19 @@
             inputSeconds.disabled = false;
             setStartButton('ready');
             setLapButton(false);
+            updateDisplay();
 
             document.querySelectorAll('.preset-btn').forEach(b => {
                 const active = b.dataset.minutes === String(minutes);
                 b.classList.toggle('active', active);
                 b.setAttribute('aria-pressed', active ? 'true' : 'false');
             });
+
+            syncMeta(
+                parseInt(inputHours.value, 10),
+                parseInt(inputMinutes.value, 10),
+                parseInt(inputSeconds.value, 10)
+            );
         }
 
         function toggleMute() {
@@ -1670,7 +1885,9 @@
             }
         }
 
-        /* ---------- Keyboard ---------- */
+        /* ============================================================
+           Keyboard
+           ============================================================ */
         document.addEventListener('keydown', (e) => {
             if (modalResolve) {
                 if (e.key === 'Escape') {
@@ -1691,12 +1908,9 @@
             }
         });
 
-        /* ---------- URL params ---------- */
-        // French singular/plural helper — 1 heure, 2 heures, 1 minute, 2 minutes…
-        function pluralizeTime(count, singular, plural) {
-            return `${count} ${count === 1 ? singular : plural}`;
-        }
-
+        /* ============================================================
+           URL params
+           ============================================================ */
         function initFromURL() {
             const params = new URLSearchParams(window.location.search);
             const rawMin = params.get('minutes');
@@ -1721,83 +1935,36 @@
             const m = Math.min(59, Math.floor((clamped % 3600) / 60));
             const s = Math.min(59, clamped % 60);
 
-            inputHours.value   = h;
-            inputMinutes.value = m;
-            inputSeconds.value = s;
-            updateTimeFromInputs();
+            inputHours.value   = String(h);
+            inputMinutes.value = String(m);
+            inputSeconds.value = String(s);
 
-            const shortParts = [];
-            if (h > 0) shortParts.push(pluralizeTime(h, 'heure', 'heures'));
-            if (m > 0) shortParts.push(pluralizeTime(m, 'minute', 'minutes'));
-            if (s > 0) shortParts.push(pluralizeTime(s, 'seconde', 'secondes'));
-            const shortLabel = shortParts.join(' ');
-            const longLabel  = shortLabel;
+            totalSeconds = clamped;
+            initialTotalSeconds = clamped;
+            remainingMs = 0;
 
-            const newTitle = `Minuteur de ${shortLabel} - Compte à rebours en ligne gratuit`;
-            const newDesc  = `Minuteur de compte à rebours de ${longLabel} en ligne et gratuit avec anneau visuel. Sans inscription.`;
-            const newH1    = `Minuteur de ${shortLabel}`;
+            statusText.textContent = 'Prêt';
+            statusText.style.color = 'var(--text-muted)';
+            setStartButton('ready');
+            updateDisplay();
 
-            const canonParams = new URLSearchParams();
-            const totalMin = h * 60 + m;
-            if (totalMin > 0) canonParams.set('minutes', totalMin);
-            if (s > 0)        canonParams.set('seconds', s);
-            const qs = canonParams.toString();
-            const querySuffix = qs ? '?' + qs : '';
-
-            const localePrefixes = { hi: '/hi/', es: '/es/', fr: '/fr/', de: '/de/' };
-            const localeLangs    = { '/': 'en', '/hi/': 'hi', '/es/': 'es', '/fr/': 'fr', '/de/': 'de' };
-            let currentBase = '/';
-            for (const prefix of Object.values(localePrefixes)) {
-                if (window.location.pathname.startsWith(prefix)) {
-                    currentBase = prefix;
-                    break;
-                }
-            }
-            const newUrl  = `https://timerclock.app${currentBase}${querySuffix}`;
-            const rootUrl = `https://timerclock.app/${querySuffix}`;
-
-            document.title = newTitle;
-
-            const setMeta = (selector, attr, value) => {
-                const el = document.querySelector(selector);
-                if (el) el.setAttribute(attr, value);
-            };
-            setMeta('meta[name="description"]', 'content', newDesc);
-            setMeta('link[rel="canonical"]', 'href', newUrl);
-            setMeta('meta[property="og:title"]', 'content', newTitle);
-            setMeta('meta[property="og:description"]', 'content', newDesc);
-            setMeta('meta[property="og:url"]', 'content', newUrl);
-            setMeta('meta[name="twitter:title"]', 'content', newTitle);
-            setMeta('meta[name="twitter:description"]', 'content', newDesc);
-
-            const h1 = document.querySelector('.site-header h1');
-            if (h1) h1.textContent = newH1;
-
-            const ldJsonEl = document.querySelector('script[type="application/ld+json"]');
-            if (ldJsonEl) {
-                try {
-                    const data = JSON.parse(ldJsonEl.textContent);
-                    data.name        = 'Timer Clock';
-                    data.description = newDesc;
-                    data.url         = newUrl;
-                    data.inLanguage  = localeLangs[currentBase] || 'fr';
-                    ldJsonEl.textContent = JSON.stringify(data);
-                } catch (err) { }
-            }
-
-            const langPaths = { en: '/', hi: '/hi/', es: '/es/', fr: '/fr/', de: '/de/' };
-            document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(link => {
-                const lang = link.getAttribute('hreflang');
-                if (lang === 'x-default') {
-                    link.setAttribute('href', rootUrl);
-                } else if (langPaths[lang]) {
-                    link.setAttribute('href', `https://timerclock.app${langPaths[lang]}${querySuffix}`);
-                }
+            // Highlight the matching preset, if any
+            const totalMin = Math.floor(clamped / 60);
+            const isExactMinute = (clamped % 60) === 0;
+            document.querySelectorAll('.preset-btn').forEach(b => {
+                const active = isExactMinute && parseInt(b.dataset.minutes, 10) === totalMin;
+                b.classList.toggle('active', active);
+                b.setAttribute('aria-pressed', active ? 'true' : 'false');
             });
+
+            syncMeta(h, m, s);
         }
 
+        /* ---------- Boot ---------- */
         updateTimeFromInputs();
         initFromURL();
+        setStartButton('ready');
+        setLapButton(false);
     </script>
 </body>
 </html>

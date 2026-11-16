@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Online Alarm Clock – Timer Clock</title>
-    <meta name="description" content="Free online alarm clock with sound. Set multiple alarms, add labels, switch 12/24-hour format, and wake up on time. Works on any device — alarms saved in your browser, no signup.">
+    <meta name="description" content="Looking for a free online alarm clock? Set your alarm time easily and use a simple browser-based clock for waking up, studying, or daily reminders.">
     <link rel="canonical" href="https://timerclock.app/online-alarm-clock">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#22c55e">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Online Alarm Clock – Free Alarm with Sound">
-    <meta property="og:description" content="Free online alarm clock with sound. Set multiple alarms, add labels, choose 12/24-hour format — no signup required.">
+    <meta property="og:title" content="Online Alarm Clock – Timer Clock">
+    <meta property="og:description" content="Looking for a free online alarm clock? Set your alarm time easily and use a simple browser-based clock for waking up, studying, or daily reminders.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://timerclock.app/online-alarm-clock">
     <meta property="og:image" content="https://timerclock.app/og-image.png">
@@ -20,8 +20,8 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Online Alarm Clock – Free Alarm with Sound">
-    <meta name="twitter:description" content="Free online alarm clock with sound. Set multiple alarms, 12/24-hour format — no signup required.">
+    <meta name="twitter:title" content="Online Alarm Clock – Timer Clock">
+    <meta name="twitter:description" content="Looking for a free online alarm clock? Set your alarm time easily and use a simple browser-based clock for waking up, studying, or daily reminders.">
     <meta name="twitter:image" content="https://timerclock.app/og-image.png">
 
     <!-- Hreflang -->
@@ -51,83 +51,149 @@
       })(window,document,'script','dataLayer','GTM-K4L3JFT4');
     </script>
 
-    <!-- Schema: WebApplication -->
-    <script type="application/ld+json">
+    
+<!-- Timer Clock - Online Alarm Clock Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Timer Clock Alarm Clock",
+      "@type": "Organization",
+      "@id": "https://timerclock.app/#organization",
+      "name": "Timer Clock",
+      "url": "https://timerclock.app/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://timerclock.app/#website",
+      "name": "Timer Clock",
+      "url": "https://timerclock.app/",
+      "publisher": {
+        "@id": "https://timerclock.app/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://timerclock.app/online-alarm-clock#webpage",
       "url": "https://timerclock.app/online-alarm-clock",
-      "description": "Free online alarm clock with sound. Set multiple alarms with labels, 12/24-hour format, saved in your browser, and wake up on time.",
-      "applicationCategory": "UtilityApplication",
-      "operatingSystem": "All",
-      "browserRequirements": "Requires JavaScript",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "featureList": [
-        "Live clock with rotating ring",
-        "12-hour and 24-hour time formats",
-        "Automatic format detection based on browser locale",
-        "Multiple alarms with labels",
-        "Sound alerts with repeated beeping",
-        "Alarms saved in browser (localStorage)",
-        "Next-alarm countdown",
-        "Timezone display",
-        "Fullscreen mode",
-        "Works on all devices"
-      ],
-      "screenshot": "https://timerclock.app/og-image.png"
-    }
-    </script>
-
-    <!-- Schema: FAQPage -->
-    <script type="application/ld+json">
+      "name": "Online Alarm Clock - Timer Clock",
+      "description": "Looking for a free online alarm clock? Set your alarm time easily and use a simple browser-based clock for waking up, studying, or daily reminders.",
+      "isPartOf": {
+        "@id": "https://timerclock.app/#website"
+      },
+      "publisher": {
+        "@id": "https://timerclock.app/#organization"
+      },
+      "mainEntity": {
+        "@id": "https://timerclock.app/online-alarm-clock#software"
+      },
+      "hasPart": {
+        "@id": "https://timerclock.app/online-alarm-clock#faq"
+      },
+      "inLanguage": "en-US"
+    },
     {
-      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "@id": "https://timerclock.app/online-alarm-clock#software",
+      "name": "Online Alarm Clock - Timer Clock",
+      "url": "https://timerclock.app/online-alarm-clock",
+      "description": "A free online alarm clock for setting wake-up alarms and daily reminders. Choose your preferred time and manage alarms directly in your browser.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and a modern web browser.",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Live digital clock",
+        "12-hour and 24-hour time formats",
+        "Automatic time format detection",
+        "Multiple alarms with custom labels",
+        "Sound alerts when an alarm rings",
+        "Alarms saved in browser localStorage",
+        "Countdown to the next alarm",
+        "Local timezone display",
+        "Fullscreen mode",
+        "Responsive design for desktop and mobile devices"
+      ],
+      "provider": {
+        "@id": "https://timerclock.app/#organization"
+      }
+    },
+    {
       "@type": "FAQPage",
+      "@id": "https://timerclock.app/online-alarm-clock#faq",
+      "url": "https://timerclock.app/online-alarm-clock#faq",
+      "isPartOf": {
+        "@id": "https://timerclock.app/online-alarm-clock#webpage"
+      },
+      "inLanguage": "en-US",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How do I set an alarm?",
+          "name": "How do I set an alarm online?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Enter the hour, minute, and (in 12-hour mode) AM/PM, optionally add a label, then click Add Alarm. The alarm will ring with a sound at the chosen time."
+            "text": "Select your preferred hour and minute, choose AM or PM if using the 12-hour format, and optionally enter an alarm label. Click Add Alarm to save your alarm."
           }
         },
         {
           "@type": "Question",
-          "name": "Does it support 24-hour format?",
+          "name": "Does the online alarm clock support 12-hour and 24-hour formats?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The clock automatically detects your browser's preferred format and you can switch between 12-hour and 24-hour at any time using the 12H/24H toggle. Your choice is saved."
+            "text": "Yes. You can switch between 12-hour and 24-hour time formats using the format toggle. The clock can also detect your browser's preferred time format."
           }
         },
         {
           "@type": "Question",
-          "name": "Are my alarms saved?",
+          "name": "Can I set multiple alarms?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. All alarms are saved in your browser's localStorage, so they persist across page reloads on the same device and browser."
+            "text": "Yes. You can add multiple alarms with custom labels to manage different wake-up times and daily reminders."
           }
         },
         {
           "@type": "Question",
-          "name": "Is the online alarm clock free?",
+          "name": "Are my alarms saved automatically?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Timer Clock's alarm clock is completely free, requires no signup, and runs directly in your browser."
+            "text": "Your alarms are saved in your browser's local storage and remain available after reloading the page on the same browser and device."
           }
         },
         {
           "@type": "Question",
-          "name": "Does it work in my timezone?",
+          "name": "Is this online alarm clock free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The alarm clock uses your device's local time, so it works anywhere in the world. Your timezone is shown next to the clock in 24-hour mode."
+            "text": "Yes. Timer Clock provides a free online alarm clock that works directly in your browser without requiring an account or signup."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the alarm clock use my local timezone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The alarm clock uses your device's local time and timezone to schedule alarms."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will my alarm ring if I close the browser?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The alarm generally needs the webpage to remain open in your browser. Alarm behavior in background tabs depends on your browser and device settings."
           }
         }
       ]
     }
-    </script>
+  ]
+}
+</script>
 
     <style>
         :root {
@@ -1239,7 +1305,7 @@
 
         <div class="hero-section">
             <h1 class="hero-title">Online Alarm Clock — Wake Up on Time</h1>
-            <p class="hero-subtitle">Set multiple alarms with labels and a sound alert. Supports 12-hour and 24-hour formats, auto-detects your timezone. Free, no signup — your alarms are saved in your browser.</p>
+            <p class="hero-subtitle">Need a reminder or a wake-up alarm? Set your time, give it a label, and let the alarm notify you when it's time.</p>
         </div>
 
         <main class="main-content" id="mainContent">
@@ -1320,68 +1386,115 @@
             </div>
         </main>
 
-        <section class="seo-content" aria-labelledby="seoTitle">
-            <h2 id="seoTitle">How to use the online alarm clock</h2>
-            <p>
-                Timer Clock's <strong>online alarm clock</strong> shows the live current time and lets you set one or more
-                alarms. Enter the hour, minute, and (when in 12-hour mode) AM/PM, optionally add a label like "Wake up" or
-                "Meeting", then click <strong>Add Alarm</strong>. When the clock reaches that time, an alarm sounds
-                repeatedly until you press <strong>STOP ALARM</strong>.
-            </p>
-            <p>
-                The clock <strong>automatically detects your preferred time format</strong> from your browser language:
-                most of the world uses 24-hour time, while the US and a few other regions use 12-hour AM/PM. You can
-                override this any time with the <strong>12H / 24H toggle</strong> — your choice is remembered. In
-                24-hour mode, your local timezone is shown next to the clock.
-            </p>
-            <p>
-                All your alarms are saved automatically in your browser, so they persist across page reloads on the same
-                device and browser. Toggle any alarm on or off with the switch, or remove it with the delete button.
-                Enter fullscreen for a distraction-free clock display.
-            </p>
 
-            <h2>Popular alarm clock uses</h2>
-            <ul>
-                <li><strong>Wake up</strong> — use your computer or tablet as a bedside clock.</li>
-                <li><strong>Reminders</strong> — set an alarm for a meeting, medication, or task.</li>
-                <li><strong>Cooking</strong> — alarm for oven timers, baking, or steeping.</li>
-                <li><strong>Power naps</strong> — quick 20-minute rest without oversleeping.</li>
-                <li><strong>Study breaks</strong> — remember to stand up and stretch.</li>
-                <li><strong>Workouts</strong> — alarms for interval sessions and circuits.</li>
-            </ul>
+<section class="seo-content" aria-labelledby="seoTitle">
 
-            <h2>Frequently asked questions</h2>
-            <div class="faq">
-                <details>
-                    <summary>How do I set an alarm?</summary>
-                    <p>Enter the hour, minute, and (in 12-hour mode) AM/PM, optionally add a label, then click <strong>Add Alarm</strong>. The alarm will ring with a sound at the chosen time.</p>
-                </details>
-                <details>
-                    <summary>Does it support 24-hour format?</summary>
-                    <p>Yes. The clock automatically detects your browser's preferred format and you can switch between 12-hour and 24-hour at any time using the <strong>12H / 24H toggle</strong>. Your choice is saved across reloads.</p>
-                </details>
-                <details>
-                    <summary>Does it work in my timezone?</summary>
-                    <p>Yes. The alarm clock uses your device's local time, so it works anywhere in the world. In 24-hour mode, your timezone is shown next to the clock.</p>
-                </details>
-                <details>
-                    <summary>Are my alarms saved?</summary>
-                    <p>Yes. All alarms are saved in your browser's <code>localStorage</code>, so they persist across page reloads on the same device and browser.</p>
-                </details>
-                <details>
-                    <summary>Is the online alarm clock free?</summary>
-                    <p>Yes. Timer Clock's alarm clock is completely free, requires no signup, and runs directly in your browser.</p>
-                </details>
-                <details>
-                    <summary>Will it wake me up if the tab is closed?</summary>
-                    <p>No. The alarm only works while the page is open in a browser tab. Keep the tab open and your device on for the alarm to ring.</p>
-                </details>
-                <details>
-                    <summary>Can I set multiple alarms?</summary>
-                    <p>Yes. You can add as many alarms as you like, each with its own time and optional label. Toggle them on or off individually.</p>
-                </details>
-            </div>
-        </section>
+    <h2 id="seoTitle">How to use the online alarm clock</h2>
+
+    <p>
+        Timer Clock makes it easy to set an alarm right from your browser. Choose the hour and minute,
+        select AM or PM if you're using the 12-hour format, and add a label such as "Wake up" or
+        "Meeting" to remember what the alarm is for. When you're ready, click
+        <strong>Add Alarm</strong>. At the scheduled time, you'll hear a sound alert that continues
+        until you press <strong>STOP ALARM</strong>.
+    </p>
+
+    <p>
+        The clock automatically selects a 12-hour or 24-hour format based on your browser's language
+        and regional settings. Prefer a different format? Simply use the <strong>12H / 24H toggle</strong>
+        to switch whenever you like. Your preference is saved for your next visit. In 24-hour mode,
+        you can also see your local timezone next to the clock.
+    </p>
+
+    <p>
+        Your alarms are saved in your browser, so they remain available when you reload the page
+        on the same device and browser. You can turn individual alarms on or off, delete the ones
+        you no longer need, and switch to fullscreen mode for a clearer view of the clock.
+    </p>
+
+    <h2>What can you use an online alarm clock for?</h2>
+
+    <p>
+        An online alarm clock is useful for more than just waking up. You can use it throughout
+        the day whenever you need a reminder or want to stay on schedule.
+    </p>
+
+    <ul>
+        <li><strong>Waking up:</strong> Set a morning alarm on your computer or tablet.</li>
+        <li><strong>Daily reminders:</strong> Remember meetings, appointments, and important tasks.</li>
+        <li><strong>Cooking:</strong> Keep track of baking, food preparation, and other kitchen tasks.</li>
+        <li><strong>Power naps:</strong> Set a short alarm so you don't sleep longer than planned.</li>
+        <li><strong>Study sessions:</strong> Set reminders for study breaks and revision time.</li>
+        <li><strong>Workouts:</strong> Keep track of exercise intervals and scheduled activities.</li>
+    </ul>
+
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq">
+
+        <details>
+            <summary>How do I set an alarm online?</summary>
+            <p>
+                Select the hour and minute, then choose AM or PM if you're using the 12-hour format.
+                You can also add a label to identify your alarm. Click <strong>Add Alarm</strong>
+                to save it. The alarm will play a sound when the selected time arrives.
+            </p>
+        </details>
+
+        <details>
+            <summary>Can I switch between 12-hour and 24-hour time?</summary>
+            <p>
+                Yes. You can switch between 12-hour and 24-hour formats using the
+                <strong>12H / 24H toggle</strong>. The clock also detects your preferred format
+                from your browser's regional settings, and your selection is saved.
+            </p>
+        </details>
+
+        <details>
+            <summary>Does the online alarm clock use my local timezone?</summary>
+            <p>
+                Yes. The clock uses your device's local time to schedule alarms. In 24-hour mode,
+                your timezone is also displayed next to the clock.
+            </p>
+        </details>
+
+        <details>
+            <summary>Are my alarms saved automatically?</summary>
+            <p>
+                Yes. Your alarms are stored in your browser's localStorage. They remain saved
+                after you reload the page, as long as you continue using the same browser and
+                device without clearing its stored data.
+            </p>
+        </details>
+
+        <details>
+            <summary>Is this online alarm clock free to use?</summary>
+            <p>
+                Yes. Timer Clock's online alarm clock is free to use. You don't need to create
+                an account or install any software. Just open the page and set your alarm.
+            </p>
+        </details>
+
+        <details>
+            <summary>Will my alarm ring if I close the browser tab?</summary>
+            <p>
+                No. The alarm needs the webpage to remain open in your browser. Keep the tab open
+                and your device powered on to receive the alarm. Background behavior may vary
+                depending on your browser and device settings.
+            </p>
+        </details>
+
+        <details>
+            <summary>Can I set more than one alarm?</summary>
+            <p>
+                Yes. You can create multiple alarms, each with its own time and optional label.
+                You can also turn individual alarms on or off or delete them whenever you want.
+            </p>
+        </details>
+
+    </div>
+
+</section>
 
         <footer class="site-footer">
             <div class="footer-grid">

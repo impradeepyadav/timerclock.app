@@ -51,70 +51,139 @@
       })(window,document,'script','dataLayer','GTM-K4L3JFT4');
     </script>
 
-    <!-- Schema: WebApplication -->
-    <script type="application/ld+json">
+    
+
+<!-- Timer Clock - Homepage Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
+      "@type": "Organization",
+      "@id": "https://timerclock.app/#organization",
+      "name": "Timer Clock",
+      "url": "https://timerclock.app/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://timerclock.app/#website",
       "name": "Timer Clock",
       "url": "https://timerclock.app/",
-      "description": "Looking for an online timer or stopwatch? Set a free countdown timer, track elapsed time, and measure seconds, minutes, and hours.",
-      "applicationCategory": "UtilityApplication",
-      "operatingSystem": "All",
-      "browserRequirements": "Requires JavaScript",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "featureList": [
-        "Countdown timer with visual ring",
-        "Time presets from 1 to 60 minutes",
-        "Sound alerts and mute option",
-        "Fullscreen clock mode",
-        "Works on all devices"
-      ],
-      "screenshot": "https://timerclock.app/og-image.png"
-    }
-    </script>
-
-    <!-- Schema: FAQPage -->
-    <script type="application/ld+json">
+      "description": "A free online countdown timer for cooking, studying, workouts, and everyday tasks.",
+      "publisher": {
+        "@id": "https://timerclock.app/#organization"
+      },
+      "inLanguage": "en-US"
+    },
     {
-      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://timerclock.app/#webpage",
+      "url": "https://timerclock.app/",
+      "name": "Online Countdown Timer - Timer Clock",
+      "description": "Set a free online countdown timer for cooking, studying, workouts, and everyday tasks. Choose a preset or enter your own time.",
+      "isPartOf": {
+        "@id": "https://timerclock.app/#website"
+      },
+      "publisher": {
+        "@id": "https://timerclock.app/#organization"
+      },
+      "mainEntity": {
+        "@id": "https://timerclock.app/#software"
+      },
+      "hasPart": {
+        "@id": "https://timerclock.app/#faq"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://timerclock.app/#software",
+      "name": "Timer Clock - Online Countdown Timer",
+      "url": "https://timerclock.app/",
+      "description": "A free online countdown timer for managing time during cooking, studying, exercise, work, and everyday activities.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and a modern web browser.",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Online countdown timer",
+        "Quick timer presets from 1 to 60 minutes",
+        "Custom hours, minutes, and seconds",
+        "Sound alerts with mute option",
+        "Fullscreen timer mode",
+        "Circular countdown progress display"
+      ],
+      "provider": {
+        "@id": "https://timerclock.app/#organization"
+      }
+    },
+    {
       "@type": "FAQPage",
+      "@id": "https://timerclock.app/#faq",
+      "url": "https://timerclock.app/#faq",
+      "isPartOf": {
+        "@id": "https://timerclock.app/#webpage"
+      },
+      "inLanguage": "en-US",
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How do I use the online timer?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Pick a preset or type the hours, minutes, and seconds you need, then press Start. The countdown begins instantly and a sound plays when it reaches zero."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is the online timer free?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Timer Clock is completely free, requires no signup, and runs directly in your browser on any device."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does it work offline?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Once the page loads, the countdown timer runs locally in your browser. You need a connection only to reload the page after closing it."
-          }
-        },
         {
           "@type": "Question",
           "name": "What is a Pomodoro timer?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A Pomodoro timer is a 25-minute focus timer used with the Pomodoro Technique. Use the 25 min preset or visit /pomodoro-timer to start instantly."
+            "text": "A Pomodoro timer helps you stay focused by breaking work into short sessions, usually 25 minutes, followed by a short break. You can use the 25-minute preset or visit our Pomodoro timer for focused study and work sessions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Timer Clock free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Timer Clock is free to use. There's no account to create or software to install. Just open the website and set your timer whenever you need it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use the countdown timer offline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the timer runs directly in your browser without needing an internet connection once the page has loaded. You only need to go online again if you want to reload the page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I change the language on Timer Clock?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can change the website language using the language selector in the top-right corner. On mobile devices, you'll find it inside the menu. Available languages include English, Hindi, Spanish, French, and German."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Timer Clock and who runs it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Timer Clock is a free online tool for setting countdown timers and managing everyday tasks. To learn more about the website, its purpose, and how to get in touch, visit our About page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use the timer in fullscreen mode?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can switch to fullscreen mode to make the countdown easier to see from a distance. It's useful when cooking, exercising, teaching, or giving a presentation."
           }
         }
       ]
     }
-    </script>
+  ]
+}
+</script>
 
     <style>
         :root {

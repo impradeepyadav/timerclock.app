@@ -1,91 +1,15 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
-    <!-- English Homepage -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://timerclock.app/</loc>
-        <lastmod>2026-11-16</lastmod>
-        <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/"/>
-        <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/"/>
     </url>
-
-    <!-- Hindi Homepage -->
-    <url>
-        <loc>https://timerclock.app/hi/</loc>
-        <lastmod>2026-11-16</lastmod>
-        <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/"/>
-        <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/"/>
-    </url>
-
-    <!-- Spanish Homepage -->
-    <url>
-        <loc>https://timerclock.app/es/</loc>
-        <lastmod>2026-11-16</lastmod>
-        <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/"/>
-        <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/"/>
-    </url>
-
-    <!-- French Homepage -->
-    <url>
-        <loc>https://timerclock.app/fr/</loc>
-        <lastmod>2026-11-16</lastmod>
-        <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/"/>
-        <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/"/>
-    </url>
-
-    <!-- German Homepage -->
-    <url>
-        <loc>https://timerclock.app/de/</loc>
-        <lastmod>2026-11-16</lastmod>
-        <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/"/>
-        <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/"/>
-    </url>
-
-    <!-- Stopwatch -->
     <url>
         <loc>https://timerclock.app/stopwatch</loc>
-        <lastmod>2026-11-16</lastmod>
     </url>
-
-    <!-- Online Alarm Clock -->
     <url>
         <loc>https://timerclock.app/online-alarm-clock</loc>
-        <lastmod>2026-11-16</lastmod>
     </url>
-
-    <!-- Pomodoro Timer -->
     <url>
         <loc>https://timerclock.app/pomodoro-timer</loc>
-        <lastmod>2026-11-16</lastmod>
     </url>
-
-    <!-- Privacy Policy -->
-    <url>
-        <loc>https://timerclock.app/privacy</loc>
-        <lastmod>2026-11-16</lastmod>
-    </url>
-
 </urlset>

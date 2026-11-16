@@ -178,7 +178,7 @@
         .sidebar-overlay {
             position: fixed;
             inset: 0;
-            background: transparent;
+            background: rgba(17, 24, 39, 0.35);
             z-index: 1999;
             opacity: 0;
             visibility: hidden;
@@ -192,6 +192,7 @@
             left: 0;
             width: 280px;
             height: 100vh;
+            height: 100dvh;
             background: var(--card-bg);
             z-index: 2000;
             transform: translateX(-100%);
@@ -444,6 +445,7 @@
             stroke-width: 12;
             stroke-linecap: round;
             stroke-dashoffset: 0;
+            transition: stroke-dashoffset 0.2s linear;
         }
         .ring-progress.ringing {
             stroke: url(#ringGradientDanger);
@@ -454,7 +456,6 @@
             50% { opacity: 0.4; }
         }
 
-        /* ============ TIME TEXT — improved scaling ============ */
         .time-text {
             font-family: var(--font-mono);
             font-size: clamp(1.5rem, 15cqw, 3.2rem);
@@ -1098,7 +1099,7 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4L3JFT4"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <aside class="sidebar" id="mobileSidebar" aria-label="Mobile navigation">
         <nav class="sidebar-nav" aria-label="Mobile primary">
             <a href="/" class="sidebar-item">
@@ -1117,17 +1118,17 @@
             <div class="sidebar-divider"></div>
 
             <div class="sidebar-lang-container">
-                <button type="button" class="sidebar-item" onclick="toggleSidebarLang()">
+                <button type="button" class="sidebar-item" id="sidebarLangBtn" aria-expanded="false">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 0 1 5.08 16zm2.95-8H5.08a7.987 7.987 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
                     Language
-                    <svg class="chevron" viewBox="0 0 24 24" id="sidebarLangChevron"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    <svg class="chevron" viewBox="0 0 24 24" id="sidebarLangChevron" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                 </button>
                 <div class="sidebar-lang-list" id="sidebarLangList">
-                    <a href="/online-alarm-clock" hreflang="en" onclick="switchLang(event, '/online-alarm-clock')">English</a>
-                    <a href="/hi/online-alarm-clock" hreflang="hi" onclick="switchLang(event, '/hi/online-alarm-clock')">हिंदी</a>
-                    <a href="/es/online-alarm-clock" hreflang="es" onclick="switchLang(event, '/es/online-alarm-clock')">Español</a>
-                    <a href="/fr/online-alarm-clock" hreflang="fr" onclick="switchLang(event, '/fr/online-alarm-clock')">Français</a>
-                    <a href="/de/online-alarm-clock" hreflang="de" onclick="switchLang(event, '/de/online-alarm-clock')">Deutsch</a>
+                    <a href="/online-alarm-clock" hreflang="en">English</a>
+                    <a href="/hi/online-alarm-clock" hreflang="hi">हिंदी</a>
+                    <a href="/es/online-alarm-clock" hreflang="es">Español</a>
+                    <a href="/fr/online-alarm-clock" hreflang="fr">Français</a>
+                    <a href="/de/online-alarm-clock" hreflang="de">Deutsch</a>
                 </div>
             </div>
         </nav>
@@ -1160,22 +1161,22 @@
 
             <div class="header-actions">
                 <div class="lang-dropdown">
-                    <button type="button" class="lang-btn" id="langBtn" onclick="toggleLangDropdown()" aria-label="Select language" aria-expanded="false" aria-controls="langDropdown">
+                    <button type="button" class="lang-btn" id="langBtn" aria-label="Select language" aria-expanded="false" aria-controls="langDropdown">
                         <svg class="globe-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 0 1 5.08 16zm2.95-8H5.08a7.987 7.987 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
                         <span>English</span>
                         <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                     </button>
                     <div class="dropdown-content" id="langDropdown">
-                        <a href="/online-alarm-clock" hreflang="en" onclick="switchLang(event, '/online-alarm-clock')">English</a>
-                        <a href="/hi/online-alarm-clock" hreflang="hi" onclick="switchLang(event, '/hi/online-alarm-clock')">हिंदी</a>
-                        <a href="/es/online-alarm-clock" hreflang="es" onclick="switchLang(event, '/es/online-alarm-clock')">Español</a>
-                        <a href="/fr/online-alarm-clock" hreflang="fr" onclick="switchLang(event, '/fr/online-alarm-clock')">Français</a>
-                        <a href="/de/online-alarm-clock" hreflang="de" onclick="switchLang(event, '/de/online-alarm-clock')">Deutsch</a>
+                        <a href="/online-alarm-clock" hreflang="en">English</a>
+                        <a href="/hi/online-alarm-clock" hreflang="hi">हिंदी</a>
+                        <a href="/es/online-alarm-clock" hreflang="es">Español</a>
+                        <a href="/fr/online-alarm-clock" hreflang="fr">Français</a>
+                        <a href="/de/online-alarm-clock" hreflang="de">Deutsch</a>
                     </div>
                 </div>
             </div>
 
-            <button class="mobile-menu-btn" onclick="openSidebar()" aria-label="Open menu">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M4 9H20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
                     <path d="M4 15H14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
@@ -1210,7 +1211,7 @@
                 <div class="status-text" id="statusText" aria-live="polite">NO ALARMS SET</div>
             </div>
 
-            <button type="button" class="fs-exit-btn" id="fsExitBtn" onclick="exitFullscreen()" aria-label="Exit fullscreen" title="Exit fullscreen (Esc)">
+            <button type="button" class="fs-exit-btn" id="fsExitBtn" aria-label="Exit fullscreen" title="Exit fullscreen (Esc)">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
             </button>
 
@@ -1235,14 +1236,14 @@
                     <label for="inputLabel">Label (optional)</label>
                     <input type="text" id="inputLabel" placeholder="Wake up" maxlength="24" autocomplete="off">
                 </div>
-                <button type="button" class="btn-add" id="addBtn" onclick="addAlarm()">
+                <button type="button" class="btn-add" id="addBtn">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     <span>Add Alarm</span>
                 </button>
             </div>
 
             <div class="alarm-ringing-group" id="alarmRingingGroup" style="display:none;">
-                <button type="button" class="btn-stop-alarm" id="stopBtn" onclick="stopRinging()">
+                <button type="button" class="btn-stop-alarm" id="stopBtn">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
                     <span>STOP ALARM</span>
                 </button>
@@ -1252,7 +1253,7 @@
 
             <div class="controls-wrapper">
                 <div class="controls">
-                    <button type="button" class="btn-icon" id="fsBtn" onclick="enterFullscreen()" title="Fullscreen" aria-label="Enter fullscreen">
+                    <button type="button" class="btn-icon" id="fsBtn" title="Fullscreen" aria-label="Enter fullscreen">
                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
                     </button>
                 </div>
@@ -1376,14 +1377,16 @@
         const pad2 = (n) => String(n).padStart(2, '0');
         const escapeHtml = (s) => {
             const div = document.createElement('div');
-            div.textContent = s;
+            div.textContent = String(s);
             return div.innerHTML;
+        };
+        const setText = (el, text) => {
+            if (el.textContent !== text) el.textContent = text;
         };
 
         /* ========== ELEMENT REFS ========== */
         const mainTime        = $id('mainTime');
         const periodText      = $id('periodText');
-        const timeDisplayEl   = $id('timeDisplay');
         const statusText      = $id('statusText');
         const progressRing    = $id('progressRing');
         const inputHour       = $id('inputHour');
@@ -1393,12 +1396,17 @@
         const alarmInputGroup = $id('alarmInputGroup');
         const alarmRingingGrp = $id('alarmRingingGroup');
         const alarmsContainer = $id('alarmsContainer');
+        const addBtn          = $id('addBtn');
+        const stopBtn         = $id('stopBtn');
         const langBtn         = $id('langBtn');
         const langDropdown    = $id('langDropdown');
         const mainContent     = $id('mainContent');
         const fsBtn           = $id('fsBtn');
+        const fsExitBtn       = $id('fsExitBtn');
+        const mobileMenuBtn   = $id('mobileMenuBtn');
         const mobileSidebar   = $id('mobileSidebar');
         const sidebarOverlay  = $id('sidebarOverlay');
+        const sidebarLangBtn  = $id('sidebarLangBtn');
         const sidebarLangList = $id('sidebarLangList');
         const sidebarLangChevron = $id('sidebarLangChevron');
 
@@ -1407,7 +1415,9 @@
         let alarms = [];
         let isRinging = false;
         let ringingAlarmId = null;
-        let lastCheckKey = '';
+        // Per-alarm "already fired this minute" tracking (in-memory only).
+        // Format: Map<alarmId, 'YYYY-M-D-HH-MM'>
+        const firedKeys = new Map();
         let audioCtx = null;
         let alarmAudioInterval = null;
         let wakeLock = null;
@@ -1422,38 +1432,43 @@
             document.body.style.overflow = 'hidden';
             sidebarLangList.classList.remove('show');
             sidebarLangChevron.style.transform = 'rotate(0deg)';
+            sidebarLangBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
         }
         function closeSidebar() {
             mobileSidebar.classList.remove('open');
             sidebarOverlay.classList.remove('active');
             document.body.style.overflow = '';
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
         }
         function toggleSidebarLang() {
-            sidebarLangList.classList.toggle('show');
-            sidebarLangChevron.style.transform =
-                sidebarLangList.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+            const isOpen = sidebarLangList.classList.toggle('show');
+            sidebarLangChevron.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+            sidebarLangBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         }
+
+        mobileMenuBtn.addEventListener('click', openSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+        sidebarLangBtn.addEventListener('click', toggleSidebarLang);
 
         /* ========== LANGUAGE ========== */
         function toggleLangDropdown() {
             const isOpen = langDropdown.classList.toggle('show');
             langBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         }
-        function switchLang(e, baseUrl) {
-            e.preventDefault();
-            window.location.href = baseUrl + window.location.search + window.location.hash;
-        }
-        function closeLangDropdown() {
+        function closeLangDropdown(returnFocus) {
+            if (!langDropdown.classList.contains('show')) return;
             langDropdown.classList.remove('show');
             langBtn.setAttribute('aria-expanded', 'false');
+            if (returnFocus) langBtn.focus();
         }
-        document.addEventListener('click', (e) => {
-            if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) closeLangDropdown();
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleLangDropdown();
         });
         document.addEventListener('click', (e) => {
-            if (e.detail > 0 && e.target instanceof Element) {
-                const btn = e.target.closest('button');
-                if (btn) btn.blur();
+            if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
+                closeLangDropdown(false);
             }
         });
 
@@ -1463,11 +1478,13 @@
                    document.msFullscreenElement || null;
         }
         function enterFullscreen() {
-            const el = mainContent;
-            const req = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
-            if (!req) { if (fsBtn) fsBtn.style.display = 'none'; return; }
+            const req = mainContent.requestFullscreen || mainContent.webkitRequestFullscreen || mainContent.msRequestFullscreen;
+            if (!req) {
+                if (fsBtn) fsBtn.style.display = 'none';
+                return;
+            }
             try {
-                const p = req.call(el);
+                const p = req.call(mainContent);
                 if (p && p.catch) p.catch(() => {});
             } catch (_) {}
         }
@@ -1483,6 +1500,8 @@
             const isFs = !!getFullscreenElement();
             fsBtn.style.display = isFs ? 'none' : '';
         }
+        fsBtn.addEventListener('click', enterFullscreen);
+        fsExitBtn.addEventListener('click', exitFullscreen);
         document.addEventListener('fullscreenchange', handleFullscreenChange);
         document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
 
@@ -1494,26 +1513,31 @@
                 wakeLock.addEventListener('release', () => { wakeLock = null; });
             } catch (_) { wakeLock = null; }
         }
-        function releaseWakeLock() {
-            if (wakeLock) { wakeLock.release().catch(() => {}); wakeLock = null; }
-        }
         document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible') {
-                requestWakeLock();
-            }
+            if (document.visibilityState === 'visible') requestWakeLock();
         });
         requestWakeLock();
 
         /* ========== AUDIO ========== */
         function initAudio() {
             if (!audioCtx) {
-                try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-                catch (_) { return; }
+                const Ctx = window.AudioContext || window.webkitAudioContext;
+                if (!Ctx) return;
+                try { audioCtx = new Ctx(); }
+                catch (_) { audioCtx = null; return; }
             }
-            if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+            if (audioCtx.state === 'suspended') {
+                try { audioCtx.resume().catch(() => {}); } catch (_) {}
+            }
         }
+
+        // Unlock audio on first user gesture (browsers require a gesture).
+        ['pointerdown', 'keydown', 'touchstart'].forEach((evt) => {
+            document.addEventListener(evt, initAudio, { once: true, passive: true });
+        });
+
         function beep(delay, freq) {
-            if (!audioCtx) return;
+            if (!audioCtx || audioCtx.state !== 'running') return;
             try {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
@@ -1529,13 +1553,17 @@
             } catch (_) {}
         }
         function playAlarmPattern() {
-            if (!audioCtx) return;
             beep(0, 880);
             beep(0.2, 1046);
             beep(0.4, 1318);
         }
         function startAlarmSound() {
             initAudio();
+            if (!audioCtx) return;
+            if (alarmAudioInterval) {
+                clearInterval(alarmAudioInterval);
+                alarmAudioInterval = null;
+            }
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume().then(() => {
                     playAlarmPattern();
@@ -1558,11 +1586,18 @@
             try {
                 const data = localStorage.getItem(ALARMS_KEY);
                 const arr = data ? JSON.parse(data) : [];
-                return Array.isArray(arr) ? arr.filter(a =>
+                if (!Array.isArray(arr)) return [];
+                return arr.filter(a =>
                     a && typeof a.id === 'string' &&
                     typeof a.hour === 'number' && a.hour >= 0 && a.hour <= 23 &&
                     typeof a.minute === 'number' && a.minute >= 0 && a.minute <= 59
-                ) : [];
+                ).map(a => ({
+                    id: a.id,
+                    hour: a.hour,
+                    minute: a.minute,
+                    label: typeof a.label === 'string' ? a.label.slice(0, 24) : '',
+                    enabled: a.enabled !== false
+                }));
             } catch (_) { return []; }
         }
         function saveAlarms() {
@@ -1586,8 +1621,8 @@
             const h12 = h === 0 ? 12 : (h > 12 ? h - 12 : h);
             const period = h < 12 ? 'AM' : 'PM';
 
-            mainTime.textContent = pad2(h12) + ':' + pad2(m) + ':' + pad2(s);
-            periodText.textContent = period;
+            setText(mainTime, pad2(h12) + ':' + pad2(m) + ':' + pad2(s));
+            setText(periodText, period);
 
             if (isRinging) {
                 progressRing.classList.add('ringing');
@@ -1600,22 +1635,25 @@
         }
 
         /* ========== ALARM CHECKING ========== */
+        function minuteKey(now) {
+            return now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() +
+                   '-' + now.getHours() + '-' + now.getMinutes();
+        }
+
         function checkAlarms(now) {
             if (isRinging) return;
 
-            const dateKey = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+            const key = minuteKey(now);
             const h = now.getHours();
             const m = now.getMinutes();
-            const key = dateKey + '-' + h + '-' + m;
-
-            if (key === lastCheckKey) return;
-            lastCheckKey = key;
 
             for (const alarm of alarms) {
                 if (!alarm.enabled) continue;
+                if (firedKeys.get(alarm.id) === key) continue;
                 if (alarm.hour === h && alarm.minute === m) {
+                    firedKeys.set(alarm.id, key);
                     triggerAlarm(alarm);
-                    return;
+                    return; // another alarm at the same minute will ring after STOP
                 }
             }
         }
@@ -1627,7 +1665,8 @@
             alarmInputGroup.style.display = 'none';
             alarmRingingGrp.style.display = 'flex';
 
-            statusText.textContent = 'ALARM' + (alarm.label ? ': ' + alarm.label.toUpperCase() : '!');
+            const label = alarm.label ? String(alarm.label).toUpperCase() : '';
+            setText(statusText, 'ALARM' + (label ? ': ' + label : '!'));
             statusText.style.color = 'var(--danger)';
 
             startAlarmSound();
@@ -1652,6 +1691,7 @@
             progressRing.classList.remove('ringing');
             updateStatus(new Date());
         }
+        stopBtn.addEventListener('click', stopRinging);
 
         /* ========== STATUS TEXT ========== */
         function updateStatus(now) {
@@ -1659,23 +1699,20 @@
 
             const enabled = alarms.filter(a => a.enabled);
             if (enabled.length === 0) {
-                statusText.textContent = 'NO ALARMS SET';
+                setText(statusText, 'NO ALARMS SET');
                 statusText.style.color = 'var(--text-muted)';
                 return;
             }
 
-            const nowMin = now.getHours() * 60 + now.getMinutes();
-            const nowSec = now.getSeconds();
+            const nowSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
 
             let bestDiffSec = Infinity;
             let nextAlarm = null;
 
             for (const a of enabled) {
-                const alarmMin = a.hour * 60 + a.minute;
-                let diffMin = alarmMin - nowMin;
-                if (diffMin < 0) diffMin += 24 * 60;
-                let diffSec = diffMin * 60 - nowSec;
-                if (diffSec < 0) diffSec += 24 * 3600;
+                const alarmSec = a.hour * 3600 + a.minute * 60;
+                let diffSec = alarmSec - nowSec;
+                if (diffSec < 0) diffSec += 86400;
                 if (diffSec < bestDiffSec) {
                     bestDiffSec = diffSec;
                     nextAlarm = a;
@@ -1690,7 +1727,7 @@
                 if (hrs > 0) inStr = hrs + 'h ' + mins + 'm';
                 else if (mins > 0) inStr = mins + 'm';
                 else inStr = '<1m';
-                statusText.textContent = 'NEXT: ' + formatTime12(nextAlarm.hour, nextAlarm.minute) + ' · in ' + inStr;
+                setText(statusText, 'NEXT: ' + formatTime12(nextAlarm.hour, nextAlarm.minute) + ' · in ' + inStr);
                 statusText.style.color = 'var(--green-hover)';
             }
         }
@@ -1722,12 +1759,11 @@
             renderAlarms();
             updateStatus(new Date());
 
-            // Preview sound
+            // Confirmation beep (only plays if audio is unlocked).
             initAudio();
             setTimeout(() => { beep(0, 880); beep(0.15, 1046); }, 50);
 
             inputLabel.value = '';
-            resetAlarmForm();
         }
 
         function toggleAlarm(id) {
@@ -1735,16 +1771,27 @@
             if (!a) return;
             a.enabled = !a.enabled;
             saveAlarms();
-            renderAlarms();
+
+            const item = alarmsContainer.querySelector('[data-alarm-id="' + id + '"]');
+            if (item) item.classList.toggle('disabled', !a.enabled);
+
+            if (!a.enabled && ringingAlarmId === id) stopRinging();
             updateStatus(new Date());
         }
 
         function deleteAlarm(id) {
-            alarms = alarms.filter(x => x.id !== id);
+            const idx = alarms.findIndex(x => x.id === id);
+            if (idx === -1) return;
+            alarms.splice(idx, 1);
             saveAlarms();
-            renderAlarms();
-            updateStatus(new Date());
+            firedKeys.delete(id);
+
+            const item = alarmsContainer.querySelector('[data-alarm-id="' + id + '"]');
+            if (item) item.remove();
+            if (alarms.length === 0) renderAlarms();
+
             if (ringingAlarmId === id) stopRinging();
+            updateStatus(new Date());
         }
 
         function resetAlarmForm() {
@@ -1769,19 +1816,27 @@
 
             let html = '';
             for (const a of sorted) {
-                html += '<div class="alarm-item' + (a.enabled ? '' : ' disabled') + '">';
+                const timeStr = formatTime12(a.hour, a.minute);
+                const timeSafe = escapeHtml(timeStr);
+                const idSafe = escapeHtml(a.id);
+                const labelSafe = a.label ? escapeHtml(a.label) : '';
+
+                html += '<div class="alarm-item' + (a.enabled ? '' : ' disabled') + '" data-alarm-id="' + idSafe + '">';
                 html += '<div class="alarm-info">';
-                html += '<div class="alarm-time-big">' + formatTime12(a.hour, a.minute) + '</div>';
-                if (a.label) {
-                    html += '<div class="alarm-label-text">' + escapeHtml(a.label) + '</div>';
+                html += '<div class="alarm-time-big">' + timeSafe + '</div>';
+                if (labelSafe) {
+                    html += '<div class="alarm-label-text">' + labelSafe + '</div>';
                 }
                 html += '</div>';
                 html += '<div class="alarm-actions">';
                 html += '<label class="toggle-switch">';
-                html += '<input type="checkbox"' + (a.enabled ? ' checked' : '') + ' onchange="toggleAlarm(\'' + a.id + '\')" aria-label="Toggle alarm">';
+                html += '<input type="checkbox"' + (a.enabled ? ' checked' : '') +
+                        ' data-alarm-toggle="' + idSafe + '"' +
+                        ' aria-label="Enable alarm at ' + timeSafe + '">';
                 html += '<span class="toggle-slider"></span>';
                 html += '</label>';
-                html += '<button type="button" class="delete-btn" onclick="deleteAlarm(\'' + a.id + '\')" aria-label="Delete alarm">';
+                html += '<button type="button" class="delete-btn" data-alarm-delete="' + idSafe + '"' +
+                        ' aria-label="Delete alarm at ' + timeSafe + '">';
                 html += '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>';
                 html += '</button>';
                 html += '</div>';
@@ -1790,31 +1845,52 @@
             alarmsContainer.innerHTML = html;
         }
 
+        /* Event delegation for alarm list actions */
+        alarmsContainer.addEventListener('change', (e) => {
+            const t = e.target;
+            if (t instanceof HTMLInputElement && t.dataset.alarmToggle) {
+                toggleAlarm(t.dataset.alarmToggle);
+            }
+        });
+        alarmsContainer.addEventListener('click', (e) => {
+            const t = e.target;
+            if (!(t instanceof Element)) return;
+            const btn = t.closest('[data-alarm-delete]');
+            if (btn) deleteAlarm(btn.dataset.alarmDelete);
+        });
+
         /* ========== INPUT SETUP ========== */
         function setupNumericInput(input, min, max) {
-            input.addEventListener('focus', () => { try { input.select(); } catch (_) {} });
+            input.addEventListener('focus', () => {
+                try { input.select(); } catch (_) {}
+            });
 
             input.addEventListener('keydown', (e) => {
                 if (e.ctrlKey || e.metaKey || e.altKey) return;
-                if (['e','E','+','-','.','].includes(e.key)) e.preventDefault();
                 if (e.key === 'Enter') {
                     e.preventDefault();
                     addAlarm();
+                    return;
+                }
+                // Block exponent, sign, decimal, and other non-digit characters
+                if (['e', 'E', '+', '-', '.'].includes(e.key)) {
+                    e.preventDefault();
                 }
             });
+
             input.addEventListener('beforeinput', (e) => {
                 if (e.data && /\D/.test(e.data)) e.preventDefault();
             });
+
             input.addEventListener('input', () => {
                 const cleaned = input.value.replace(/[^0-9]/g, '');
                 if (cleaned !== input.value) input.value = cleaned;
                 if (input.value !== '') {
                     const val = parseInt(input.value, 10);
-                    if (!isNaN(val)) {
-                        if (val > max) input.value = String(max);
-                    }
+                    if (!isNaN(val) && val > max) input.value = String(max);
                 }
             });
+
             input.addEventListener('blur', () => {
                 let val = parseInt(input.value, 10);
                 if (isNaN(val) || val < min) val = min;
@@ -1824,6 +1900,7 @@
         }
         setupNumericInput(inputHour, 1, 12);
         setupNumericInput(inputMinute, 0, 59);
+
         inputLabel.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -1831,11 +1908,13 @@
             }
         });
 
+        addBtn.addEventListener('click', addAlarm);
+
         /* ========== KEYBOARD ========== */
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 if (mobileSidebar.classList.contains('open')) { closeSidebar(); return; }
-                if (langDropdown.classList.contains('show')) { closeLangDropdown(); return; }
+                if (langDropdown.classList.contains('show')) { closeLangDropdown(true); return; }
             }
             if (e.repeat) return;
             const el = e.target instanceof Element ? e.target : document.body;
@@ -1860,12 +1939,6 @@
         alarms = loadAlarms();
         renderAlarms();
         resetAlarmForm();
-
-        // Prevent immediate re-firing for the current minute on load
-        (function initKey() {
-            const n = new Date();
-            lastCheckKey = n.getFullYear() + '-' + (n.getMonth() + 1) + '-' + n.getDate() + '-' + n.getHours() + '-' + n.getMinutes();
-        })();
 
         tick();
         setInterval(tick, 200);

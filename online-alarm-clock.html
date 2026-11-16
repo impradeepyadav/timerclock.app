@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Online Alarm Clock – Timer Clock</title>
-    <meta name="description" content="Free online alarm clock with sound. Set multiple alarms, add labels, and wake up on time. Works on any device — alarms saved in your browser, no signup.">
+    <meta name="description" content="Free online alarm clock with sound. Set multiple alarms, add labels, switch 12/24-hour format, and wake up on time. Works on any device — alarms saved in your browser, no signup.">
     <link rel="canonical" href="https://timerclock.app/online-alarm-clock">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#22c55e">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Online Alarm Clock – Free Alarm with Sound">
-    <meta property="og:description" content="Free online alarm clock with sound. Set multiple alarms, add labels, and wake up on time — no signup required.">
+    <meta property="og:description" content="Free online alarm clock with sound. Set multiple alarms, add labels, choose 12/24-hour format — no signup required.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://timerclock.app/online-alarm-clock">
     <meta property="og:image" content="https://timerclock.app/og-image.png">
@@ -21,7 +21,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Online Alarm Clock – Free Alarm with Sound">
-    <meta name="twitter:description" content="Free online alarm clock with sound. Set multiple alarms — no signup required.">
+    <meta name="twitter:description" content="Free online alarm clock with sound. Set multiple alarms, 12/24-hour format — no signup required.">
     <meta name="twitter:image" content="https://timerclock.app/og-image.png">
 
     <!-- Hreflang -->
@@ -58,17 +58,20 @@
       "@type": "WebApplication",
       "name": "Timer Clock Alarm Clock",
       "url": "https://timerclock.app/online-alarm-clock",
-      "description": "Free online alarm clock with sound. Set multiple alarms with labels, saved in your browser, and wake up on time.",
+      "description": "Free online alarm clock with sound. Set multiple alarms with labels, 12/24-hour format, saved in your browser, and wake up on time.",
       "applicationCategory": "UtilityApplication",
       "operatingSystem": "All",
       "browserRequirements": "Requires JavaScript",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "featureList": [
         "Live clock with rotating ring",
+        "12-hour and 24-hour time formats",
+        "Automatic format detection based on browser locale",
         "Multiple alarms with labels",
         "Sound alerts with repeated beeping",
         "Alarms saved in browser (localStorage)",
         "Next-alarm countdown",
+        "Timezone display",
         "Fullscreen mode",
         "Works on all devices"
       ],
@@ -87,7 +90,15 @@
           "name": "How do I set an alarm?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Enter the hour, minute, and AM/PM, optionally add a label, then click Add Alarm. The alarm will ring with a sound at the chosen time."
+            "text": "Enter the hour, minute, and (in 12-hour mode) AM/PM, optionally add a label, then click Add Alarm. The alarm will ring with a sound at the chosen time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it support 24-hour format?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The clock automatically detects your browser's preferred format and you can switch between 12-hour and 24-hour at any time using the 12H/24H toggle. Your choice is saved."
           }
         },
         {
@@ -104,6 +115,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Yes. Timer Clock's alarm clock is completely free, requires no signup, and runs directly in your browser."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work in my timezone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The alarm clock uses your device's local time, so it works anywhere in the world. Your timezone is shown next to the clock in 24-hour mode."
           }
         }
       ]
@@ -376,7 +395,7 @@
         }
         .dropdown-content.show { display: block; }
 
-        /* ============ HERO — improved text scaling ============ */
+        /* ============ HERO ============ */
         .hero-section {
             text-align: center;
             width: 100%;
@@ -473,11 +492,14 @@
         }
         .time-text .ms-text {
             font-family: var(--font-mono);
-            font-size: clamp(0.95rem, 9cqw, 1.8rem);
+            font-size: clamp(0.85rem, 8cqw, 1.6rem);
             font-weight: 500;
             color: var(--text-muted);
             margin-left: 6px;
             letter-spacing: 0.02em;
+        }
+        .time-text .ms-text:empty {
+            display: none;
         }
 
         .status-text {
@@ -510,7 +532,9 @@
         .main-content:fullscreen .alarm-input-group,
         .main-content:-webkit-full-screen .alarm-input-group,
         .main-content:fullscreen .alarms-container,
-        .main-content:-webkit-full-screen .alarms-container { display: none !important; }
+        .main-content:-webkit-full-screen .alarms-container,
+        .main-content:fullscreen .format-toggle,
+        .main-content:-webkit-full-screen .format-toggle { display: none !important; }
         .main-content:fullscreen .timer-display,
         .main-content:-webkit-full-screen .timer-display {
             width: clamp(220px, min(52vh, 60vw), 500px);
@@ -520,7 +544,7 @@
         .main-content:fullscreen .time-text,
         .main-content:-webkit-full-screen .time-text { font-size: clamp(2rem, 15cqw, 4.6rem); }
         .main-content:fullscreen .time-text .ms-text,
-        .main-content:-webkit-full-screen .time-text .ms-text { font-size: clamp(1.2rem, 9cqw, 2.6rem); }
+        .main-content:-webkit-full-screen .time-text .ms-text { font-size: clamp(1.1rem, 8cqw, 2.4rem); }
         .main-content:fullscreen .status-text,
         .main-content:-webkit-full-screen .status-text {
             font-size: clamp(13px, min(2.4vh, 3.6vw), 20px);
@@ -842,6 +866,35 @@
             background-color: var(--gray-light);
             border-color: var(--border-color);
         }
+
+        /* Format toggle (12H/24H) */
+        .format-toggle {
+            height: clamp(38px, min(6.4vh, 10vw), 46px);
+            min-width: clamp(60px, 18vw, 72px);
+            padding: 0 clamp(12px, 2.4vw, 16px);
+            border-radius: 30px;
+            border: 1.5px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-family: var(--font-mono);
+            font-size: clamp(12px, min(1.8vh, 3.2vw), 14px);
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+        .format-toggle:hover {
+            border-color: var(--green-primary);
+            color: var(--green-hover);
+            background: var(--green-light);
+            transform: translateY(-1px);
+        }
+        .format-toggle:active { transform: translateY(0); }
 
         .hint {
             font-family: var(--font-body);
@@ -1186,7 +1239,7 @@
 
         <div class="hero-section">
             <h1 class="hero-title">Online Alarm Clock — Wake Up on Time</h1>
-            <p class="hero-subtitle">Set multiple alarms with labels and a sound alert. Free, no signup — your alarms are saved in your browser.</p>
+            <p class="hero-subtitle">Set multiple alarms with labels and a sound alert. Supports 12-hour and 24-hour formats, auto-detects your timezone. Free, no signup — your alarms are saved in your browser.</p>
         </div>
 
         <main class="main-content" id="mainContent">
@@ -1225,7 +1278,7 @@
                     <label for="inputMinute">Minute</label>
                     <input type="text" id="inputMinute" value="0" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="2">
                 </div>
-                <div class="input-wrapper period">
+                <div class="input-wrapper period" id="periodWrapper">
                     <label for="inputPeriod">AM/PM</label>
                     <select id="inputPeriod">
                         <option value="AM">AM</option>
@@ -1253,6 +1306,9 @@
 
             <div class="controls-wrapper">
                 <div class="controls">
+                    <button type="button" class="format-toggle" id="formatBtn" aria-label="Switch to 24-hour format" title="Switch to 24-hour format">
+                        <span id="formatLabel">12H</span>
+                    </button>
                     <button type="button" class="btn-icon" id="fsBtn" title="Fullscreen" aria-label="Enter fullscreen">
                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
                     </button>
@@ -1268,9 +1324,15 @@
             <h2 id="seoTitle">How to use the online alarm clock</h2>
             <p>
                 Timer Clock's <strong>online alarm clock</strong> shows the live current time and lets you set one or more
-                alarms. Enter the hour, minute, and AM/PM, optionally add a label like "Wake up" or "Meeting", then click
-                <strong>Add Alarm</strong>. When the clock reaches that time, an alarm sounds repeatedly until you press
-                <strong>STOP ALARM</strong>.
+                alarms. Enter the hour, minute, and (when in 12-hour mode) AM/PM, optionally add a label like "Wake up" or
+                "Meeting", then click <strong>Add Alarm</strong>. When the clock reaches that time, an alarm sounds
+                repeatedly until you press <strong>STOP ALARM</strong>.
+            </p>
+            <p>
+                The clock <strong>automatically detects your preferred time format</strong> from your browser language:
+                most of the world uses 24-hour time, while the US and a few other regions use 12-hour AM/PM. You can
+                override this any time with the <strong>12H / 24H toggle</strong> — your choice is remembered. In
+                24-hour mode, your local timezone is shown next to the clock.
             </p>
             <p>
                 All your alarms are saved automatically in your browser, so they persist across page reloads on the same
@@ -1292,7 +1354,15 @@
             <div class="faq">
                 <details>
                     <summary>How do I set an alarm?</summary>
-                    <p>Enter the hour, minute, and AM/PM, optionally add a label, then click <strong>Add Alarm</strong>. The alarm will ring with a sound at the chosen time.</p>
+                    <p>Enter the hour, minute, and (in 12-hour mode) AM/PM, optionally add a label, then click <strong>Add Alarm</strong>. The alarm will ring with a sound at the chosen time.</p>
+                </details>
+                <details>
+                    <summary>Does it support 24-hour format?</summary>
+                    <p>Yes. The clock automatically detects your browser's preferred format and you can switch between 12-hour and 24-hour at any time using the <strong>12H / 24H toggle</strong>. Your choice is saved across reloads.</p>
+                </details>
+                <details>
+                    <summary>Does it work in my timezone?</summary>
+                    <p>Yes. The alarm clock uses your device's local time, so it works anywhere in the world. In 24-hour mode, your timezone is shown next to the clock.</p>
                 </details>
                 <details>
                     <summary>Are my alarms saved?</summary>
@@ -1393,6 +1463,7 @@
         const inputMinute     = $id('inputMinute');
         const inputPeriod     = $id('inputPeriod');
         const inputLabel      = $id('inputLabel');
+        const periodWrapper   = $id('periodWrapper');
         const alarmInputGroup = $id('alarmInputGroup');
         const alarmRingingGrp = $id('alarmRingingGroup');
         const alarmsContainer = $id('alarmsContainer');
@@ -1403,6 +1474,8 @@
         const mainContent     = $id('mainContent');
         const fsBtn           = $id('fsBtn');
         const fsExitBtn       = $id('fsExitBtn');
+        const formatBtn       = $id('formatBtn');
+        const formatLabel     = $id('formatLabel');
         const mobileMenuBtn   = $id('mobileMenuBtn');
         const mobileSidebar   = $id('mobileSidebar');
         const sidebarOverlay  = $id('sidebarOverlay');
@@ -1412,18 +1485,143 @@
 
         /* ========== STATE ========== */
         const ALARMS_KEY = 'timerclock_alarms_v1';
+        const FORMAT_KEY = 'timerclock_format_v1';
+
         let alarms = [];
         let isRinging = false;
         let ringingAlarmId = null;
-        // Per-alarm "already fired this minute" tracking (in-memory only).
-        // Format: Map<alarmId, 'YYYY-M-D-HH-MM'>
-        const firedKeys = new Map();
+        const firedKeys = new Map(); // Map<alarmId, 'YYYY-M-D-HH-MM'>
         let audioCtx = null;
         let alarmAudioInterval = null;
         let wakeLock = null;
+        let tzLabel = '';
         const circumference = 2 * Math.PI * 130;
 
         progressRing.style.strokeDasharray = String(circumference);
+
+        /* ========== 12H / 24H FORMAT ========== */
+        function detectHourCycle() {
+            try {
+                const locale = navigator.language || 'en-US';
+                const fmt = new Intl.DateTimeFormat(locale, { hour: 'numeric' });
+                const cycle = fmt.resolvedOptions().hourCycle;
+                // h23 / h24 => 24-hour preference
+                return cycle === 'h23' || cycle === 'h24';
+            } catch (_) {
+                return false;
+            }
+        }
+
+        function loadFormatPref() {
+            try {
+                const stored = localStorage.getItem(FORMAT_KEY);
+                if (stored === '24h') return true;
+                if (stored === '12h') return false;
+            } catch (_) {}
+            return detectHourCycle();
+        }
+
+        function saveFormatPref() {
+            try { localStorage.setItem(FORMAT_KEY, use24Hour ? '24h' : '12h'); } catch (_) {}
+        }
+
+        let use24Hour = loadFormatPref();
+
+        /* ========== TIMEZONE LABEL ========== */
+        function computeTimezoneLabel() {
+            try {
+                // Prefer a short, human-readable abbreviation (EST, IST, JST, UTC, etc.)
+                const parts = new Intl.DateTimeFormat('en-US', { timeZoneName: 'short' })
+                    .formatToParts(new Date());
+                const name = (parts.find(p => p.type === 'timeZoneName') || {}).value || '';
+                if (name && name.length <= 4) return name;
+            } catch (_) {}
+            // Fallback: compact UTC offset (+5:30, -8, etc.)
+            try {
+                const offset = -new Date().getTimezoneOffset();
+                const sign = offset >= 0 ? '+' : '-';
+                const h = Math.floor(Math.abs(offset) / 60);
+                const m = Math.abs(offset) % 60;
+                return sign + h + (m ? ':' + pad2(m) : '');
+            } catch (_) {
+                return '';
+            }
+        }
+
+        function refreshTimezone() {
+            tzLabel = computeTimezoneLabel();
+        }
+
+        /* ========== FORMAT HELPERS ========== */
+        function getHourBounds() {
+            return use24Hour ? { min: 0, max: 23 } : { min: 1, max: 12 };
+        }
+
+        // Convert a display hour (+ optional AM/PM) to 24-hour hour.
+        function displayHourTo24(displayHour, period) {
+            if (use24Hour) return displayHour;
+            if (period === 'AM') return displayHour === 12 ? 0 : displayHour;
+            return displayHour === 12 ? 12 : displayHour + 12;
+        }
+
+        // Convert a 24-hour hour to the display-hour for the current format.
+        function hour24ToDisplay(h24) {
+            if (use24Hour) return h24;
+            return h24 === 0 ? 12 : (h24 > 12 ? h24 - 12 : h24);
+        }
+
+        // Format a 24-hour time for display (used by status text + alarm list).
+        function formatTime(h24, m) {
+            if (use24Hour) {
+                return pad2(h24) + ':' + pad2(m);
+            }
+            const h12 = h24 === 0 ? 12 : (h24 > 12 ? h24 - 12 : h24);
+            const period = h24 < 12 ? 'AM' : 'PM';
+            return pad2(h12) + ':' + pad2(m) + ' ' + period;
+        }
+
+        function updateFormatUI() {
+            if (use24Hour) {
+                formatLabel.textContent = '24H';
+                formatBtn.setAttribute('aria-label', 'Switch to 12-hour format');
+                formatBtn.title = 'Switch to 12-hour format';
+                periodWrapper.style.display = 'none';
+            } else {
+                formatLabel.textContent = '12H';
+                formatBtn.setAttribute('aria-label', 'Switch to 24-hour format');
+                formatBtn.title = 'Switch to 24-hour format';
+                periodWrapper.style.display = '';
+            }
+        }
+
+        function toggleFormat() {
+            // 1) Read the current input value in the OLD format.
+            const oldBounds = getHourBounds();
+            const oldDisplayHour = clampInt(inputHour.value, oldBounds.min, oldBounds.max);
+            const oldPeriod = inputPeriod.value === 'PM' ? 'PM' : 'AM';
+            const h24 = displayHourTo24(oldDisplayHour, oldPeriod);
+
+            // 2) Flip the format.
+            use24Hour = !use24Hour;
+            saveFormatPref();
+            updateFormatUI();
+
+            // 3) Write the value back in the NEW format.
+            const newDisplayHour = hour24ToDisplay(h24);
+            const newBounds = getHourBounds();
+            let v = newDisplayHour;
+            if (v < newBounds.min) v = newBounds.min;
+            if (v > newBounds.max) v = newBounds.max;
+            inputHour.value = String(v);
+            inputPeriod.value = h24 < 12 ? 'AM' : 'PM';
+
+            // 4) Refresh dependent UI.
+            renderAlarms();
+            updateStatus(new Date());
+            updateClock(new Date());
+        }
+
+        formatBtn.addEventListener('click', toggleFormat);
 
         /* ========== SIDEBAR ========== */
         function openSidebar() {
@@ -1514,7 +1712,10 @@
             } catch (_) { wakeLock = null; }
         }
         document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible') requestWakeLock();
+            if (document.visibilityState === 'visible') {
+                requestWakeLock();
+                refreshTimezone();
+            }
         });
         requestWakeLock();
 
@@ -1604,13 +1805,6 @@
             try { localStorage.setItem(ALARMS_KEY, JSON.stringify(alarms)); } catch (_) {}
         }
 
-        /* ========== TIME FORMATTING ========== */
-        function formatTime12(h24, m) {
-            const h12 = h24 === 0 ? 12 : (h24 > 12 ? h24 - 12 : h24);
-            const period = h24 < 12 ? 'AM' : 'PM';
-            return pad2(h12) + ':' + pad2(m) + ' ' + period;
-        }
-
         /* ========== CLOCK ========== */
         function updateClock(now) {
             const h = now.getHours();
@@ -1618,11 +1812,15 @@
             const s = now.getSeconds();
             const ms = now.getMilliseconds();
 
-            const h12 = h === 0 ? 12 : (h > 12 ? h - 12 : h);
-            const period = h < 12 ? 'AM' : 'PM';
-
-            setText(mainTime, pad2(h12) + ':' + pad2(m) + ':' + pad2(s));
-            setText(periodText, period);
+            if (use24Hour) {
+                setText(mainTime, pad2(h) + ':' + pad2(m) + ':' + pad2(s));
+                setText(periodText, tzLabel);
+            } else {
+                const h12 = h === 0 ? 12 : (h > 12 ? h - 12 : h);
+                const period = h < 12 ? 'AM' : 'PM';
+                setText(mainTime, pad2(h12) + ':' + pad2(m) + ':' + pad2(s));
+                setText(periodText, period);
+            }
 
             if (isRinging) {
                 progressRing.classList.add('ringing');
@@ -1727,23 +1925,25 @@
                 if (hrs > 0) inStr = hrs + 'h ' + mins + 'm';
                 else if (mins > 0) inStr = mins + 'm';
                 else inStr = '<1m';
-                setText(statusText, 'NEXT: ' + formatTime12(nextAlarm.hour, nextAlarm.minute) + ' · in ' + inStr);
+                setText(statusText, 'NEXT: ' + formatTime(nextAlarm.hour, nextAlarm.minute) + ' · in ' + inStr);
                 statusText.style.color = 'var(--green-hover)';
             }
         }
 
         /* ========== ALARM CRUD ========== */
         function addAlarm() {
-            const h12 = clampInt(inputHour.value, 1, 12);
+            const bounds = getHourBounds();
+            const displayHour = clampInt(inputHour.value, bounds.min, bounds.max);
             const minute = clampInt(inputMinute.value, 0, 59);
             const period = inputPeriod.value === 'PM' ? 'PM' : 'AM';
             const label = (inputLabel.value || '').trim().slice(0, 24);
 
             let hour24;
-            if (period === 'AM') {
-                hour24 = h12 === 12 ? 0 : h12;
+            if (use24Hour) {
+                hour24 = displayHour;
             } else {
-                hour24 = h12 === 12 ? 12 : h12 + 12;
+                if (period === 'AM') hour24 = displayHour === 12 ? 0 : displayHour;
+                else hour24 = displayHour === 12 ? 12 : displayHour + 12;
             }
 
             const newAlarm = {
@@ -1796,13 +1996,11 @@
 
         function resetAlarmForm() {
             const now = new Date(Date.now() + 60000);
-            const h = now.getHours();
+            const h24 = now.getHours();
             const m = now.getMinutes();
-            const period = h < 12 ? 'AM' : 'PM';
-            const h12 = h === 0 ? 12 : (h > 12 ? h - 12 : h);
-            inputHour.value = String(h12);
+            inputHour.value = String(hour24ToDisplay(h24));
+            inputPeriod.value = h24 < 12 ? 'AM' : 'PM';
             inputMinute.value = String(m);
-            inputPeriod.value = period;
         }
 
         /* ========== RENDERING ========== */
@@ -1816,7 +2014,7 @@
 
             let html = '';
             for (const a of sorted) {
-                const timeStr = formatTime12(a.hour, a.minute);
+                const timeStr = formatTime(a.hour, a.minute);
                 const timeSafe = escapeHtml(timeStr);
                 const idSafe = escapeHtml(a.id);
                 const labelSafe = a.label ? escapeHtml(a.label) : '';
@@ -1860,7 +2058,7 @@
         });
 
         /* ========== INPUT SETUP ========== */
-        function setupNumericInput(input, min, max) {
+        function setupNumericInput(input, getBounds) {
             input.addEventListener('focus', () => {
                 try { input.select(); } catch (_) {}
             });
@@ -1886,20 +2084,22 @@
                 const cleaned = input.value.replace(/[^0-9]/g, '');
                 if (cleaned !== input.value) input.value = cleaned;
                 if (input.value !== '') {
+                    const b = getBounds();
                     const val = parseInt(input.value, 10);
-                    if (!isNaN(val) && val > max) input.value = String(max);
+                    if (!isNaN(val) && val > b.max) input.value = String(b.max);
                 }
             });
 
             input.addEventListener('blur', () => {
+                const b = getBounds();
                 let val = parseInt(input.value, 10);
-                if (isNaN(val) || val < min) val = min;
-                if (val > max) val = max;
+                if (isNaN(val) || val < b.min) val = b.min;
+                if (val > b.max) val = b.max;
                 input.value = String(val);
             });
         }
-        setupNumericInput(inputHour, 1, 12);
-        setupNumericInput(inputMinute, 0, 59);
+        setupNumericInput(inputHour, getHourBounds);
+        setupNumericInput(inputMinute, () => ({ min: 0, max: 59 }));
 
         inputLabel.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
@@ -1937,11 +2137,16 @@
 
         /* ========== INIT ========== */
         alarms = loadAlarms();
+        refreshTimezone();
+        updateFormatUI();
         renderAlarms();
         resetAlarmForm();
 
         tick();
         setInterval(tick, 200);
+
+        // Refresh timezone periodically (handles DST transitions).
+        setInterval(refreshTimezone, 60 * 60 * 1000);
     </script>
 </body>
 </html>

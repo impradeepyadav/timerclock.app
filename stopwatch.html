@@ -51,63 +51,136 @@
       })(window,document,'script','dataLayer','GTM-K4L3JFT4');
     </script>
 
-    <!-- Schema: WebApplication -->
-    <script type="application/ld+json">
+    
+<!-- Timer Clock - Stopwatch Page Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
+      "@type": "Organization",
+      "@id": "https://timerclock.app/#organization",
       "name": "Timer Clock",
-      "url": "https://timerclock.app/stopwatch",
-      "description": "Looking for a free online stopwatch? Start, stop, and reset the timer to measure elapsed time and track every second.",
-      "applicationCategory": "UtilityApplication",
-      "operatingSystem": "All",
-      "browserRequirements": "Requires JavaScript",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "featureList": [
-        "Millisecond precision stopwatch",
-        "Lap recording with best and worst highlight",
-        "Keyboard shortcuts (Space to start/pause, L for lap)",
-        "Fullscreen mode",
-        "Works on all devices"
-      ],
-      "screenshot": "https://timerclock.app/og-image.png"
-    }
-    </script>
-
-    <!-- Schema: FAQPage -->
-    <script type="application/ld+json">
+      "url": "https://timerclock.app/"
+    },
     {
-      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://timerclock.app/#website",
+      "name": "Timer Clock",
+      "url": "https://timerclock.app/",
+      "publisher": {
+        "@id": "https://timerclock.app/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://timerclock.app/stopwatch#webpage",
+      "url": "https://timerclock.app/stopwatch",
+      "name": "Online Stopwatch - Timer Clock",
+      "description": "Use a free online stopwatch to measure elapsed time. Start, pause, resume, and reset the stopwatch directly in your browser.",
+      "isPartOf": {
+        "@id": "https://timerclock.app/#website"
+      },
+      "publisher": {
+        "@id": "https://timerclock.app/#organization"
+      },
+      "mainEntity": {
+        "@id": "https://timerclock.app/stopwatch#software"
+      },
+      "hasPart": {
+        "@id": "https://timerclock.app/stopwatch#faq"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://timerclock.app/stopwatch#software",
+      "name": "Timer Clock - Online Stopwatch",
+      "url": "https://timerclock.app/stopwatch",
+      "description": "A free online stopwatch for measuring elapsed time during workouts, studying, sports, cooking, and everyday activities.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Free online stopwatch",
+        "Start and pause stopwatch",
+        "Resume elapsed time",
+        "Reset stopwatch",
+        "Digital elapsed time display"
+      ],
+      "provider": {
+        "@id": "https://timerclock.app/#organization"
+      }
+    },
+    {
       "@type": "FAQPage",
+      "@id": "https://timerclock.app/stopwatch#faq",
+      "url": "https://timerclock.app/stopwatch",
+      "isPartOf": {
+        "@id": "https://timerclock.app/stopwatch#webpage"
+      },
+      "inLanguage": "en-US",
       "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is an online stopwatch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An online stopwatch is a browser-based tool that measures elapsed time. It starts counting from zero and helps you track how long an activity takes."
+          }
+        },
         {
           "@type": "Question",
           "name": "How do I use the online stopwatch?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Press Start to begin counting. Press Lap to record a lap time while running, Pause to stop temporarily, and Reset to clear and start over."
+            "text": "Open the stopwatch page and click the Start button to begin measuring time. Click Pause to stop temporarily, Resume to continue, or Reset to start again from zero."
           }
         },
         {
           "@type": "Question",
-          "name": "Does the stopwatch show milliseconds?",
+          "name": "Is Timer Clock stopwatch free to use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The stopwatch displays elapsed time with millisecond precision in MM:SS.mmm format, switching to HH:MM:SS.mmm after one hour."
+            "text": "Yes, Timer Clock stopwatch is free to use. You do not need to create an account or install any software. Open the page and start measuring time."
           }
         },
         {
           "@type": "Question",
-          "name": "Is the online stopwatch free?",
+          "name": "Can I use the online stopwatch on my phone?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Timer Clock's stopwatch is completely free, requires no signup, and runs directly in your browser on any device."
+            "text": "Yes, you can use the Timer Clock online stopwatch on smartphones, tablets, laptops, and desktop computers through a modern web browser."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a stopwatch and a timer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A stopwatch counts upward from zero to measure elapsed time, while a countdown timer counts down from a selected duration to zero."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I pause and reset the stopwatch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can pause the stopwatch whenever needed and resume from the recorded time. Use the Reset button to clear the elapsed time and start again from zero."
           }
         }
       ]
     }
-    </script>
-
+  ]
+}
+</script>
+    
     <style>
         :root {
             --card-bg: #ffffff;
@@ -1115,48 +1188,71 @@
         </main>
 
         <section class="seo-content" aria-labelledby="seoTitle">
-            <h2 id="seoTitle">How to use the online stopwatch</h2>
-            <p>
-                Timer Clock's <strong>online stopwatch</strong> measures elapsed time with millisecond precision.
-                Press <strong>Start</strong> to begin counting up. While running, press <strong>Lap</strong> to record
-                a split without stopping. Press <strong>Pause</strong> to freeze the count, then <strong>Resume</strong>
-                to continue, or <strong>Reset</strong> to clear everything and start fresh.
-            </p>
-            <p>
-                Use the <strong>Space</strong> key to start or pause, <strong>L</strong> to record a lap, and <strong>R</strong>
-                to reset. Enter fullscreen for a distraction-free display — great for classrooms, gyms, or desktop use.
-            </p>
+            
+<h2 id="seoTitle">How to Use the Online Stopwatch</h2>
+<p>
+    Need to keep track of time? Timer Clock's <strong>online stopwatch</strong>
+    makes it easy. Click <strong>Start</strong> to begin counting, then use
+    <strong>Lap</strong> whenever you want to record a split without stopping
+    the timer. You can pause at any point and pick up where you left off with
+    <strong>Resume</strong>. If you want to start over, just hit
+    <strong>Reset</strong>.
+</p>
+<p>
+    You can also control the stopwatch with your keyboard. Press
+    <strong>Space</strong> to start or pause, <strong>L</strong> to record a lap,
+    and <strong>R</strong> to reset. Need a bigger display? Switch to fullscreen
+    to keep the time visible while you work out, teach a class, or run an activity.
+</p>
 
-            <h2>Popular stopwatch uses</h2>
-            <ul>
-                <li><strong>Workouts &amp; interval training</strong> — time HIIT rounds, sets, and rest periods.</li>
-                <li><strong>Cooking &amp; baking</strong> — precise timing for recipes and rests.</li>
-                <li><strong>Running &amp; cycling</strong> — record lap splits for training.</li>
-                <li><strong>Studying &amp; productivity</strong> — track time spent on focused work.</li>
-                <li><strong>Coding &amp; experiments</strong> — benchmark operations and tasks.</li>
-                <li><strong>Sports &amp; games</strong> — time matches or drills with lap precision.</li>
-            </ul>
+<h2>What Can You Use a Stopwatch For?</h2>
+<ul>
+    <li><strong>Workouts and training</strong> – Keep track of exercise rounds, rest periods, and workout times.</li>
+    <li><strong>Cooking and baking</strong> – Time each step of a recipe without losing track.</li>
+    <li><strong>Running and cycling</strong> – Record lap times and compare your performance.</li>
+    <li><strong>Studying and work</strong> – See how long you spend on a task or study session.</li>
+    <li><strong>Coding and testing</strong> – Measure how long a process or experiment takes.</li>
+    <li><strong>Sports and games</strong> – Time drills, practice sessions, and friendly competitions.</li>
+</ul>
 
-            <h2>Frequently asked questions</h2>
-            <div class="faq">
-                <details>
-                    <summary>How do I use the online stopwatch?</summary>
-                    <p>Press <strong>Start</strong> to begin counting. Press <strong>Lap</strong> to record a lap time while running, <strong>Pause</strong> to stop temporarily, and <strong>Reset</strong> to clear and start over.</p>
-                </details>
-                <details>
-                    <summary>Does the stopwatch show milliseconds?</summary>
-                    <p>Yes. Elapsed time is displayed in <strong>MM:SS.mmm</strong> format with millisecond precision, switching to <strong>HH:MM:SS.mmm</strong> after one hour.</p>
-                </details>
-                <details>
-                    <summary>Is the online stopwatch free?</summary>
-                    <p>Yes. Our stopwatch is completely free, requires no signup, and runs directly in your browser on any device.</p>
-                </details>
-                <details>
-                    <summary>What do the green and red lap colors mean?</summary>
-                    <p>The fastest lap is highlighted in <strong>green</strong> and the slowest in <strong>red</strong>, so you can instantly spot your best and worst splits.</p>
-                </details>
-            </div>
-        </section>
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+    <details>
+        <summary>How do I use the online stopwatch?</summary>
+        <p>
+            Click <strong>Start</strong> to begin counting. Use <strong>Lap</strong>
+            to save a split time without stopping the stopwatch. Click
+            <strong>Pause</strong> when you need a break, <strong>Resume</strong>
+            to continue, or <strong>Reset</strong> to clear the time and start again.
+        </p>
+    </details>
+
+    <details>
+        <summary>Does the stopwatch show milliseconds?</summary>
+        <p>
+            Yes. The stopwatch displays time down to milliseconds in
+            <strong>MM:SS.mmm</strong> format. Once an hour has passed, the display
+            changes to <strong>HH:MM:SS.mmm</strong>.
+        </p>
+    </details>
+
+    <details>
+        <summary>Is the online stopwatch free to use?</summary>
+        <p>
+            Yes, it's completely free. There's no signup or installation needed.
+            Just open Timer Clock in your browser and start using the stopwatch.
+        </p>
+    </details>
+
+    <details>
+        <summary>What do the green and red lap times mean?</summary>
+        <p>
+            Green marks your fastest lap, while red highlights your slowest.
+            This makes it easier to compare your splits and see where you were
+            quickest or slowest.
+        </p>
+    </details>
+</div>
 
         <footer class="site-footer">
             <div class="footer-grid">

@@ -52,7 +52,7 @@
     </script>
 
     
-<!-- Timer Clock - Online Alarm Clock Structured Data -->
+<!-- Timer Clock - Online Alarm Clock Structured Data (FAQ 100% matches visible content) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -61,7 +61,11 @@
       "@type": "Organization",
       "@id": "https://timerclock.app/#organization",
       "name": "Timer Clock",
-      "url": "https://timerclock.app/"
+      "url": "https://timerclock.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://timerclock.app/og-image.png"
+      }
     },
     {
       "@type": "WebSite",
@@ -127,7 +131,7 @@
     {
       "@type": "FAQPage",
       "@id": "https://timerclock.app/online-alarm-clock#faq",
-      "url": "https://timerclock.app/online-alarm-clock#faq",
+      "url": "https://timerclock.app/online-alarm-clock",
       "isPartOf": {
         "@id": "https://timerclock.app/online-alarm-clock#webpage"
       },
@@ -138,23 +142,23 @@
           "name": "How do I set an alarm online?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Select your preferred hour and minute, choose AM or PM if using the 12-hour format, and optionally enter an alarm label. Click Add Alarm to save your alarm."
+            "text": "Select the hour and minute, then choose AM or PM if you're using the 12-hour format. You can also add a label to identify your alarm. Click Add Alarm to save it. The alarm will play a sound when the selected time arrives."
           }
         },
         {
           "@type": "Question",
-          "name": "Does the online alarm clock support 12-hour and 24-hour formats?",
+          "name": "Can I switch between 12-hour and 24-hour time?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. You can switch between 12-hour and 24-hour time formats using the format toggle. The clock can also detect your browser's preferred time format."
+            "text": "Yes. You can switch between 12-hour and 24-hour formats using the 12H / 24H toggle. The clock also detects your preferred format from your browser's regional settings, and your selection is saved."
           }
         },
         {
           "@type": "Question",
-          "name": "Can I set multiple alarms?",
+          "name": "Does the online alarm clock use my local timezone?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. You can add multiple alarms with custom labels to manage different wake-up times and daily reminders."
+            "text": "Yes. The clock uses your device's local time to schedule alarms. In 24-hour mode, your timezone is also displayed next to the clock."
           }
         },
         {
@@ -162,31 +166,31 @@
           "name": "Are my alarms saved automatically?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Your alarms are saved in your browser's local storage and remain available after reloading the page on the same browser and device."
+            "text": "Yes. Your alarms are stored in your browser's localStorage. They remain saved after you reload the page, as long as you continue using the same browser and device without clearing its stored data."
           }
         },
         {
           "@type": "Question",
-          "name": "Is this online alarm clock free?",
+          "name": "Is this online alarm clock free to use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Timer Clock provides a free online alarm clock that works directly in your browser without requiring an account or signup."
+            "text": "Yes. Timer Clock's online alarm clock is free to use. You don't need to create an account or install any software. Just open the page and set your alarm."
           }
         },
         {
           "@type": "Question",
-          "name": "Does the alarm clock use my local timezone?",
+          "name": "Will my alarm ring if I close the browser tab?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The alarm clock uses your device's local time and timezone to schedule alarms."
+            "text": "No. The alarm needs the webpage to remain open in your browser. Keep the tab open and your device powered on to receive the alarm. Background behavior may vary depending on your browser and device settings."
           }
         },
         {
           "@type": "Question",
-          "name": "Will my alarm ring if I close the browser?",
+          "name": "Can I set more than one alarm?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The alarm generally needs the webpage to remain open in your browser. Alarm behavior in background tabs depends on your browser and device settings."
+            "text": "Yes. You can create multiple alarms, each with its own time and optional label. You can also turn individual alarms on or off or delete them whenever you want."
           }
         }
       ]
@@ -568,20 +572,43 @@
             display: none;
         }
 
+        /* ============================================================
+           STATUS TEXT — fits on every device, wraps when needed.
+           Uses container-query units (cqw) so it scales with the
+           timer circle itself, not the viewport.
+           ============================================================ */
         .status-text {
             font-family: var(--font-display);
-            font-size: clamp(12px, min(1.8vh, 3.4vw), 14px);
+            font-size: clamp(10px, 3.6cqw, 14px);
             font-weight: 700;
             color: var(--text-muted);
-            letter-spacing: 2px;
+            letter-spacing: clamp(0.5px, 0.6cqw, 2.5px);
             z-index: 10;
             text-transform: uppercase;
             text-align: center;
-            padding: 0 8px;
+            padding: 0 10px;
             max-width: 100%;
-            line-height: 1.3;
+            line-height: 1.35;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+            transition: color 0.2s ease;
         }
 
+        /* Ringing state: tighter letterspacing so long labels fit */
+        .status-text.ringing {
+            font-size: clamp(10px, 3.4cqw, 13px);
+            letter-spacing: clamp(0.3px, 0.35cqw, 1.5px);
+            animation: alarmTextPulse 0.9s ease-in-out infinite;
+        }
+        @keyframes alarmTextPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.65; }
+        }
+
+        /* ============================================================
+           FULLSCREEN — status text scales with timer circle
+           ============================================================ */
         .main-content:fullscreen, .main-content:-webkit-full-screen {
             width: 100vw; height: 100vh;
             max-width: 100vw; max-height: 100vh;
@@ -611,10 +638,17 @@
         .main-content:-webkit-full-screen .time-text { font-size: clamp(2rem, 15cqw, 4.6rem); }
         .main-content:fullscreen .time-text .ms-text,
         .main-content:-webkit-full-screen .time-text .ms-text { font-size: clamp(1.1rem, 8cqw, 2.4rem); }
+
         .main-content:fullscreen .status-text,
         .main-content:-webkit-full-screen .status-text {
-            font-size: clamp(13px, min(2.4vh, 3.6vw), 20px);
-            letter-spacing: 0.4vh;
+            font-size: clamp(11px, 3.6cqw, 20px);
+            letter-spacing: clamp(0.5px, 0.6cqw, 3px);
+            padding: 0 16px;
+        }
+        .main-content:fullscreen .status-text.ringing,
+        .main-content:-webkit-full-screen .status-text.ringing {
+            font-size: clamp(10px, 3.4cqw, 18px);
+            letter-spacing: clamp(0.3px, 0.35cqw, 2px);
         }
 
         .fs-exit-btn {
@@ -1381,13 +1415,13 @@
                 </div>
 
                 <div class="hint">
-                    Press <kbd>Space</kbd> to stop alarm when ringing
+                    Press <kbd>Space</kbd> or <kbd>Esc</kbd> to stop alarm when ringing
                 </div>
             </div>
         </main>
 
 
-<section class="seo-content" aria-labelledby="seoTitle">
+<section class="seo-content" aria-labelledby="seoTitle" id="faq">
 
     <h2 id="seoTitle">How to use the online alarm clock</h2>
 
@@ -1512,9 +1546,9 @@
                     <h3 id="footerTools">Tools</h3>
                     <ul>
                         <li><a href="/">Online Timer</a></li>
-                        <li><a href="/stopwatch">Stopwatch</a></li>
                         <li><a href="/pomodoro-timer">Pomodoro Timer</a></li>
                         <li><a href="/online-alarm-clock">Online Alarm Clock</a></li>
+                        <li><a href="/25-minute-timer">25 Minute Timer</a></li>
                     </ul>
                 </nav>
 
@@ -1603,7 +1637,7 @@
         let alarms = [];
         let isRinging = false;
         let ringingAlarmId = null;
-        const firedKeys = new Map(); // Map<alarmId, 'YYYY-M-D-HH-MM'>
+        const firedKeys = new Map();
         let audioCtx = null;
         let alarmAudioInterval = null;
         let wakeLock = null;
@@ -1618,7 +1652,6 @@
                 const locale = navigator.language || 'en-US';
                 const fmt = new Intl.DateTimeFormat(locale, { hour: 'numeric' });
                 const cycle = fmt.resolvedOptions().hourCycle;
-                // h23 / h24 => 24-hour preference
                 return cycle === 'h23' || cycle === 'h24';
             } catch (_) {
                 return false;
@@ -1643,13 +1676,11 @@
         /* ========== TIMEZONE LABEL ========== */
         function computeTimezoneLabel() {
             try {
-                // Prefer a short, human-readable abbreviation (EST, IST, JST, UTC, etc.)
                 const parts = new Intl.DateTimeFormat('en-US', { timeZoneName: 'short' })
                     .formatToParts(new Date());
                 const name = (parts.find(p => p.type === 'timeZoneName') || {}).value || '';
                 if (name && name.length <= 4) return name;
             } catch (_) {}
-            // Fallback: compact UTC offset (+5:30, -8, etc.)
             try {
                 const offset = -new Date().getTimezoneOffset();
                 const sign = offset >= 0 ? '+' : '-';
@@ -1670,20 +1701,17 @@
             return use24Hour ? { min: 0, max: 23 } : { min: 1, max: 12 };
         }
 
-        // Convert a display hour (+ optional AM/PM) to 24-hour hour.
         function displayHourTo24(displayHour, period) {
             if (use24Hour) return displayHour;
             if (period === 'AM') return displayHour === 12 ? 0 : displayHour;
             return displayHour === 12 ? 12 : displayHour + 12;
         }
 
-        // Convert a 24-hour hour to the display-hour for the current format.
         function hour24ToDisplay(h24) {
             if (use24Hour) return h24;
             return h24 === 0 ? 12 : (h24 > 12 ? h24 - 12 : h24);
         }
 
-        // Format a 24-hour time for display (used by status text + alarm list).
         function formatTime(h24, m) {
             if (use24Hour) {
                 return pad2(h24) + ':' + pad2(m);
@@ -1708,18 +1736,15 @@
         }
 
         function toggleFormat() {
-            // 1) Read the current input value in the OLD format.
             const oldBounds = getHourBounds();
             const oldDisplayHour = clampInt(inputHour.value, oldBounds.min, oldBounds.max);
             const oldPeriod = inputPeriod.value === 'PM' ? 'PM' : 'AM';
             const h24 = displayHourTo24(oldDisplayHour, oldPeriod);
 
-            // 2) Flip the format.
             use24Hour = !use24Hour;
             saveFormatPref();
             updateFormatUI();
 
-            // 3) Write the value back in the NEW format.
             const newDisplayHour = hour24ToDisplay(h24);
             const newBounds = getHourBounds();
             let v = newDisplayHour;
@@ -1728,7 +1753,6 @@
             inputHour.value = String(v);
             inputPeriod.value = h24 < 12 ? 'AM' : 'PM';
 
-            // 4) Refresh dependent UI.
             renderAlarms();
             updateStatus(new Date());
             updateClock(new Date());
@@ -1845,7 +1869,6 @@
             }
         }
 
-        // Unlock audio on first user gesture (browsers require a gesture).
         ['pointerdown', 'keydown', 'touchstart'].forEach((evt) => {
             document.addEventListener(evt, initAudio, { once: true, passive: true });
         });
@@ -1964,7 +1987,7 @@
                 if (alarm.hour === h && alarm.minute === m) {
                     firedKeys.set(alarm.id, key);
                     triggerAlarm(alarm);
-                    return; // another alarm at the same minute will ring after STOP
+                    return;
                 }
             }
         }
@@ -1979,6 +2002,7 @@
             const label = alarm.label ? String(alarm.label).toUpperCase() : '';
             setText(statusText, 'ALARM' + (label ? ': ' + label : '!'));
             statusText.style.color = 'var(--danger)';
+            statusText.classList.add('ringing');
 
             startAlarmSound();
             if (navigator.vibrate) {
@@ -2000,6 +2024,7 @@
                 try { navigator.vibrate(0); } catch (_) {}
             }
             progressRing.classList.remove('ringing');
+            statusText.classList.remove('ringing');
             updateStatus(new Date());
         }
         stopBtn.addEventListener('click', stopRinging);
@@ -2072,7 +2097,6 @@
             renderAlarms();
             updateStatus(new Date());
 
-            // Confirmation beep (only plays if audio is unlocked).
             initAudio();
             setTimeout(() => { beep(0, 880); beep(0.15, 1046); }, 50);
 
@@ -2156,7 +2180,6 @@
             alarmsContainer.innerHTML = html;
         }
 
-        /* Event delegation for alarm list actions */
         alarmsContainer.addEventListener('change', (e) => {
             const t = e.target;
             if (t instanceof HTMLInputElement && t.dataset.alarmToggle) {
@@ -2183,7 +2206,6 @@
                     addAlarm();
                     return;
                 }
-                // Block exponent, sign, decimal, and other non-digit characters
                 if (['e', 'E', '+', '-', '.'].includes(e.key)) {
                     e.preventDefault();
                 }
@@ -2226,6 +2248,7 @@
         /* ========== KEYBOARD ========== */
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
+                if (isRinging) { e.preventDefault(); stopRinging(); return; }
                 if (mobileSidebar.classList.contains('open')) { closeSidebar(); return; }
                 if (langDropdown.classList.contains('show')) { closeLangDropdown(true); return; }
             }
@@ -2258,7 +2281,6 @@
         tick();
         setInterval(tick, 200);
 
-        // Refresh timezone periodically (handles DST transitions).
         setInterval(refreshTimezone, 60 * 60 * 1000);
     </script>
 </body>

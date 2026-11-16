@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
   <url>
     <loc>https://timerclock.app/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/"/>
@@ -10,6 +13,44 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/"/>
   </url>
   <url>
+    <loc>https://timerclock.app/hi/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/"/>
+  </url>
+  <url>
+    <loc>https://timerclock.app/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/"/>
+  </url>
+  <url>
+    <loc>https://timerclock.app/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/"/>
+  </url>
+  <url>
+    <loc>https://timerclock.app/de/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/"/>
+  </url>
+
+  <!-- Stopwatch -->
+  <url>
     <loc>https://timerclock.app/stopwatch</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/stopwatch"/>
     <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/stopwatch/"/>
@@ -19,96 +60,101 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/stopwatch"/>
   </url>
   <url>
-    <loc>https://timerclock.app/online-alarm-clock</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/online-alarm-clock"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/online-alarm-clock/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/online-alarm-clock/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/online-alarm-clock/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/online-alarm-clock/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/online-alarm-clock"/>
+    <loc>https://timerclock.app/hi/stopwatch/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/stopwatch"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/stopwatch"/>
   </url>
   <url>
-    <loc>https://timerclock.app/pomodoro-timer</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/pomodoro-timer"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/pomodoro-timer/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/pomodoro-timer/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/pomodoro-timer/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/pomodoro-timer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/pomodoro-timer"/>
+    <loc>https://timerclock.app/es/stopwatch/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/stopwatch"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/stopwatch"/>
   </url>
   <url>
-    <loc>https://timerclock.app/1-minute-timer</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/1-minute-timer"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/1-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/1-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/1-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/1-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/1-minute-timer"/>
+    <loc>https://timerclock.app/fr/stopwatch/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/stopwatch"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/stopwatch"/>
   </url>
   <url>
-    <loc>https://timerclock.app/5-minute-timer</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/5-minute-timer"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/5-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/5-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/5-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/5-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/5-minute-timer"/>
+    <loc>https://timerclock.app/de/stopwatch/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/stopwatch"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/stopwatch/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/stopwatch"/>
   </url>
-  <url>
-    <loc>https://timerclock.app/10-minute-timer</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/10-minute-timer"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/10-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/10-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/10-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/10-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/10-minute-timer"/>
-  </url>
-  <url>
-    <loc>https://timerclock.app/15-minute-timer</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/15-minute-timer"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/15-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/15-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/15-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/15-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/15-minute-timer"/>
-  </url>
-  <url>
-    <loc>https://timerclock.app/25-minute-timer</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/25-minute-timer"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/25-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/25-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/25-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/25-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/25-minute-timer"/>
-  </url>
-  <url>
-    <loc>https://timerclock.app/30-minute-timer</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/30-minute-timer"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/30-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/30-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/30-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/30-minute-timer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/30-minute-timer"/>
-  </url>
-  <url>
-    <loc>https://timerclock.app/1-hour-timer</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://timerclock.app/1-hour-timer"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/1-hour-timer/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://timerclock.app/es/1-hour-timer/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://timerclock.app/fr/1-hour-timer/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://timerclock.app/de/1-hour-timer/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://timerclock.app/1-hour-timer"/>
-  </url>
-  <url>
-    <loc>https://timerclock.app/about</loc>
-  </url>
-  <url>
-    <loc>https://timerclock.app/privacy</loc>
-  </url>
-  <url>
-    <loc>https://timerclock.app/terms</loc>
-  </url>
-  <url>
-    <loc>https://timerclock.app/contact</loc>
-  </url>
+
+  <!-- Tool pages: English URLs -->
+  <url><loc>https://timerclock.app/online-alarm-clock</loc></url>
+  <url><loc>https://timerclock.app/pomodoro-timer</loc></url>
+  <url><loc>https://timerclock.app/1-minute-timer</loc></url>
+  <url><loc>https://timerclock.app/5-minute-timer</loc></url>
+  <url><loc>https://timerclock.app/10-minute-timer</loc></url>
+  <url><loc>https://timerclock.app/15-minute-timer</loc></url>
+  <url><loc>https://timerclock.app/25-minute-timer</loc></url>
+  <url><loc>https://timerclock.app/30-minute-timer</loc></url>
+  <url><loc>https://timerclock.app/1-hour-timer</loc></url>
+
+  <!-- Hindi tool pages -->
+  <url><loc>https://timerclock.app/hi/online-alarm-clock/</loc></url>
+  <url><loc>https://timerclock.app/hi/pomodoro-timer/</loc></url>
+  <url><loc>https://timerclock.app/hi/1-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/hi/5-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/hi/10-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/hi/15-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/hi/25-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/hi/30-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/hi/1-hour-timer/</loc></url>
+
+  <!-- Spanish tool pages -->
+  <url><loc>https://timerclock.app/es/online-alarm-clock/</loc></url>
+  <url><loc>https://timerclock.app/es/pomodoro-timer/</loc></url>
+  <url><loc>https://timerclock.app/es/1-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/es/5-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/es/10-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/es/15-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/es/25-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/es/30-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/es/1-hour-timer/</loc></url>
+
+  <!-- French tool pages -->
+  <url><loc>https://timerclock.app/fr/online-alarm-clock/</loc></url>
+  <url><loc>https://timerclock.app/fr/pomodoro-timer/</loc></url>
+  <url><loc>https://timerclock.app/fr/1-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/fr/5-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/fr/10-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/fr/15-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/fr/25-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/fr/30-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/fr/1-hour-timer/</loc></url>
+
+  <!-- German tool pages -->
+  <url><loc>https://timerclock.app/de/online-alarm-clock/</loc></url>
+  <url><loc>https://timerclock.app/de/pomodoro-timer/</loc></url>
+  <url><loc>https://timerclock.app/de/1-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/de/5-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/de/10-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/de/15-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/de/25-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/de/30-minute-timer/</loc></url>
+  <url><loc>https://timerclock.app/de/1-hour-timer/</loc></url>
+
+  <!-- Informational pages -->
+  <url><loc>https://timerclock.app/about</loc></url>
+  <url><loc>https://timerclock.app/privacy</loc></url>
+  <url><loc>https://timerclock.app/terms</loc></url>
+  <url><loc>https://timerclock.app/contact</loc></url>
+
 </urlset>

@@ -573,9 +573,7 @@
         }
 
         /* ============================================================
-           STATUS TEXT — fits on every device, wraps when needed.
-           Uses container-query units (cqw) so it scales with the
-           timer circle itself, not the viewport.
+           STATUS TEXT — fits on every screen via cqw units
            ============================================================ */
         .status-text {
             font-family: var(--font-display);
@@ -595,7 +593,6 @@
             transition: color 0.2s ease;
         }
 
-        /* Ringing state: tighter letterspacing so long labels fit */
         .status-text.ringing {
             font-size: clamp(10px, 3.4cqw, 13px);
             letter-spacing: clamp(0.3px, 0.35cqw, 1.5px);
@@ -701,6 +698,10 @@
             text-transform: uppercase;
             line-height: 1.3;
         }
+
+        /* ============================================================
+           INPUTS — border animation & focus glow REMOVED
+           ============================================================ */
         .input-wrapper input,
         .input-wrapper select {
             height: clamp(46px, min(8vh, 13vw), 60px);
@@ -713,17 +714,18 @@
             text-align: center;
             outline: none;
             background-color: var(--card-bg);
-            transition: all 0.2s ease;
             min-width: 0;
             font-variant-numeric: tabular-nums;
             line-height: 1.2;
+            /* No transition — border no longer animates */
         }
-        .input-wrapper input:hover,
-        .input-wrapper select:hover { border-color: #d1d5db; }
-        .input-wrapper input:focus,
-        .input-wrapper select:focus {
-            border-color: var(--green-primary);
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+        /* No hover border change */
+        /* No focus border-color change, no box-shadow glow */
+        /* Just a simple outline for keyboard accessibility */
+        .input-wrapper input:focus-visible,
+        .input-wrapper select:focus-visible {
+            outline: 2px solid var(--green-primary);
+            outline-offset: 2px;
         }
 
         .input-wrapper.small input { width: clamp(60px, 18vw, 80px); }
@@ -967,7 +969,6 @@
             border-color: var(--border-color);
         }
 
-        /* Format toggle (12H/24H) */
         .format-toggle {
             height: clamp(38px, min(6.4vh, 10vw), 46px);
             min-width: clamp(60px, 18vw, 72px);
@@ -1644,6 +1645,9 @@
         let tzLabel = '';
         const circumference = 2 * Math.PI * 130;
 
+        /* Preview mode: shows "SET: HH:MM" while user edits inputs */
+        let previewMode = false;
+
         progressRing.style.strokeDasharray = String(circumference);
 
         /* ========== 12H / 24H FORMAT ========== */
@@ -1754,7 +1758,11 @@
             inputPeriod.value = h24 < 12 ? 'AM' : 'PM';
 
             renderAlarms();
-            updateStatus(new Date());
+            if (previewMode) {
+                updatePreviewStatus();
+            } else {
+                updateStatus(new Date());
+            }
             updateClock(new Date());
         }
 
@@ -1995,6 +2003,7 @@
         function triggerAlarm(alarm) {
             isRinging = true;
             ringingAlarmId = alarm.id;
+            previewMode = false;  /* exit preview mode when alarm fires */
 
             alarmInputGroup.style.display = 'none';
             alarmRingingGrp.style.display = 'flex';
@@ -2015,6 +2024,7 @@
             if (!isRinging) return;
             isRinging = false;
             ringingAlarmId = null;
+            previewMode = false;
 
             alarmInputGroup.style.display = '';
             alarmRingingGrp.style.display = 'none';
@@ -2029,9 +2039,51 @@
         }
         stopBtn.addEventListener('click', stopRinging);
 
+        /* ========== PREVIEW STATUS (updates as user types) ========== */
+        function updatePreviewStatus() {
+            if (isRinging) return;
+
+            const bounds = getHourBounds();
+            const h = clampInt(inputHour.value, bounds.min, bounds.max);
+            const m = clampInt(inputMinute.value, 0, 59);
+            const period = inputPeriod.value === 'PM' ? 'PM' : 'AM';
+
+            let h24;
+            if (use24Hour) {
+                h24 = h;
+            } else {
+                if (period === 'AM') h24 = h === 12 ? 0 : h;
+                else h24 = h === 12 ? 12 : h + 12;
+            }
+
+            previewMode = true;
+            setText(statusText, 'SET: ' + formatTime(h24, m));
+            statusText.style.color = 'var(--text-muted)';
+            statusText.classList.remove('ringing');
+        }
+
+        /* Attach preview listeners to alarm inputs */
+        [inputHour, inputMinute].forEach((inp) => {
+            inp.addEventListener('input', updatePreviewStatus);
+            inp.addEventListener('change', updatePreviewStatus);
+            inp.addEventListener('focus', updatePreviewStatus);
+        });
+        inputPeriod.addEventListener('change', updatePreviewStatus);
+        inputPeriod.addEventListener('focus', updatePreviewStatus);
+
+        /* Exit preview when focus leaves the alarm input group entirely */
+        alarmInputGroup.addEventListener('focusout', () => {
+            setTimeout(() => {
+                if (!alarmInputGroup.matches(':focus-within') && previewMode) {
+                    previewMode = false;
+                    updateStatus(new Date());
+                }
+            }, 10);
+        });
+
         /* ========== STATUS TEXT ========== */
         function updateStatus(now) {
-            if (isRinging) return;
+            if (isRinging || previewMode) return;
 
             const enabled = alarms.filter(a => a.enabled);
             if (enabled.length === 0) {
@@ -2095,6 +2147,8 @@
             alarms.push(newAlarm);
             saveAlarms();
             renderAlarms();
+
+            previewMode = false;
             updateStatus(new Date());
 
             initAudio();
@@ -2113,6 +2167,7 @@
             if (item) item.classList.toggle('disabled', !a.enabled);
 
             if (!a.enabled && ringingAlarmId === id) stopRinging();
+            previewMode = false;
             updateStatus(new Date());
         }
 
@@ -2128,6 +2183,7 @@
             if (alarms.length === 0) renderAlarms();
 
             if (ringingAlarmId === id) stopRinging();
+            previewMode = false;
             updateStatus(new Date());
         }
 

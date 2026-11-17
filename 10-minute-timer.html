@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,6 @@
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#22c55e">
 
-    <!-- Open Graph -->
     <meta property="og:title" content="10 Minute Timer – Free Online Countdown">
     <meta property="og:description" content="Free 10 minute timer with sound alert. Starts at 10:00 — perfect for study breaks, meditation, cooking, and workouts.">
     <meta property="og:type" content="website">
@@ -18,13 +17,11 @@
     <meta property="og:image" content="https://timerclock.app/og-image.png">
     <meta property="og:site_name" content="Timer Clock">
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="10 Minute Timer – Free Online Countdown">
     <meta name="twitter:description" content="Free 10 minute timer with sound alert. Starts at 10:00 — no signup required.">
     <meta name="twitter:image" content="https://timerclock.app/og-image.png">
 
-    <!-- Hreflang -->
     <link rel="alternate" hreflang="en" href="https://timerclock.app/10-minute-timer">
     <link rel="alternate" hreflang="hi" href="https://timerclock.app/hi/10-minute-timer">
     <link rel="alternate" hreflang="es" href="https://timerclock.app/es/10-minute-timer">
@@ -32,17 +29,14 @@
     <link rel="alternate" hreflang="de" href="https://timerclock.app/de/10-minute-timer">
     <link rel="alternate" hreflang="x-default" href="https://timerclock.app/10-minute-timer">
 
-    <!-- Favicons -->
     <link rel="icon" href="https://timerclock.app/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <!-- GTM -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
       new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -51,18 +45,70 @@
       })(window,document,'script','dataLayer','GTM-K4L3JFT4');
     </script>
 
-    <!-- Schema: WebApplication -->
-    <script type="application/ld+json">
+<!-- ============================================================
+     Timer Clock — 10 Minute Timer Structured Data
+     Unified @graph: Organization → WebSite → WebPage → SoftwareApplication → FAQPage
+     All FAQ text 100% matches the visible page content.
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
+      "@type": "Organization",
+      "@id": "https://timerclock.app/#organization",
+      "name": "Timer Clock",
+      "url": "https://timerclock.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://timerclock.app/og-image.png"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://timerclock.app/#website",
+      "name": "Timer Clock",
+      "url": "https://timerclock.app/",
+      "publisher": {
+        "@id": "https://timerclock.app/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://timerclock.app/10-minute-timer#webpage",
+      "url": "https://timerclock.app/10-minute-timer",
+      "name": "10 Minute Timer – Free Online Countdown | Timer Clock",
+      "description": "Free 10 minute timer with sound alert. Perfect for study breaks, meditation, power naps, cooking, and quick workouts. Starts at 10:00 — works on any device, no signup.",
+      "isPartOf": {
+        "@id": "https://timerclock.app/#website"
+      },
+      "publisher": {
+        "@id": "https://timerclock.app/#organization"
+      },
+      "mainEntity": {
+        "@id": "https://timerclock.app/10-minute-timer#software"
+      },
+      "hasPart": {
+        "@id": "https://timerclock.app/10-minute-timer#faq"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://timerclock.app/10-minute-timer#software",
       "name": "10 Minute Timer – Timer Clock",
       "url": "https://timerclock.app/10-minute-timer",
       "description": "Free 10 minute timer with sound alert. Perfect for study breaks, meditation, power naps, cooking, and quick workouts.",
-      "applicationCategory": "UtilityApplication",
-      "operatingSystem": "All",
-      "browserRequirements": "Requires JavaScript",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and a modern web browser.",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
       "featureList": [
         "Starts preset to 10:00",
         "Sound alert at zero",
@@ -70,22 +116,26 @@
         "Fullscreen mode",
         "Works on all devices"
       ],
-      "screenshot": "https://timerclock.app/og-image.png"
-    }
-    </script>
-
-    <!-- Schema: FAQPage -->
-    <script type="application/ld+json">
+      "screenshot": "https://timerclock.app/og-image.png",
+      "provider": {
+        "@id": "https://timerclock.app/#organization"
+      }
+    },
     {
-      "@context": "https://schema.org",
       "@type": "FAQPage",
+      "@id": "https://timerclock.app/10-minute-timer#faq",
+      "url": "https://timerclock.app/10-minute-timer",
+      "isPartOf": {
+        "@id": "https://timerclock.app/10-minute-timer#webpage"
+      },
+      "inLanguage": "en-US",
       "mainEntity": [
         {
           "@type": "Question",
           "name": "How do I start the 10 minute timer?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The timer is already set to 10:00 when the page loads. Just press Start (or the Space bar) and the countdown begins immediately. A sound plays when it reaches zero."
+            "text": "The timer is already set to 10:00 when the page loads. Press Start (or the Space bar) and the countdown begins immediately. A sound plays when it reaches zero."
           }
         },
         {
@@ -101,7 +151,7 @@
           "name": "Can I change the time?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Use the presets (1, 5, 10, 15, 25, 30, 45, 60 minutes) or type a custom time in the hour/minute/second inputs. The 10-minute default is just a starting point."
+            "text": "Yes. Use the presets (1, 5, 10, 15, 25, 30, 45, 60 minutes) or type a custom time in the hour / minute / second inputs. The 10-minute default is just a starting point."
           }
         },
         {
@@ -109,12 +159,22 @@
           "name": "Is the 10 minute timer free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. It's completely free, requires no signup, and runs directly in your browser on any device."
+            "text": "Yes. It's completely free, requires no signup, and runs directly in your browser on any device (phone, tablet, or computer)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work in the background?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, once the page loads the countdown runs locally in your browser. For the sound alert to play reliably, keep the tab visible or the device screen on — the timer uses the Wake Lock API to keep the screen awake."
           }
         }
       ]
     }
-    </script>
+  ]
+}
+</script>
 
     <style>
         :root {
@@ -197,6 +257,7 @@
             left: 0;
             width: 280px;
             height: 100vh;
+            height: 100dvh;
             background: var(--card-bg);
             z-index: 2000;
             transform: translateX(-100%);
@@ -488,40 +549,46 @@
             filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.45));
         }
 
+        /* Reduced base size + max-width guards so text always fits inside ring */
         .time-text {
             font-family: var(--font-mono);
-            font-size: clamp(1.6rem, 19cqw, 4.1rem);
+            font-size: clamp(1.4rem, 17cqw, 3.6rem);
             font-weight: 700;
             color: var(--text-main);
             font-variant-numeric: tabular-nums;
             z-index: 10;
             line-height: 1;
             margin-bottom: 0.4vh;
-            letter-spacing: -2px;
+            letter-spacing: -1.5px;
             white-space: nowrap;
-            max-width: 100%;
+            max-width: 88%;
             text-align: center;
             text-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
         }
         .time-text .ms-text {
             font-family: var(--font-mono);
-            font-size: clamp(0.85rem, 10cqw, 2rem);
+            font-size: clamp(0.8rem, 9cqw, 1.8rem);
             font-weight: 500;
             color: var(--text-muted);
             margin-left: 2px;
         }
-        .time-text.long-time { font-size: clamp(1.1rem, 14cqw, 2.8rem); }
-        .time-text.long-time .ms-text { font-size: clamp(0.7rem, 7cqw, 1.4rem); }
+        .time-text.long-time { font-size: clamp(1rem, 12.5cqw, 2.5rem); letter-spacing: -1px; }
+        .time-text.long-time .ms-text { font-size: clamp(0.6rem, 6.5cqw, 1.3rem); }
 
         .status-text {
             font-family: var(--font-display);
-            font-size: clamp(11px, min(1.7vh, 3.2vw), 14px);
+            font-size: clamp(10px, min(1.6vh, 3vw), 13px);
             font-weight: 700;
             color: var(--text-muted);
-            letter-spacing: 3px;
+            letter-spacing: clamp(1px, 0.5cqw, 3px);
             z-index: 10;
             text-transform: uppercase;
             text-align: center;
+            max-width: 80%;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            hyphens: auto;
+            text-wrap: balance;
         }
 
         .main-content:fullscreen, .main-content:-webkit-full-screen {
@@ -531,11 +598,22 @@
             background: var(--page-bg);
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             gap: clamp(10px, 1.8vh, 22px);
             overflow-y: auto;
             overflow-x: hidden;
+        }
+        .main-content:fullscreen::before,
+        .main-content:fullscreen::after,
+        .main-content:-webkit-full-screen::before,
+        .main-content:-webkit-full-screen::after {
+            content: "";
+            display: block;
+            flex: 0 0 auto;
+            margin: auto;
+            width: 0;
+            height: 0;
         }
         .main-content:fullscreen .presets, .main-content:-webkit-full-screen .presets { display: none !important; }
         .main-content:fullscreen .timer-display, .main-content:-webkit-full-screen .timer-display {
@@ -543,13 +621,13 @@
             height: clamp(200px, min(50vh, 58vw), 480px);
             margin: 0.5vh 0;
         }
-        .main-content:fullscreen .time-text, .main-content:-webkit-full-screen .time-text { font-size: clamp(2.2rem, 19cqw, 5.6rem); }
-        .main-content:fullscreen .time-text .ms-text, .main-content:-webkit-full-screen .time-text .ms-text { font-size: clamp(1rem, 10cqw, 2.6rem); }
-        .main-content:fullscreen .time-text.long-time, .main-content:-webkit-full-screen .time-text.long-time { font-size: clamp(1.4rem, 14cqw, 3.8rem); }
-        .main-content:fullscreen .time-text.long-time .ms-text, .main-content:-webkit-full-screen .time-text.long-time .ms-text { font-size: clamp(0.8rem, 7cqw, 1.9rem); }
+        .main-content:fullscreen .time-text, .main-content:-webkit-full-screen .time-text { font-size: clamp(2rem, 17cqw, 5rem); }
+        .main-content:fullscreen .time-text .ms-text, .main-content:-webkit-full-screen .time-text .ms-text { font-size: clamp(0.9rem, 9cqw, 2.3rem); }
+        .main-content:fullscreen .time-text.long-time, .main-content:-webkit-full-screen .time-text.long-time { font-size: clamp(1.2rem, 12.5cqw, 3.4rem); }
+        .main-content:fullscreen .time-text.long-time .ms-text, .main-content:-webkit-full-screen .time-text.long-time .ms-text { font-size: clamp(0.7rem, 6.5cqw, 1.7rem); }
         .main-content:fullscreen .status-text, .main-content:-webkit-full-screen .status-text {
-            font-size: clamp(13px, min(2.4vh, 3.6vw), 20px);
-            letter-spacing: 0.5vh;
+            font-size: clamp(12px, min(2.2vh, 3.4vw), 18px);
+            letter-spacing: 0.4vh;
         }
 
         .fs-exit-btn {
@@ -879,28 +957,30 @@
         }
         .footer-tagline {
             font-family: var(--font-body);
-            font-size: 13px;
-            line-height: 1.6;
+            font-size: 13.5px;
+            line-height: 1.7;
             color: var(--text-muted);
-            max-width: 34ch;
+            max-width: 36ch;
         }
         .footer-col h3 {
             font-family: var(--font-body);
-            font-size: 11px;
+            font-size: 11.5px;
             font-weight: 700;
             letter-spacing: 0.8px;
             text-transform: uppercase;
             color: var(--text-muted);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            line-height: 1.4;
         }
-        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
         .footer-col a {
             color: var(--text-main);
             text-decoration: none;
             font-family: var(--font-body);
             font-size: 14px;
             font-weight: 500;
-            padding: 2px 0;
+            line-height: 1.5;
+            padding: 4px 0;
             display: inline-block;
             transition: color 0.2s ease;
         }
@@ -911,11 +991,13 @@
             justify-content: center;
             align-items: center;
             margin-top: clamp(18px, 2.8vh, 28px);
-            padding-top: 14px;
+            padding-top: 16px;
             border-top: 1px solid var(--border-color);
             font-family: var(--font-body);
             font-size: 13px;
             color: var(--text-muted);
+            line-height: 1.5;
+            text-align: center;
         }
 
         .modal-overlay {
@@ -947,7 +1029,7 @@
             .mobile-menu-btn { display: flex; }
             .site-header { flex-direction: row; justify-content: space-between; }
             .dropdown-content { right: auto; left: 50%; transform: translateX(-50%); }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
             .footer-brand { grid-column: 1 / -1; }
             .hero-title { font-size: clamp(18px, 4.4vw, 22px); margin-bottom: 4px; }
             .hero-subtitle { font-size: clamp(12px, 3.4vw, 14px); }
@@ -964,13 +1046,14 @@
             .brand-text { font-size: 18px; }
             .hero-title { font-size: 18px; }
             .hero-subtitle { font-size: 12px; }
-            .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 22px; }
             .footer-brand { grid-column: auto; }
             .footer-brand .brand { margin: 0 auto; }
             .footer-tagline { max-width: none; text-align: center; }
             .footer-col { text-align: center; }
-            .footer-col ul { align-items: center; }
-            .footer-bottom { text-align: center; }
+            .footer-col ul { align-items: center; gap: 2px; }
+            .footer-col a { padding: 6px 0; }
+            .footer-bottom { text-align: center; font-size: 12.5px; }
         }
 
         @media (max-width: 380px) {
@@ -1127,7 +1210,7 @@
                     <circle class="ring-bg" cx="140" cy="140" r="130"></circle>
                     <circle class="ring-progress" id="progressRing" cx="140" cy="140" r="130"></circle>
                 </svg>
-                <div class="time-text" id="timeDisplay" role="timer" aria-live="off" aria-label="Timer display">
+                <div class="time-text long-time" id="timeDisplay" role="timer" aria-live="off" aria-label="Timer display">
                     <span id="mainTime">00:10:00</span><span class="ms-text" id="msTime"></span>
                 </div>
                 <div class="status-text" id="statusText" aria-live="polite">READY</div>
@@ -1258,8 +1341,7 @@
                         <span class="brand-text">timerclock.app</span>
                     </a>
                     <p class="footer-tagline">
-                        Free online countdown timer, stopwatch, alarm clock, and Pomodoro timer.
-                        No signup, works on any device.
+                        Timer Clock offers free online countdown timers, a stopwatch, and an alarm clock to help you track time and stay productive throughout the day.
                     </p>
                 </div>
 
@@ -1267,9 +1349,9 @@
                     <h3 id="footerTools">Tools</h3>
                     <ul>
                         <li><a href="/">Online Timer</a></li>
-                        <li><a href="/stopwatch">Stopwatch</a></li>
                         <li><a href="/pomodoro-timer">Pomodoro Timer</a></li>
                         <li><a href="/online-alarm-clock">Online Alarm Clock</a></li>
+                        <li><a href="/25-minute-timer">25 Minute Timer</a></li>
                     </ul>
                 </nav>
 
@@ -1280,15 +1362,15 @@
                         <li><a href="/5-minute-timer">5 Minute Timer</a></li>
                         <li><a href="/10-minute-timer">10 Minute Timer</a></li>
                         <li><a href="/15-minute-timer">15 Minute Timer</a></li>
-                        <li><a href="/25-minute-timer">25 Minute Timer</a></li>
                         <li><a href="/30-minute-timer">30 Minute Timer</a></li>
                         <li><a href="/1-hour-timer">1 Hour Timer</a></li>
                     </ul>
                 </nav>
 
-                <nav class="footer-col" aria-labelledby="footerLegal">
-                    <h3 id="footerLegal">Legal</h3>
+                <nav class="footer-col" aria-labelledby="footerCompany">
+                    <h3 id="footerCompany">Company</h3>
                     <ul>
+                        <li><a href="/about">About</a></li>
                         <li><a href="/privacy">Privacy Policy</a></li>
                         <li><a href="/terms">Terms of Use</a></li>
                         <li><a href="/contact">Contact</a></li>
@@ -1334,6 +1416,7 @@
         const playIcon       = $id('playIcon');
         const pauseIcon      = $id('pauseIcon');
         const progressRing   = $id('progressRing');
+        const timerDisplay   = $id('timerDisplay');
         const inputHours     = $id('inputHours');
         const inputMinutes   = $id('inputMinutes');
         const inputSeconds   = $id('inputSeconds');
@@ -1373,6 +1456,79 @@
         const DANGER_STROKE = 'url(#ringGradientDanger)';
 
         progressRing.style.strokeDasharray = String(circumference);
+
+        /* ============================================================
+           ✅ AUTO-FIT — guarantees time text and status text fit
+           INSIDE the ring circle on EVERY screen size.
+           ============================================================ */
+        function fitTimeText() {
+            if (!mainTime || !timerDisplay) return;
+            const cw = timerDisplay.clientWidth;
+            if (cw === 0) { setTimeout(fitTimeText, 120); return; }
+
+            mainTime.style.fontSize = '';
+            void mainTime.offsetWidth;
+
+            const naturalWidth = mainTime.scrollWidth;
+            const maxAllowed = cw * 0.82;
+
+            if (naturalWidth > maxAllowed && maxAllowed > 0) {
+                const cs = getComputedStyle(mainTime);
+                const baseSize = parseFloat(cs.fontSize) || 24;
+                const ratio = maxAllowed / naturalWidth;
+                const newSize = Math.max(11, baseSize * ratio * 0.92);
+                mainTime.style.fontSize = newSize.toFixed(2) + 'px';
+            }
+        }
+
+        function fitStatusText() {
+            if (!statusText || !timerDisplay) return;
+            const cw = timerDisplay.clientWidth;
+            if (cw === 0) { setTimeout(fitStatusText, 120); return; }
+
+            statusText.style.fontSize = '';
+            statusText.style.letterSpacing = '';
+            void statusText.offsetWidth;
+
+            const naturalWidth = statusText.scrollWidth;
+            const maxAllowed = cw * 0.78;
+
+            if (naturalWidth > maxAllowed && maxAllowed > 0) {
+                const cs = getComputedStyle(statusText);
+                const baseSize = parseFloat(cs.fontSize) || 13;
+                const baseSpacing = parseFloat(cs.letterSpacing) || 0;
+                const ratio = maxAllowed / naturalWidth;
+                const newSize = Math.max(8, baseSize * ratio * 0.92);
+                statusText.style.fontSize = newSize.toFixed(2) + 'px';
+                if (baseSpacing > 0) {
+                    statusText.style.letterSpacing = Math.max(0.3, baseSpacing * ratio).toFixed(2) + 'px';
+                }
+            }
+        }
+
+        function fitAllTexts() {
+            fitTimeText();
+            fitStatusText();
+        }
+        function scheduleFitAll() {
+            requestAnimationFrame(fitAllTexts);
+        }
+
+        /* Re-fit on ANY layout change */
+        window.addEventListener('resize', scheduleFitAll);
+        window.addEventListener('orientationchange', scheduleFitAll);
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', scheduleFitAll);
+        }
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(scheduleFitAll);
+        }
+        if (window.ResizeObserver) {
+            try {
+                const __ro = new ResizeObserver(() => scheduleFitAll());
+                __ro.observe(timerDisplay);
+            } catch (_) {}
+        }
 
         /* ========== SIDEBAR ========== */
         function openSidebar() {
@@ -1449,6 +1605,10 @@
         function handleFullscreenChange() {
             const isFs = !!getFullscreenElement();
             fsBtn.style.display = isFs ? 'none' : '';
+            setTimeout(scheduleFitAll, 50);
+            setTimeout(scheduleFitAll, 200);
+            setTimeout(scheduleFitAll, 450);
+            setTimeout(scheduleFitAll, 800);
         }
         document.addEventListener('fullscreenchange', handleFullscreenChange);
         document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
@@ -1508,6 +1668,15 @@
             });
         }
 
+        /* ========== STATUS (with fit) ========== */
+        function setStatus(text, color) {
+            if (statusText.textContent !== text) {
+                statusText.textContent = text;
+                requestAnimationFrame(fitStatusText);
+            }
+            if (color !== undefined) statusText.style.color = color;
+        }
+
         /* ========== AUDIO ========== */
         function initAudio() {
             if (!audioCtx) {
@@ -1562,7 +1731,6 @@
             const s = totalSeconds % 60;
             mainTime.textContent = pad2(h) + ':' + pad2(m) + ':' + pad2(s);
             msTime.textContent = '';
-            timeDisplayEl.classList.add('long-time');
         }
         function updateDisplay() {
             updateCountdownText();
@@ -1625,8 +1793,7 @@
             if (!isRunning) {
                 setRingGreen();
                 const paused = remainingMs > 0;
-                statusText.textContent = paused ? 'PAUSED' : 'READY';
-                statusText.style.color = 'var(--text-muted)';
+                setStatus(paused ? 'PAUSED' : 'READY', 'var(--text-muted)');
                 setStartButton(paused ? 'paused' : 'ready');
             }
             updateDisplay();
@@ -1649,13 +1816,11 @@
             if (remainingMs <= 0 && totalSeconds <= 0) updateTimeFromInputs();
             const msToRun = remainingMs > 0 ? remainingMs : (totalSeconds * 1000);
             if (msToRun <= 0) {
-                statusText.textContent = 'SET TIME';
-                statusText.style.color = 'var(--danger)';
+                setStatus('SET TIME', 'var(--danger)');
                 clearTimeout(zeroMsgTimeout);
                 zeroMsgTimeout = setTimeout(() => {
                     if (!isRunning && remainingMs <= 0 && totalSeconds <= 0) {
-                        statusText.textContent = 'READY';
-                        statusText.style.color = 'var(--text-muted)';
+                        setStatus('READY', 'var(--text-muted)');
                     }
                 }, 1500);
                 return;
@@ -1672,8 +1837,7 @@
             backstopId = setTimeout(finishCountdown, msToRun);
             isRunning = true;
             requestWakeLock();
-            statusText.textContent = 'RUNNING';
-            statusText.style.color = 'var(--green-hover)';
+            setStatus('RUNNING', 'var(--green-hover)');
             setStartButton('running');
             cancelAnimationFrame(rafId);
             rafId = requestAnimationFrame(countdownLoop);
@@ -1702,8 +1866,7 @@
             remainingMs = 0;
             totalSeconds = 0;
             updateCountdownText();
-            statusText.textContent = "TIME'S UP!";
-            statusText.style.color = 'var(--danger)';
+            setStatus("TIME'S UP!", 'var(--danger)');
             setRingDanger();
             progressRing.style.strokeDashoffset = String(circumference);
             setStartButton('ready');
@@ -1733,8 +1896,7 @@
             inputHours.disabled = false;
             inputMinutes.disabled = false;
             inputSeconds.disabled = false;
-            statusText.textContent = 'PAUSED';
-            statusText.style.color = 'var(--text-muted)';
+            setStatus('PAUSED', 'var(--text-muted)');
             setStartButton('paused');
         }
 
@@ -1775,8 +1937,7 @@
                         progressRing.style.strokeDashoffset =
                             circumference - (remainingMs / initMs) * circumference;
                     }
-                    statusText.textContent = 'PAUSED';
-                    statusText.style.color = 'var(--text-muted)';
+                    setStatus('PAUSED', 'var(--text-muted)');
                     setStartButton('paused');
                 }
                 const ok = await showConfirm('Timer is running or paused. Reset and apply this preset?');
@@ -1799,8 +1960,7 @@
             inputSeconds.value = '0';
             totalSeconds = totalMin * 60;
             initialTotalSeconds = totalSeconds;
-            statusText.textContent = 'READY';
-            statusText.style.color = 'var(--text-muted)';
+            setStatus('READY', 'var(--text-muted)');
             setRingGreen();
             inputHours.disabled = false;
             inputMinutes.disabled = false;
@@ -1808,6 +1968,7 @@
             setStartButton('ready');
             updateDisplay();
             markPresetActive(totalMin);
+            scheduleFitAll();
         }
 
         /* ========== MUTE ========== */
@@ -1848,8 +2009,11 @@
             if (/\/1-minute-timer\/?$/.test(path))  { setPreset(1, true);  return; }
             if (/\/5-minute-timer\/?$/.test(path))  { setPreset(5, true);  return; }
             if (/\/10-minute-timer\/?$/.test(path)) { setPreset(10, true); return; }
+            if (/\/15-minute-timer\/?$/.test(path)) { setPreset(15, true); return; }
             if (/\/pomodoro-timer\/?$/.test(path))  { setPreset(25, true); return; }
             if (/\/25-minute-timer\/?$/.test(path)) { setPreset(25, true); return; }
+            if (/\/30-minute-timer\/?$/.test(path)) { setPreset(30, true); return; }
+            if (/\/1-hour-timer\/?$/.test(path))    { setPreset(60, true); return; }
 
             const minMatch = path.match(/\/(\d+)-minute-timer\/?$/);
             if (minMatch) {
@@ -1887,8 +2051,7 @@
             totalSeconds = clamped;
             initialTotalSeconds = clamped;
             remainingMs = 0;
-            statusText.textContent = 'READY';
-            statusText.style.color = 'var(--text-muted)';
+            setStatus('READY', 'var(--text-muted)');
             setStartButton('ready');
             updateDisplay();
             matchPresetHighlight(clamped);
@@ -1898,6 +2061,16 @@
         updateTimeFromInputs();
         initFromURL();
         setStartButton('ready');
+
+        /* Initial fit — multiple passes to catch layout settling */
+        scheduleFitAll();
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(scheduleFitAll);
+        }
+        setTimeout(scheduleFitAll, 100);
+        setTimeout(scheduleFitAll, 300);
+        setTimeout(scheduleFitAll, 800);
+        setTimeout(scheduleFitAll, 1500);
     </script>
 </body>
 </html>

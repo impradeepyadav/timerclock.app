@@ -1090,7 +1090,11 @@
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-    <aside class="sidebar" id="mobileSidebar" aria-label="Mobile navigation" aria-hidden="true">
+    <aside class="sidebar"
+       id="mobileSidebar"
+       aria-label="Mobile navigation"
+       aria-hidden="true"
+       inert>
         <nav class="sidebar-nav" aria-label="Mobile primary">
             <a href="/" class="sidebar-item active">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
@@ -1973,35 +1977,53 @@
         /* ==========================================================
            SIDEBAR
            ========================================================== */
-        function openSidebar() {
-            if (mobileSidebar.classList.contains('open')) return;
-            sidebarPrevFocus = document.activeElement;
-            mobileSidebar.classList.add('open');
-            mobileSidebar.setAttribute('aria-hidden', 'false');
-            sidebarOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            sidebarLangList.classList.remove('show');
-            sidebarLangChevron.style.transform = 'rotate(0deg)';
-            sidebarLangBtn.setAttribute('aria-expanded', 'false');
-            if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'true');
-            // Focus first link in panel
-            setTimeout(() => {
-                const first = mobileSidebar.querySelector('a, button');
-                if (first) { try { first.focus(); } catch (_) {} }
-            }, 60);
-        }
-        function closeSidebar(skipRestoreFocus) {
-            if (!mobileSidebar.classList.contains('open')) return;
-            mobileSidebar.classList.remove('open');
-            mobileSidebar.setAttribute('aria-hidden', 'true');
-            sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-            if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
-            if (!skipRestoreFocus && sidebarPrevFocus && typeof sidebarPrevFocus.focus === 'function') {
-                try { sidebarPrevFocus.focus(); } catch (_) {}
-            }
-            sidebarPrevFocus = null;
-        }
+        
+function openSidebar() {
+    if (mobileSidebar.classList.contains('open')) return;
+
+    sidebarPrevFocus = document.activeElement;
+
+    mobileSidebar.removeAttribute('inert');
+    mobileSidebar.setAttribute('aria-hidden', 'false');
+    mobileSidebar.classList.add('open');
+
+    sidebarOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    sidebarLangList.classList.remove('show');
+    sidebarLangChevron.style.transform = 'rotate(0deg)';
+    sidebarLangBtn.setAttribute('aria-expanded', 'false');
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    }
+
+    requestAnimationFrame(() => {
+        const first = mobileSidebar.querySelector('a, button');
+        if (first) first.focus();
+    });
+}
+
+function closeSidebar(skipRestoreFocus = false) {
+    if (!mobileSidebar.classList.contains('open')) return;
+
+    if (!skipRestoreFocus && mobileMenuBtn) {
+        mobileMenuBtn.focus();
+    }
+
+    mobileSidebar.classList.remove('open');
+    mobileSidebar.setAttribute('aria-hidden', 'true');
+    mobileSidebar.setAttribute('inert', '');
+
+    sidebarOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    sidebarPrevFocus = null;
+}
         function toggleSidebarLang() {
             sidebarLangList.classList.toggle('show');
             const open = sidebarLangList.classList.contains('show');

@@ -37,10 +37,24 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'"
+>
+
+<noscript>
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+    >
+</noscript>
 
     <!-- GTM -->
     <script>
@@ -151,7 +165,7 @@
             --card-bg: #ffffff;
             --page-bg: #fafbfc;
             --text-main: #111827;
-            --text-muted: #6b7280;
+            --text-muted: #4b5563;
             --green-primary: #22c55e;
             --green-hover: #16a34a;
             --green-dark: #15803d;
@@ -514,12 +528,17 @@
             color: var(--text-main);
             transform: translateY(-1px);
         }
-        .preset-btn.active {
-            background-color: var(--green-light);
-            color: var(--green-dark);
-            border-color: var(--green-primary);
-        }
-        .preset-btn.active:hover { background-color: #bbf7d0; }
+        
+.preset-btn.active {
+    background-color: #dcfce7;
+    color: #14532d;
+    border-color: #15803d;
+}
+
+.preset-btn.active:hover {
+    background-color: #bbf7d0;
+    color: #14532d;
+}
 
         .timer-display {
             position: relative;
@@ -866,7 +885,11 @@
             margin-bottom: 6px;
             overflow-wrap: anywhere;
         }
-        .seo-content a { color: var(--green-hover); text-decoration: none; font-weight: 500; }
+        .seo-content a {
+    color: #166534;
+    text-decoration: none;
+    font-weight: 500;
+}
         .seo-content a:hover { text-decoration: underline; }
         .seo-content .faq { margin-top: 6px; }
         .seo-content details {

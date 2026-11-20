@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
     <title>Online Stopwatch – Timer Clock</title>
     <meta name="description" content="Looking for a free online stopwatch? Start, stop, and reset the timer to measure elapsed time and track every second.">
@@ -40,7 +40,18 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        rel="preload"
+        as="style"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'"
+    >
+    <noscript>
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+        >
+    </noscript>
 
     <!-- GTM -->
     <script>
@@ -51,7 +62,6 @@
       })(window,document,'script','dataLayer','GTM-K4L3JFT4');
     </script>
 
-    
 <!-- Timer Clock - Stopwatch Page Structured Data -->
 <script type="application/ld+json">
 {
@@ -112,7 +122,8 @@
         "Start and pause stopwatch",
         "Resume elapsed time",
         "Reset stopwatch",
-        "Digital elapsed time display"
+        "Digital elapsed time display",
+        "Millisecond precision with lap timing"
       ],
       "provider": {
         "@id": "https://timerclock.app/#organization"
@@ -180,13 +191,13 @@
   ]
 }
 </script>
-    
+
     <style>
         :root {
             --card-bg: #ffffff;
             --page-bg: #fafbfc;
             --text-main: #111827;
-            --text-muted: #6b7280;
+            --text-muted: #4b5563;
             --green-primary: #22c55e;
             --green-hover: #16a34a;
             --green-dark: #15803d;
@@ -209,6 +220,16 @@
             font-family: var(--font-body);
         }
 
+        html {
+            height: 100%;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            scroll-behavior: smooth;
+        }
+
         body {
             user-select: none;
             -webkit-user-select: none;
@@ -220,16 +241,17 @@
             overflow-x: hidden;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
         }
-        input, textarea, h1, h2, h3, p, a, .seo-content {
+
+        input, textarea, h1, h2, h3, p, a, .seo-content, .time-text, .status-text, .brand-text, .hero-title, .hero-subtitle, .footer-tagline, .footer-bottom {
             user-select: text;
             -webkit-user-select: text;
         }
 
-        html {
-            height: 100%;
-            -webkit-text-size-adjust: 100%;
-            text-size-adjust: 100%;
+        button, a, .btn, .btn-icon, .sidebar-item, .lang-btn, .mobile-menu-btn, .fs-exit-btn {
+            touch-action: manipulation;
         }
 
         .container {
@@ -243,6 +265,14 @@
             align-items: center;
             padding: clamp(14px, 3vh, 32px) clamp(12px, 4vw, 40px) clamp(12px, 2.5vh, 24px);
             gap: clamp(10px, 2vh, 20px);
+        }
+
+        @supports (padding: max(0px)) {
+            .container {
+                padding-left: max(clamp(12px, 4vw, 40px), env(safe-area-inset-left));
+                padding-right: max(clamp(12px, 4vw, 40px), env(safe-area-inset-right));
+                padding-bottom: max(clamp(12px, 2.5vh, 24px), env(safe-area-inset-bottom));
+            }
         }
 
         .sidebar-overlay {
@@ -260,15 +290,16 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 280px;
+            width: min(280px, 85vw);
             height: 100vh;
+            height: 100dvh;
             background: var(--card-bg);
             z-index: 2000;
             transform: translateX(-100%);
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
-            padding: 30px 16px 20px;
+            padding: calc(30px + env(safe-area-inset-top)) 16px calc(20px + env(safe-area-inset-bottom));
             overflow-y: auto;
             box-shadow: 0 20px 60px rgba(17, 24, 39, 0.15);
             font-family: var(--font-body);
@@ -294,7 +325,9 @@
             text-align: left;
             margin-bottom: 2px;
             text-decoration: none;
+            transition: background 0.15s ease, color 0.15s ease;
         }
+        .sidebar-item:hover { background: var(--gray-light); color: var(--text-main); }
         .sidebar-item svg {
             width: 20px;
             height: 20px;
@@ -309,21 +342,49 @@
             width: 14px !important;
             height: 14px !important;
             color: var(--text-muted) !important;
+            transition: transform 0.2s ease;
         }
 
         .sidebar-divider { height: 1px; background: var(--border-color); margin: 12px 16px; }
 
         .sidebar-lang-container { display: flex; flex-direction: column; }
-        .sidebar-lang-list { display: none; flex-direction: column; padding-left: 34px; gap: 2px; margin-bottom: 8px; }
+        .sidebar-lang-list {
+            display: none;
+            flex-direction: column;
+            padding-left: 16px;
+            gap: 2px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
         .sidebar-lang-list.show { display: flex; }
         .sidebar-lang-list a {
-            padding: 8px 12px;
+            padding: 10px 14px;
             text-decoration: none;
             color: var(--text-muted);
             font-family: var(--font-body);
             font-size: 14px;
             font-weight: 500;
             border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .sidebar-lang-list a:hover {
+            background: var(--gray-light);
+            color: var(--text-main);
+        }
+        .sidebar-lang-list a.active {
+            background: var(--green-light);
+            color: var(--green-dark);
+            font-weight: 600;
+        }
+        .sidebar-lang-list a.active::after {
+            content: '✓';
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--green-dark);
         }
 
         .mobile-menu-btn {
@@ -336,7 +397,9 @@
             align-items: center;
             justify-content: center;
             border-radius: 8px;
+            transition: background 0.15s ease;
         }
+        .mobile-menu-btn:hover { background: var(--gray-light); }
         .mobile-menu-btn svg { width: 28px; height: 28px; display: block; }
         .mobile-menu-btn svg path {
             stroke: currentColor;
@@ -362,9 +425,10 @@
             align-items: center;
             gap: clamp(12px, 2vw, 24px);
             flex: 0 0 auto;
+            min-width: 0;
         }
 
-        .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; }
         .brand-logo {
             width: 32px;
             height: 32px;
@@ -380,6 +444,8 @@
             color: var(--text-main);
             line-height: 1.2;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .main-nav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
@@ -391,17 +457,21 @@
             padding: 8px 16px;
             color: var(--text-muted);
             font-family: var(--font-body);
-            font-size: 15px;
+            font-size: clamp(13px, 1.4vw, 15px);
             font-weight: 500;
             border-radius: 8px;
             white-space: nowrap;
             text-decoration: none;
+            transition: background 0.15s ease, color 0.15s ease;
         }
-        .nav-item.active { color: var(--green-primary); }
-        .nav-item.active svg { fill: var(--green-primary); }
+        .nav-item:hover { background: var(--gray-light); color: var(--text-main); }
+        .nav-item.active { color: #166534; }
+        .nav-item.active svg { fill: currentColor; }
         .nav-item svg { width: 20px; height: 20px; fill: currentColor; }
 
         .header-actions { flex: 0 0 auto; display: flex; align-items: center; gap: 10px; }
+
+        /* ============ LANGUAGE DROPDOWN ============ */
         .lang-dropdown { position: relative; }
         .lang-btn {
             display: flex;
@@ -415,35 +485,82 @@
             font-weight: 500;
             color: var(--text-main);
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 10px;
+            transition: background 0.15s ease;
         }
+        .lang-btn:hover { background: var(--gray-light); }
         .lang-btn svg.globe-icon { width: 16px; height: 16px; fill: var(--text-muted); }
-        .lang-btn svg.chevron-icon { width: 14px; height: 14px; fill: var(--text-muted); transition: transform 0.2s; }
+        .lang-btn svg.chevron-icon {
+            width: 14px;
+            height: 14px;
+            fill: var(--text-muted);
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .lang-btn[aria-expanded="true"] svg.chevron-icon { transform: rotate(180deg); }
 
         .dropdown-content {
-            display: none;
             position: absolute;
-            top: 120%; right: 0;
+            top: calc(100% + 8px);
+            right: 0;
             background-color: var(--card-bg);
-            min-width: 130px;
-            box-shadow: 0 8px 24px rgba(17, 24, 39, 0.12);
-            border-radius: 12px;
+            min-width: 170px;
+            box-shadow:
+                0 12px 32px rgba(17, 24, 39, 0.14),
+                0 4px 12px rgba(17, 24, 39, 0.06),
+                0 0 0 1px rgba(17, 24, 39, 0.04);
+            border-radius: 14px;
             border: 1px solid var(--border-color);
             z-index: 100;
             overflow: hidden;
             padding: 6px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px) scale(0.96);
+            transform-origin: top right;
+            transition:
+                opacity 0.18s ease,
+                transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                visibility 0.18s ease;
+            pointer-events: none;
+        }
+        .dropdown-content.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
         }
         .dropdown-content a {
             color: var(--text-main);
             padding: 10px 14px;
             text-decoration: none;
-            display: block;
-            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 10px;
             font-family: var(--font-body);
             font-size: 14px;
             font-weight: 500;
+            line-height: 1.3;
+            transition: background 0.15s ease, color 0.15s ease;
+            position: relative;
         }
-        .dropdown-content.show { display: block; }
+        .dropdown-content a:hover {
+            background: var(--gray-light);
+            color: var(--text-main);
+        }
+        .dropdown-content a.active {
+            background: var(--green-light);
+            color: var(--green-dark);
+            font-weight: 600;
+        }
+        .dropdown-content a.active::after {
+            content: '✓';
+            margin-left: auto;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--green-dark);
+            line-height: 1;
+        }
 
         /* ============ HERO ============ */
         .hero-section {
@@ -452,26 +569,29 @@
             max-width: 800px;
             margin: 5px 0;
             padding: 0 12px;
+            min-width: 0;
         }
         .hero-title {
             font-family: var(--font-display);
-            font-size: clamp(20px, 3vw, 30px);
+            font-size: clamp(19px, 2.8vw, 30px);
             font-weight: 800;
             letter-spacing: -0.015em;
             color: var(--text-main);
             margin-bottom: 8px;
             line-height: 1.3;
-            overflow-wrap: break-word;
-            word-break: break-word;
+            overflow-wrap: anywhere;
+            word-break: normal;
+            hyphens: auto;
             text-wrap: balance;
         }
         .hero-subtitle {
             font-family: var(--font-body);
-            font-size: clamp(13px, 1.9vw, 16px);
+            font-size: clamp(13px, 1.8vw, 16px);
             color: var(--text-muted);
             line-height: 1.55;
             font-weight: 400;
-            overflow-wrap: break-word;
+            overflow-wrap: anywhere;
+            text-wrap: pretty;
         }
 
         .main-content {
@@ -489,8 +609,8 @@
 
         .timer-display {
             position: relative;
-            width: clamp(200px, min(38vh, 78vw), 360px);
-            height: clamp(200px, min(38vh, 78vw), 360px);
+            width: clamp(190px, min(38vh, 76vw), 360px);
+            height: clamp(190px, min(38vh, 76vw), 360px);
             max-width: 100%;
             display: flex;
             flex-direction: column;
@@ -514,14 +634,18 @@
             stroke-width: 12;
             stroke-linecap: round;
             stroke-dashoffset: 0;
+            transition: stroke 0.3s ease;
         }
 
+        /* ============ TIME TEXT — cqi + vw fallback ============ */
         .time-text {
             font-family: var(--font-mono);
-            font-size: clamp(1.8rem, 17cqw, 3.6rem);
+            font-size: clamp(1.6rem, 16vw, 3.4rem);
+            font-size: clamp(1.6rem, 17cqi, 3.4rem);
             font-weight: 700;
             color: var(--text-main);
-            font-variant-numeric: tabular-nums;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: "tnum" 1, "lnum" 1;
             z-index: 10;
             line-height: 1;
             margin-bottom: 0.4vh;
@@ -530,21 +654,34 @@
             max-width: 100%;
             text-align: center;
             text-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+            overflow: hidden;
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            width: 100%;
         }
         .time-text .ms-text {
             font-family: var(--font-mono);
-            font-size: clamp(1.1rem, 11cqw, 2.2rem);
+            font-size: clamp(1rem, 10vw, 2rem);
+            font-size: clamp(1rem, 11cqi, 2rem);
             font-weight: 500;
             color: var(--text-muted);
             margin-left: 1px;
             letter-spacing: -0.01em;
+            font-variant-numeric: tabular-nums lining-nums;
         }
-        .time-text.long-time { font-size: clamp(1.3rem, 13cqw, 2.8rem); }
-        .time-text.long-time .ms-text { font-size: clamp(0.9rem, 9cqw, 1.7rem); }
+        .time-text.long-time {
+            font-size: clamp(1.2rem, 13vw, 2.8rem);
+            font-size: clamp(1.2rem, 13cqi, 2.8rem);
+        }
+        .time-text.long-time .ms-text {
+            font-size: clamp(0.85rem, 8.5vw, 1.7rem);
+            font-size: clamp(0.85rem, 9cqi, 1.7rem);
+        }
 
         .status-text {
             font-family: var(--font-display);
-            font-size: clamp(12px, min(1.8vh, 3.4vw), 14px);
+            font-size: clamp(11px, min(1.7vh, 3.2vw), 14px);
             font-weight: 700;
             color: var(--text-muted);
             letter-spacing: 3px;
@@ -555,7 +692,7 @@
         }
 
         /* ============================================================
-           FULLSCREEN — FIXED LAYOUT (lap times visible + scroll-safe)
+           FULLSCREEN — FIXED LAYOUT
            ============================================================ */
         .main-content:fullscreen,
         .main-content:-webkit-full-screen {
@@ -567,9 +704,6 @@
             background: var(--page-bg);
             display: flex;
             flex-direction: column;
-            /* NOT `center` — pseudo-element auto-margins do the centering.
-               This way, when content overflows, it starts from the top
-               and remains fully scrollable (no top clipping). */
             justify-content: flex-start;
             align-items: center;
             gap: clamp(10px, 1.8vh, 22px);
@@ -577,9 +711,6 @@
             overflow-x: hidden;
         }
 
-        /* Invisible zero-height spacers that vertically center the
-           real content when there's space, and collapse to 0 when
-           content overflows (so scroll starts from the very top). */
         .main-content:fullscreen::before,
         .main-content:fullscreen::after,
         .main-content:-webkit-full-screen::before,
@@ -592,7 +723,6 @@
             height: 0;
         }
 
-        /* Smaller timer in fullscreen so lap list + controls fit */
         .main-content:fullscreen .timer-display,
         .main-content:-webkit-full-screen .timer-display {
             width: clamp(180px, min(38vh, 52vw), 380px);
@@ -602,27 +732,30 @@
         }
         .main-content:fullscreen .time-text,
         .main-content:-webkit-full-screen .time-text {
-            font-size: clamp(1.9rem, 15cqw, 3.8rem);
+            font-size: clamp(1.8rem, 15vw, 3.8rem);
+            font-size: clamp(1.8rem, 15cqi, 3.8rem);
         }
         .main-content:fullscreen .time-text .ms-text,
         .main-content:-webkit-full-screen .time-text .ms-text {
-            font-size: clamp(1rem, 9.5cqw, 2.2rem);
+            font-size: clamp(1rem, 10vw, 2.2rem);
+            font-size: clamp(1rem, 10cqi, 2.2rem);
         }
         .main-content:fullscreen .time-text.long-time,
         .main-content:-webkit-full-screen .time-text.long-time {
-            font-size: clamp(1.4rem, 11cqw, 2.9rem);
+            font-size: clamp(1.3rem, 12vw, 2.9rem);
+            font-size: clamp(1.3rem, 12cqi, 2.9rem);
         }
         .main-content:fullscreen .time-text.long-time .ms-text,
         .main-content:-webkit-full-screen .time-text.long-time .ms-text {
-            font-size: clamp(0.9rem, 7.5cqw, 1.8rem);
+            font-size: clamp(0.9rem, 8vw, 1.8rem);
+            font-size: clamp(0.9rem, 8cqi, 1.8rem);
         }
         .main-content:fullscreen .status-text,
         .main-content:-webkit-full-screen .status-text {
             font-size: clamp(12px, min(2.2vh, 3.4vw), 18px);
-            letter-spacing: 0.4vh;
+            letter-spacing: 0.5vh;
         }
 
-        /* ✅ LAPS ARE NOW VISIBLE AND PROPERLY SIZED IN FULLSCREEN */
         .main-content:fullscreen .laps-container,
         .main-content:-webkit-full-screen .laps-container {
             width: 100%;
@@ -735,6 +868,7 @@
             gap: 1.5vh;
             flex-shrink: 0;
             width: 100%;
+            min-width: 0;
         }
         .controls {
             display: flex;
@@ -743,16 +877,17 @@
             gap: clamp(8px, 2vw, 16px);
             flex-wrap: wrap;
             max-width: 100%;
+            min-width: 0;
         }
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 9px;
-            padding: clamp(10px, 1.8vh, 15px) clamp(18px, 4.5vw, 32px);
+            padding: clamp(10px, 1.8vh, 15px) clamp(16px, 4vw, 32px);
             border-radius: 30px;
             font-family: var(--font-body);
-            font-size: clamp(15px, min(2.4vh, 4.2vw), 18px);
+            font-size: clamp(14px, min(2.2vh, 4vw), 18px);
             font-weight: 700;
             cursor: pointer;
             border: none;
@@ -827,12 +962,12 @@
 
         .hint {
             font-family: var(--font-body);
-            font-size: clamp(12px, min(1.8vh, 3.2vw), 14px);
+            font-size: clamp(11px, min(1.7vh, 3vw), 14px);
             color: var(--text-muted);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px 10px;
+            gap: 8px;
             flex-wrap: wrap;
             text-align: center;
             padding: 0 4px;
@@ -844,26 +979,25 @@
             border-radius: 6px;
             padding: 3px 8px;
             font-family: var(--font-mono);
-            font-size: clamp(11px, min(1.6vh, 2.8vw), 13px);
+            font-size: clamp(10px, min(1.5vh, 2.6vw), 13px);
             font-weight: 600;
             color: var(--text-main);
             box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
         }
         .hint .sep { color: var(--text-muted); opacity: 0.5; }
 
-        svg.icon { width: clamp(18px, min(2.5vh, 4.2vw), 22px); height: clamp(18px, min(2.5vh, 4.2vw), 22px); fill: currentColor; flex-shrink: 0; }
+        svg.icon {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            min-height: 22px;
+            display: block;
+            flex-shrink: 0;
+            fill: currentColor;
+        }
 
         .hidden { display: none !important; }
 
-        .sr-only {
-            position: absolute !important;
-            width: 1px; height: 1px;
-            padding: 0; margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
         button:focus-visible, a:focus-visible {
             outline: 2px solid var(--green-primary);
             outline-offset: 2px;
@@ -877,16 +1011,18 @@
             padding: clamp(16px, 2.5vh, 26px) clamp(4px, 1vw, 8px) 0;
             border-top: 1px solid var(--border-color);
             flex-shrink: 0;
+            min-width: 0;
         }
         .seo-content h2 {
             font-family: var(--font-display);
-            font-size: clamp(18px, 2.4vw, 22px);
+            font-size: clamp(17px, 2.3vw, 22px);
             font-weight: 800;
             letter-spacing: -0.3px;
             color: var(--text-main);
             margin: clamp(12px, 2vh, 22px) 0 8px;
             line-height: 1.35;
-            overflow-wrap: break-word;
+            overflow-wrap: anywhere;
+            text-wrap: balance;
         }
         .seo-content h2:first-child { margin-top: 0; }
         .seo-content p {
@@ -895,7 +1031,8 @@
             line-height: 1.75;
             color: var(--text-muted);
             margin-bottom: 10px;
-            overflow-wrap: break-word;
+            overflow-wrap: anywhere;
+            text-wrap: pretty;
         }
         .seo-content ul { list-style: disc; padding-left: 22px; margin-bottom: 12px; }
         .seo-content li {
@@ -904,9 +1041,13 @@
             line-height: 1.7;
             color: var(--text-muted);
             margin-bottom: 6px;
-            overflow-wrap: break-word;
+            overflow-wrap: anywhere;
         }
-        .seo-content a { color: var(--green-hover); text-decoration: none; font-weight: 500; }
+        .seo-content a {
+            color: #166534;
+            text-decoration: none;
+            font-weight: 500;
+        }
         .seo-content a:hover { text-decoration: underline; }
         .seo-content .faq { margin-top: 6px; }
         .seo-content details {
@@ -915,8 +1056,10 @@
             padding: 12px 16px;
             margin-bottom: 8px;
             background: var(--card-bg);
+            transition: all 0.2s ease;
         }
-        .seo-content details[open] { box-shadow: 0 2px 8px rgba(17, 24, 39, 0.04); }
+        .seo-content details:hover { border-color: var(--gray-hover); }
+        .seo-content details[open] { background: var(--card-bg); box-shadow: 0 2px 8px rgba(17, 24, 39, 0.04); }
         .seo-content summary {
             font-family: var(--font-body);
             font-size: clamp(13px, 1.7vw, 15px);
@@ -927,6 +1070,7 @@
             padding-right: 22px;
             position: relative;
             line-height: 1.45;
+            outline: none;
         }
         .seo-content summary::-webkit-details-marker { display: none; }
         .seo-content summary::after {
@@ -950,6 +1094,7 @@
             border-top: 1px solid var(--border-color);
             flex-shrink: 0;
             text-align: left;
+            min-width: 0;
         }
         .footer-grid {
             display: grid;
@@ -973,8 +1118,9 @@
             line-height: 1.7;
             color: var(--text-muted);
             max-width: 36ch;
-            overflow-wrap: break-word;
+            overflow-wrap: anywhere;
         }
+        .footer-col { min-width: 0; }
         .footer-col h3 {
             font-family: var(--font-body);
             font-size: 11.5px;
@@ -996,6 +1142,7 @@
             padding: 4px 0;
             display: inline-block;
             transition: color 0.2s ease;
+            overflow-wrap: anywhere;
         }
         .footer-col a:hover { color: var(--blue-link); }
 
@@ -1013,6 +1160,7 @@
             text-align: center;
             padding-left: 8px;
             padding-right: 8px;
+            overflow-wrap: anywhere;
         }
 
         @media (max-width: 768px) {
@@ -1020,10 +1168,9 @@
             .header-actions { display: none; }
             .mobile-menu-btn { display: flex; }
             .site-header { flex-direction: row; justify-content: space-between; }
-            .dropdown-content { right: auto; left: 50%; transform: translateX(-50%); }
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
             .footer-brand { grid-column: 1 / -1; }
-            .hero-title { font-size: clamp(19px, 4.4vw, 24px); line-height: 1.3; }
+            .hero-title { font-size: clamp(18px, 4.4vw, 24px); line-height: 1.3; }
             .hero-subtitle { font-size: clamp(13px, 3.4vw, 15px); line-height: 1.55; }
             .seo-content p, .seo-content li { line-height: 1.75; }
         }
@@ -1035,8 +1182,8 @@
             .fs-exit-btn { width: 38px; height: 38px; top: 12px; right: 12px; }
             .fs-exit-btn svg { width: 24px; height: 24px; }
             .brand-text { font-size: 18px; }
-            .hero-title { font-size: clamp(18px, 4.8vw, 22px); line-height: 1.3; }
-            .hero-subtitle { font-size: clamp(13px, 3.6vw, 15px); line-height: 1.55; }
+            .hero-title { font-size: clamp(17px, 4.8vw, 22px); line-height: 1.3; }
+            .hero-subtitle { font-size: clamp(12.5px, 3.6vw, 15px); line-height: 1.55; }
             .footer-grid { grid-template-columns: 1fr; gap: 22px; }
             .footer-brand { grid-column: auto; }
             .footer-brand .brand { margin: 0 auto; }
@@ -1052,11 +1199,11 @@
         }
 
         @media (max-width: 380px) {
-            .btn { padding: 10px 15px; font-size: 14px; }
+            .btn { padding: 10px 14px; font-size: 13.5px; }
             .btn-start { min-width: 100px; }
-            .btn-icon { width: 44px; height: 44px; }
-            .controls { gap: 8px; }
-            .hero-title { font-size: 17px; }
+            .btn-icon { width: 42px; height: 42px; }
+            .controls { gap: 7px; }
+            .hero-title { font-size: 16.5px; }
             .hero-subtitle { font-size: 12.5px; }
             .laps-header { font-size: 10.5px; padding: 8px 10px; }
             .lap-item { padding: 8px 10px; }
@@ -1067,11 +1214,13 @@
             .hero-title { font-size: 16px; margin-bottom: 2px; line-height: 1.25; }
             .hero-subtitle { font-size: 12px; line-height: 1.35; }
             .main-content:not(:fullscreen):not(:-webkit-full-screen) .timer-display {
-                width: clamp(160px, min(48vh, 56vw), 240px);
-                height: clamp(160px, min(48vh, 56vw), 240px);
+                width: clamp(150px, min(48vh, 56vw), 240px);
+                height: clamp(150px, min(48vh, 56vw), 240px);
                 margin: 0.5vh 0;
             }
             .main-content { gap: 8px; }
+            .btn { font-size: 14px; padding: 9px 14px; }
+            .hint { font-size: 11px; }
             .laps-container { max-height: 120px; }
         }
 
@@ -1079,6 +1228,13 @@
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        @media (forced-colors: active) {
+            .btn-start, .btn-lap, .btn-reset, .btn-icon {
+                border: 1px solid ButtonText;
             }
         }
     </style>
@@ -1089,7 +1245,11 @@
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-    <aside class="sidebar" id="mobileSidebar" aria-label="Mobile navigation">
+    <aside class="sidebar"
+       id="mobileSidebar"
+       aria-label="Mobile navigation"
+       aria-hidden="true"
+       inert>
         <nav class="sidebar-nav" aria-label="Mobile primary">
             <a href="/" class="sidebar-item">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
@@ -1107,23 +1267,23 @@
             <div class="sidebar-divider"></div>
 
             <div class="sidebar-lang-container">
-                <button type="button" class="sidebar-item" onclick="toggleSidebarLang()">
+                <button type="button" class="sidebar-item" onclick="toggleSidebarLang()" aria-expanded="false" aria-controls="sidebarLangList" id="sidebarLangBtn">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 0 1 5.08 16zm2.95-8H5.08a7.987 7.987 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
                     Language
                     <svg class="chevron" viewBox="0 0 24 24" id="sidebarLangChevron"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                 </button>
                 <div class="sidebar-lang-list" id="sidebarLangList">
-                    <a href="/stopwatch" hreflang="en" onclick="switchLang(event, '/stopwatch')">English</a>
-                    <a href="/hi/stopwatch" hreflang="hi" onclick="switchLang(event, '/hi/stopwatch')">हिंदी</a>
-                    <a href="/es/stopwatch" hreflang="es" onclick="switchLang(event, '/es/stopwatch')">Español</a>
-                    <a href="/fr/stopwatch" hreflang="fr" onclick="switchLang(event, '/fr/stopwatch')">Français</a>
-                    <a href="/de/stopwatch" hreflang="de" onclick="switchLang(event, '/de/stopwatch')">Deutsch</a>
+                    <a href="/stopwatch" hreflang="en" data-lang="en" onclick="switchLang(event, '/stopwatch')" class="active">English</a>
+                    <a href="/hi/stopwatch" hreflang="hi" data-lang="hi" onclick="switchLang(event, '/hi/stopwatch')">हिंदी</a>
+                    <a href="/es/stopwatch" hreflang="es" data-lang="es" onclick="switchLang(event, '/es/stopwatch')">Español</a>
+                    <a href="/fr/stopwatch" hreflang="fr" data-lang="fr" onclick="switchLang(event, '/fr/stopwatch')">Français</a>
+                    <a href="/de/stopwatch" hreflang="de" data-lang="de" onclick="switchLang(event, '/de/stopwatch')">Deutsch</a>
                 </div>
             </div>
         </nav>
     </aside>
 
-    <div class="container">
+    <div class="container" id="pageContainer">
 
         <header class="site-header">
             <div class="header-left">
@@ -1150,22 +1310,22 @@
 
             <div class="header-actions">
                 <div class="lang-dropdown">
-                    <button type="button" class="lang-btn" id="langBtn" onclick="toggleLangDropdown()" aria-label="Select language" aria-expanded="false" aria-controls="langDropdown">
+                    <button type="button" class="lang-btn" id="langBtn" onclick="toggleLangDropdown()" aria-label="Select language" aria-expanded="false" aria-controls="langDropdown" aria-haspopup="true">
                         <svg class="globe-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 0 1 5.08 16zm2.95-8H5.08a7.987 7.987 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
                         <span>English</span>
                         <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                     </button>
-                    <div class="dropdown-content" id="langDropdown">
-                        <a href="/stopwatch" hreflang="en" onclick="switchLang(event, '/stopwatch')">English</a>
-                        <a href="/hi/stopwatch" hreflang="hi" onclick="switchLang(event, '/hi/stopwatch')">हिंदी</a>
-                        <a href="/es/stopwatch" hreflang="es" onclick="switchLang(event, '/es/stopwatch')">Español</a>
-                        <a href="/fr/stopwatch" hreflang="fr" onclick="switchLang(event, '/fr/stopwatch')">Français</a>
-                        <a href="/de/stopwatch" hreflang="de" onclick="switchLang(event, '/de/stopwatch')">Deutsch</a>
+                    <div class="dropdown-content" id="langDropdown" role="menu">
+                        <a href="/stopwatch" hreflang="en" data-lang="en" role="menuitem" onclick="switchLang(event, '/stopwatch')" class="active" aria-current="true">English</a>
+                        <a href="/hi/stopwatch" hreflang="hi" data-lang="hi" role="menuitem" onclick="switchLang(event, '/hi/stopwatch')">हिंदी</a>
+                        <a href="/es/stopwatch" hreflang="es" data-lang="es" role="menuitem" onclick="switchLang(event, '/es/stopwatch')">Español</a>
+                        <a href="/fr/stopwatch" hreflang="fr" data-lang="fr" role="menuitem" onclick="switchLang(event, '/fr/stopwatch')">Français</a>
+                        <a href="/de/stopwatch" hreflang="de" data-lang="de" role="menuitem" onclick="switchLang(event, '/de/stopwatch')">Deutsch</a>
                     </div>
                 </div>
             </div>
 
-            <button class="mobile-menu-btn" onclick="openSidebar()" aria-label="Open menu">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="openSidebar()" aria-label="Open menu" aria-expanded="false" aria-controls="mobileSidebar">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M4 9H20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
                     <path d="M4 15H14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
@@ -1236,7 +1396,6 @@
         </main>
 
         <section class="seo-content" aria-labelledby="seoTitle">
-            
 <h2 id="seoTitle">How to Use the Online Stopwatch</h2>
 <p>
     Need to keep track of time? Timer Clock's <strong>online stopwatch</strong>
@@ -1302,7 +1461,7 @@
     </details>
 </div>
 </section>
-        
+
         <footer class="site-footer">
             <div class="footer-grid">
                 <div class="footer-brand">
@@ -1380,10 +1539,13 @@
         const langDropdown   = $id('langDropdown');
         const mainContent    = $id('mainContent');
         const fsBtn          = $id('fsBtn');
-        const mobileSidebar       = $id('mobileSidebar');
-        const sidebarOverlay      = $id('sidebarOverlay');
-        const sidebarLangList     = $id('sidebarLangList');
-        const sidebarLangChevron  = $id('sidebarLangChevron');
+        const mobileSidebar      = $id('mobileSidebar');
+        const sidebarOverlay     = $id('sidebarOverlay');
+        const sidebarLangList    = $id('sidebarLangList');
+        const sidebarLangChevron = $id('sidebarLangChevron');
+        const sidebarLangBtn     = $id('sidebarLangBtn');
+        const mobileMenuBtn      = $id('mobileMenuBtn');
+        const containerEl        = $id('pageContainer');
 
         /* ========== STATE ========== */
         let rafId = null;
@@ -1392,6 +1554,8 @@
         let isRunning = false;
         let laps = [];
         let wakeLock = null;
+        let sidebarPrevFocus = null;
+        let bodyPrevOverflow = '';
         const circumference = 2 * Math.PI * 130;
 
         progressRing.style.strokeDasharray = String(circumference);
@@ -1399,21 +1563,67 @@
 
         /* ========== SIDEBAR ========== */
         function openSidebar() {
+            if (mobileSidebar.classList.contains('open')) return;
+
+            sidebarPrevFocus = document.activeElement;
+
+            mobileSidebar.removeAttribute('inert');
+            mobileSidebar.setAttribute('aria-hidden', 'false');
             mobileSidebar.classList.add('open');
             sidebarOverlay.classList.add('active');
+
+            bodyPrevOverflow = document.body.style.overflow;
             document.body.style.overflow = 'hidden';
+
+            if (containerEl) containerEl.setAttribute('inert', '');
+
             sidebarLangList.classList.remove('show');
             sidebarLangChevron.style.transform = 'rotate(0deg)';
+            sidebarLangBtn.setAttribute('aria-expanded', 'false');
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                mobileMenuBtn.setAttribute('aria-label', 'Close menu');
+            }
+
+            requestAnimationFrame(() => {
+                const first = mobileSidebar.querySelector('a, button');
+                if (first) first.focus();
+            });
         }
-        function closeSidebar() {
+
+        function closeSidebar(skipRestoreFocus = false) {
+            if (!mobileSidebar.classList.contains('open')) return;
+
             mobileSidebar.classList.remove('open');
+            mobileSidebar.setAttribute('aria-hidden', 'true');
+            mobileSidebar.setAttribute('inert', '');
             sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+
+            document.body.style.overflow = bodyPrevOverflow || '';
+
+            if (containerEl) containerEl.removeAttribute('inert');
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+            }
+
+            if (!skipRestoreFocus) {
+                const target = sidebarPrevFocus && document.body.contains(sidebarPrevFocus)
+                    ? sidebarPrevFocus
+                    : mobileMenuBtn;
+                if (target) { try { target.focus(); } catch (_) {} }
+            }
+
+            sidebarPrevFocus = null;
         }
+
         function toggleSidebarLang() {
             sidebarLangList.classList.toggle('show');
-            sidebarLangChevron.style.transform =
-                sidebarLangList.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+            const open = sidebarLangList.classList.contains('show');
+            sidebarLangChevron.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+            sidebarLangBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
         }
 
         /* ========== LANGUAGE ========== */
@@ -1421,13 +1631,13 @@
             const isOpen = langDropdown.classList.toggle('show');
             langBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         }
-        function switchLang(e, baseUrl) {
-            e.preventDefault();
-            window.location.href = baseUrl + window.location.search + window.location.hash;
-        }
         function closeLangDropdown() {
             langDropdown.classList.remove('show');
             langBtn.setAttribute('aria-expanded', 'false');
+        }
+        function switchLang(e, baseUrl) {
+            if (e) e.preventDefault();
+            window.location.href = baseUrl + window.location.search + window.location.hash;
         }
         document.addEventListener('click', (e) => {
             if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) closeLangDropdown();
@@ -1435,7 +1645,7 @@
         document.addEventListener('click', (e) => {
             if (e.detail > 0 && e.target instanceof Element) {
                 const btn = e.target.closest('button');
-                if (btn) btn.blur();
+                if (btn) { try { btn.blur(); } catch (_) {} }
             }
         });
 
@@ -1464,7 +1674,6 @@
         function handleFullscreenChange() {
             const isFs = !!getFullscreenElement();
             fsBtn.style.display = isFs ? 'none' : '';
-            /* Re-render laps so highlight/size updates after fullscreen toggle */
             if (laps.length) renderLaps();
         }
         document.addEventListener('fullscreenchange', handleFullscreenChange);
